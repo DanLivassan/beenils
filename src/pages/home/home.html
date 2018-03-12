@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar [hideBackButton]="true" color="danger">
+    <ion-buttons end>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+
+    </ion-buttons>
+
+    <ion-title>Beenews Mobile - Notícias</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-slides>
+    <ion-slide *ngFor="let publication of publications">
+      <ion-card>
+        <img src="{{publication.cover_image}}" alt="">
+        <div class="card-title">{{publication.title}}</div>
+        <div class="card-subtitle">421 views</div>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+  <ion-segment [(ngModel)]="editorial_segment" color="primary">
+    <ion-segment-button *ngFor="let editorial of editorials" value="{{editorial.id}}">
+      {{editorial.name}}
+    </ion-segment-button>
+  </ion-segment>
+
+  <ng-container *ngFor="let editorial of editorials">
+    <div *ngIf="editorial_segment==editorial.id">
+      <ion-list>
+        <ion-card *ngFor="let segment_publication of segment_publications[editorial.id]">
+            <ion-item>
+              <ion-avatar item-start>
+                <img src="https://thumbs.dreamstime.com/b/do-retrato-masculino-do-avatar-do-%C3%ADcone-do-perfil-pessoa-ocasional-46846325.jpg">
+              </ion-avatar>
+              <h2>{{segment_publication.created_by.get_full_name()}}</h2>
+              <p>{{segment_publication.created_at | date:'dd-MM-yyyy'}}</p>
+            </ion-item>
+
+            <img src="{{segment_publication.cover_image}}">
+
+            <ion-card-content>
+              <p>{{segment_publication.title}}</p>
+            </ion-card-content>
+
+            <ion-row>
+              <ion-col>
+                <button ion-button icon-left clear small>
+                  <ion-icon name="thumbs-up"></ion-icon>
+                  <div>12 Likes</div>
+                </button>
+              </ion-col>
+              <ion-col>
+                <button ion-button icon-left clear small>
+                  <ion-icon name="eye"></ion-icon>
+                  <div>4 views</div>
+                </button>
+              </ion-col>
+              <ion-col center text-center>
+                <ion-note>
+                  11h atrás
+                </ion-note>
+              </ion-col>
+            </ion-row>
+
+
+        </ion-card>
+      </ion-list>
+    </div>
+  </ng-container>
+
+
+
+</ion-content>

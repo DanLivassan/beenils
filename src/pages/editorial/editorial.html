@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar [hideBackButton]="false" color="danger">
+    <ion-buttons end>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+
+    </ion-buttons>
+
+    <ion-title>Beenews Mobile - Editoriais</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ion-list [hidden]="!listing">
+  <ion-item-sliding #item *ngFor="let editorial of editoriais">
+    <ion-item>
+      {{editorial.name}}
+    </ion-item>
+    <ion-item-options side="left">
+      <button ion-button>Seguir</button>
+      <button ion-button color="danger">Compartilhar</button>
+    </ion-item-options>
+
+    <ion-item-options side="right">
+      <button ion-button>Ocultar</button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+  <div [hidden]="listing">
+  <form (ngSubmit)="addEditorial()">
+    <ion-item>
+      <ion-label>Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="new_editorial.name" name="title"></ion-input>
+    </ion-item>
+    <button ion-button type="submit" block>Adicionar Editorial</button>
+  </form>
+  </div>
+  <ion-fab right bottom>
+    <button ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab><ion-icon (click)="changeAction()" name="add"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-whatsapp"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>
