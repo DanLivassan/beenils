@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {EditorialPage} from "../pages/editorial/editorial";
 import {PublicationListPage} from "../pages/publication-list/publication-list";
+import {UserProvider} from "../providers/user/user";
+import {SigninPage} from "../pages/signin/signin";
 
 
 @Component({
@@ -15,17 +17,24 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  rootPage = HomePage;
+
+  rootPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(
     public platform: Platform,
     public menu: MenuController,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public userProvider:UserProvider
   ) {
     this.initializeApp();
-
+    if(!this.userProvider.isAuthenticated()){
+      this.rootPage = SigninPage;
+    }
+    else{
+      this.rootPage = HomePage;
+    }
 
     this.pages = [
       { title: 'Home', component: HomePage },

@@ -5,13 +5,6 @@ import {PublicationProvider} from "../../providers/publication/publication";
 import {Editorial} from "../../models/editorial";
 import {UserProvider} from "../../providers/user/user";
 
-/**
- * Generated class for the HomePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -39,12 +32,16 @@ export class HomePage {
 
     this.publications = pubProvider.getAll();
   }
+
+  ionViewCanEnter(){
+    return this.userProvider.isAuthenticated();
+  }
   ionViewDidEnter(){
     this.task = setInterval(()=>{
       this.changeSlides();
     },3000);
 
-    }
+  }
 
 
   changeSlides() {

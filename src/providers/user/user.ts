@@ -11,32 +11,51 @@ import {User} from "../../models/user";
 @Injectable()
 export class UserProvider {
   user:User;
-  public isLogged = false;
+  baseUrl:string = 'http://api.beenews.localhost/';
+  private isLogged = false;
   constructor(public http: HttpClient) {
-    console.log('Hello UserProvider Provider');
+
   }
 
-  login(email:string, password:string){
-    let route = '/access/login';
+  signUp(user:User){
+    let route = baseUrl+'/create';
+  }
+
+  delete(user:User){
+    let route = baseUrl+'/delete';
+  }
+
+  login(email:string, password:string):User{
+
+    let route = baseUrl+'/access/login';
+    this.user=null;
+
     let form_data:FormData=new FormData();
     form_data.append('email', email);
     form_data.append('password', password);
     this.http.post(
-      'http://api.beenews.localhost/access/login',
+      route,
       form_data)
       .
     subscribe(
       (data)=>{
         if(data[0]=='logged'){
-          this.user = new User(1,"Danilo", "Santana",100,1);
-          //TODO retornar dados do usuário quando logar
+          this.user = new User(
+            data['user']['id'],
+            data['user']['name'],
+            data['user']['last_name'],
+            data['user']['type'],
+            data['user']['status'],
+          );
           localStorage.setItem('token', data[1]);
           this.isLogged = true;
         }
     });
+    return this.user;
   }
   logout(){
     this.isLogged=false;
+    this.user=null;
     localStorage.removeItem('token');
   }
 
@@ -45,6 +64,10 @@ export class UserProvider {
       return localStorage.getItem('token');
     }
     return false;
+  }
+
+  isAuthenticated():boolean{
+    return this.isLogged;
   }
 
 }

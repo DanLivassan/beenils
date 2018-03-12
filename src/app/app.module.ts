@@ -14,6 +14,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {EditorialPage} from "../pages/editorial/editorial";
 import {PublicationListPage} from "../pages/publication-list/publication-list";
 import {UserProvider} from "../providers/user/user";
+import {SigninPage} from "../pages/signin/signin";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {UserProvider} from "../providers/user/user";
     PublicationViewPage,
     EditorialPage,
     PublicationListPage,
+    SigninPage,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +37,7 @@ import {UserProvider} from "../providers/user/user";
     PublicationViewPage,
     EditorialPage,
     PublicationListPage,
+    SigninPage,
   ],
   providers: [
     StatusBar,

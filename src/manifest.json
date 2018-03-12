@@ -1,10 +1,10 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Beenews - Mobile App",
+  "short_name": "Beenews",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
-    "src": "assets/imgs/logo.png",
+    "src": "assets/pages-logo-dark.png",
     "sizes": "512x512",
     "type": "image/png"
   }],
