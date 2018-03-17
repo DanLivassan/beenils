@@ -25,7 +25,7 @@ export class PublicationProvider {
             1,
             1,
             'http://s2.glbimg.com/DML4FBgfNJ-AF0d1727X5l87j9A=/0x86:3500x2273/640x400/s.glbimg.com/es/ge/f/original/2018/03/06/2018-03-06t213231z_1496203657_rc1727da39d0_rtrmadp_3_soccer-champions-psg-mad.jpg',
-            10,
+            456,
             'Salvador',
             []
           ),
@@ -42,7 +42,7 @@ export class PublicationProvider {
             1,
             1,
             'https://s2.glbimg.com/1kCYgsimDRIYys5eRHPQElXin_Y=/0x0:2000x1333/984x0/smart/filters:strip_icc()/s.glbimg.com/es/ge/f/original/2018/03/11/20180311173552223_2_0zkcBH1.jpg',
-            10,
+            4122,
             'Salvador',
             []
           ),
@@ -59,7 +59,7 @@ export class PublicationProvider {
             1,
             1,
             'https://s2.glbimg.com/UUoLjACvqX9WLsYL0zNLcC4v1DI=/0x0:597x432/984x0/smart/filters:strip_icc()/s.glbimg.com/es/ge/f/original/2018/03/11/sem_titulo_00p6Yqp.png',
-            10,
+            1336,
             'Salvador',
             []
           )
@@ -79,7 +79,7 @@ export class PublicationProvider {
         1,
         1,
         'https://s2.glbimg.com/8hIm9iqU_mJD-xCuqmYcxQEKLH0=/0x0:3500x2144/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2017/T/i/OifzSrRhqTl52i7h7FBg/2017-08-10t194902z-515865645-rc1be4f645a0-rtrmadp-3-brazil-economy-budget.jpg',
-        10,
+        1236,
         'Salvador',
         []
       ),
@@ -96,7 +96,7 @@ export class PublicationProvider {
         1,
         1,
         'https://gazetaguacuana.com.br/wp-content/uploads/2015/09/politica1-450x314.jpg',
-        10,
+        1456,
         'Salvador',
         []
       ),
@@ -113,7 +113,7 @@ export class PublicationProvider {
         1,
         1,
         'https://s2.glbimg.com/Cyka9rL3qwBAlsFHM-_4ySX_Rc4=/0x0:600x364/984x0/smart/filters:strip_icc()/s.glbimg.com/jo/g1/f/original/2016/02/03/vaccari.png',
-        10,
+        1063,
         'Salvador',
         []
       )
@@ -132,7 +132,7 @@ export class PublicationProvider {
         1,
         1,
         'https://www.saudedicas.com.br/wp-content/uploads/2016/11/beneficios-do-cacau-para-a-beleza-1-676x288.jpg',
-        10,
+        1256,
         'Salvador',
         []
       ),
@@ -157,7 +157,7 @@ export class PublicationProvider {
         1,
         1,
         'https://s.glbimg.com/jo/g1/f/original/blog/8213d15f-7ec0-47a8-91c5-91d057754ae0_capsule-1079838_1280.jpg',
-        10,
+        1589,
         'Salvador',
         []
       ),
@@ -174,7 +174,7 @@ export class PublicationProvider {
         1,
         1,
         'https://s2.glbimg.com/a3eS3P03p5UMXvfFwllXBjRynSM=/0x0:1700x1065/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2017/X/B/NyHNbUQtq1pHB6yMPSoQ/toni-mendes.jpg',
-        10,
+        1002,
         'Salvador',
         []
       )

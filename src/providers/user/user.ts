@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {User} from "../../models/user";
+import {Params} from "../../utils/params";
+import {Address} from "../../models/address";
+import 'rxjs/Rx';
+
 
 /*
   Generated class for the UserProvider provider.
@@ -10,49 +14,45 @@ import {User} from "../../models/user";
 */
 @Injectable()
 export class UserProvider {
+
   user:User;
-  baseUrl:string = 'http://api.beenews.localhost/';
+  baseUrl:string = 'http://api.beenews.localhost';
   private isLogged = false;
   constructor(public http: HttpClient) {
 
   }
 
   signUp(user:User){
-    let route = baseUrl+'/create';
+    let route = Params.baseUrl+'/create';
   }
 
   delete(user:User){
-    let route = baseUrl+'/delete';
+    let route = Params.baseUrl+'/delete';
   }
 
-  login(email:string, password:string):User{
+  login(email:string, password:string){
 
-    let route = baseUrl+'/access/login';
+    let url =Params.getBaseUrl()+'/access/login';
     this.user=null;
 
     let form_data:FormData=new FormData();
     form_data.append('email', email);
     form_data.append('password', password);
-    this.http.post(
-      route,
-      form_data)
-      .
-    subscribe(
-      (data)=>{
-        if(data[0]=='logged'){
-          this.user = new User(
-            data['user']['id'],
-            data['user']['name'],
-            data['user']['last_name'],
-            data['user']['type'],
-            data['user']['status'],
-          );
-          localStorage.setItem('token', data[1]);
-          this.isLogged = true;
-        }
-    });
-    return this.user;
+
+    return this.http.post(
+      url,
+      form_data);
+
   }
+
+  successLogin(){
+    this.isLogged = true;
+  }
+
+  erroLogin(){
+    this.isLogged = false;
+  }
+
   logout(){
     this.isLogged=false;
     this.user=null;
@@ -68,6 +68,14 @@ export class UserProvider {
 
   isAuthenticated():boolean{
     return this.isLogged;
+  }
+
+  setUser(user:User){
+    this.user = user;
+  }
+
+  getUser():User{
+    return this.user;
   }
 
 }

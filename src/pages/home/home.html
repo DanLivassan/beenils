@@ -1,16 +1,14 @@
 <ion-header>
-  <ion-navbar [hideBackButton]="true" color="danger">
+  <ion-navbar [hideBackButton]="true">
     <ion-buttons end>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-
     </ion-buttons>
-
     <ion-title>Beenews Mobile - Notícias</ion-title>
   </ion-navbar>
-</ion-header>
 
+</ion-header>
 <ion-content>
 
   <ion-slides>
@@ -18,7 +16,7 @@
       <ion-card>
         <img src="{{publication.cover_image}}" alt="">
         <div class="card-title">{{publication.title}}</div>
-        <div class="card-subtitle">421 views</div>
+        <div class="card-subtitle">{{publication.views}} views</div>
       </ion-card>
     </ion-slide>
   </ion-slides>
@@ -36,32 +34,31 @@
               <ion-avatar item-start>
                 <img src="https://thumbs.dreamstime.com/b/do-retrato-masculino-do-avatar-do-%C3%ADcone-do-perfil-pessoa-ocasional-46846325.jpg">
               </ion-avatar>
-              <h2>{{segment_publication.created_by.get_full_name()}}</h2>
-              <p>{{segment_publication.created_at | date:'dd-MM-yyyy'}}</p>
+              <p style="color: #fff;">Por: {{segment_publication.created_by.get_full_name()}}</p>
             </ion-item>
 
             <img src="{{segment_publication.cover_image}}">
 
             <ion-card-content>
-              <p>{{segment_publication.title}}</p>
+              <p style="color:#fff;">{{segment_publication.title}}</p>
             </ion-card-content>
 
             <ion-row>
               <ion-col>
-                <button ion-button icon-left clear small>
+                <button ion-button icon-left small>
                   <ion-icon name="thumbs-up"></ion-icon>
-                  <div>12 Likes</div>
+                  <div> Like</div>
                 </button>
               </ion-col>
               <ion-col>
                 <button ion-button icon-left clear small>
                   <ion-icon name="eye"></ion-icon>
-                  <div>4 views</div>
+                  <div>{{segment_publication.views}} views</div>
                 </button>
               </ion-col>
               <ion-col center text-center>
                 <ion-note>
-                  11h atrás
+                  {{segment_publication.created_at | date:"dd/MM/yyyy"}}
                 </ion-note>
               </ion-col>
             </ion-row>

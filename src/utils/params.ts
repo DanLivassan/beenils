@@ -1,1 +1,26 @@
-const baseUrl:string = 'http://api.beenews.localhost/';
+
+export class Params{
+
+
+  constructor() {
+  }
+
+  static readonly baseUrl = 'http://api.beenews.localhost';
+  static getBaseUrl(){
+    return Params.baseUrl;
+  }
+  static readonly UserTypes ={
+    'Leitor':1,
+    'Jornalista': 5,
+    'Moderador': 10,
+    'Editor':30,
+    'Colunista': 60,
+    'Administrador':100
+  };
+  static readonly UserStatus = {
+    'Ativo':1,
+    'Inativo': 2,
+  };
+
+}
+

@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Editorial} from "../../models/editorial";
+import {Params} from "../../utils/params";
+import {UserProvider} from "../user/user";
 
 /*
   Generated class for the EditorialProvider provider.
@@ -12,7 +14,10 @@ import {Editorial} from "../../models/editorial";
 export class EditorialProvider {
 
   private editorials:Editorial[]=[];
-  constructor(private http:HttpClient) {
+  constructor(
+    private http:HttpClient,
+    private userProvider:UserProvider
+  ) {
     this.editorials.push(
       new Editorial(1,'Esportes'),
       new Editorial(2,'Política'),
@@ -35,9 +40,29 @@ export class EditorialProvider {
     return editorial;
   }
 
-  set(editorial: Editorial):Editorial{
-    this.editorials.push(editorial);
-    return editorial;
+  set(editorial: Editorial){
+    if(this.userProvider.isAuthenticated()) {
+
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': 'Bearer '+this.userProvider.getToken(),
+        })
+      };
+
+      let url = Params.getBaseUrl() + '/v1/editorial/create';
+      let formData: FormData = new FormData();
+      formData.append('Editorial[name]', editorial.name);
+      this.http.post(
+        url,
+        formData,
+        httpOptions
+      ).subscribe((edt)=>{
+        console.log("subcribe ----------");
+        console.log(edt);
+      });
+
+
+    }
   }
 
 

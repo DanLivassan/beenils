@@ -13,9 +13,8 @@ import {UserProvider} from "../../providers/user/user";
 export class HomePage {
   @ViewChild(Slides) slides: Slides;
   private task;
-  private editorial_segment=1;
   private editorials:Editorial[];
-
+  private editorial_segment = 1;
   private number_slide=1;
   private publications = [];
   private segment_publications = []

@@ -32,7 +32,7 @@
   <form (ngSubmit)="addEditorial()">
     <ion-item>
       <ion-label>Nome</ion-label>
-      <ion-input type="text" [(ngModel)]="new_editorial.name" name="title"></ion-input>
+      <ion-input type="text" [(ngModel)]="new_editorial.name" name="Editorial[name]"></ion-input>
     </ion-item>
     <button ion-button type="submit" block>Adicionar Editorial</button>
   </form>
@@ -41,7 +41,6 @@
     <button ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
     <ion-fab-list side="left">
       <button ion-fab><ion-icon (click)="changeAction()" name="add"></ion-icon></button>
-      <button ion-fab><ion-icon name="logo-whatsapp"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 

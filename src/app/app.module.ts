@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
+import { MomentModule } from 'angular2-moment';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -28,6 +28,7 @@ import {SigninPage} from "../pages/signin/signin";
   imports: [
     BrowserModule,
     HttpClientModule,
+    MomentModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

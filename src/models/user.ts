@@ -1,4 +1,5 @@
 import {Editorial} from "./editorial";
+import {Address} from "./address";
 
 export class User{
 
@@ -10,7 +11,7 @@ export class User{
   private _status:number;
   private _editorials:Editorial[];
   private _column:string;
-
+  private _address:Address;
 
   // User Profile attributes
   private _email:string;
@@ -120,5 +121,13 @@ export class User{
 
   set user_token(value) {
     this._user_token = value;
+  }
+
+  get address(): Address {
+    return this._address;
+  }
+
+  set address(value: Address) {
+    this._address = value;
   }
 }
