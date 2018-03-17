@@ -29,7 +29,7 @@
   <ng-container *ngFor="let editorial of editorials">
     <div *ngIf="editorial_segment==editorial.id">
       <ion-list>
-        <ion-card *ngFor="let segment_publication of segment_publications[editorial.id]">
+        <ion-card (click)="publicationView(segment_publication.id)" *ngFor="let segment_publication of segment_publications[editorial.id]">
             <ion-item>
               <ion-avatar item-start>
                 <img src="https://thumbs.dreamstime.com/b/do-retrato-masculino-do-avatar-do-%C3%ADcone-do-perfil-pessoa-ocasional-46846325.jpg">

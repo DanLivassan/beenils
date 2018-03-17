@@ -1,9 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, Slides} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Slides, ToastController} from 'ionic-angular';
 import {EditorialProvider} from "../../providers/editorial/editorial";
 import {PublicationProvider} from "../../providers/publication/publication";
 import {Editorial} from "../../models/editorial";
 import {UserProvider} from "../../providers/user/user";
+import {PublicationViewPage} from "../publication-view/publication-view";
 
 @IonicPage()
 @Component({
@@ -22,7 +23,8 @@ export class HomePage {
               public navParams: NavParams,
               private pubProvider:PublicationProvider,
               private edtProvider:EditorialProvider,
-              private userProvider:UserProvider
+              private userProvider:UserProvider,
+              private toastCtrl:ToastController
               ) {
     this.editorials = this.edtProvider.getAll();
     this.editorials.forEach((edit, i)=>{
@@ -51,6 +53,26 @@ export class HomePage {
       this.number_slide++;
     }
     this.slides.slideTo(this.number_slide,500);
+  }
+
+  publicationView(id:number){
+    let publication = this.pubProvider.get(id);
+    if(publication != null){
+      this.navCtrl.push(PublicationViewPage, {'publication':publication});
+    }
+    else{
+      this.presentToast("Notícia não encontrada", 3000, 'top');
+    }
+  }
+
+  presentToast(message:string, duration:number, position:string) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: duration,
+      position: position
+    });
+
+    toast.present();
   }
 
 }

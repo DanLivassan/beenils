@@ -23,6 +23,7 @@ import {SigninPage} from "../pages/signin/signin";
     PublicationViewPage,
     EditorialPage,
     PublicationListPage,
+    PublicationViewPage,
     SigninPage,
   ],
   imports: [
@@ -37,6 +38,7 @@ import {SigninPage} from "../pages/signin/signin";
     HomePage,
     PublicationViewPage,
     EditorialPage,
+    PublicationViewPage,
     PublicationListPage,
     SigninPage,
   ],

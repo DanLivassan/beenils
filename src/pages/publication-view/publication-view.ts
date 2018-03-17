@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Publication} from "../../models/publication";
 
 /**
  * Generated class for the PublicationViewPage page.
@@ -15,7 +16,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PublicationViewPage {
 
+  publication:Publication;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.publication = this.navParams.get('publication');
+    console.log(this.publication);
   }
 
   ionViewDidLoad() {
