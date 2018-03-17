@@ -13,7 +13,7 @@
 
   <ion-slides>
     <ion-slide *ngFor="let publication of publications">
-      <ion-card>
+      <ion-card (click)="publicationView(publication.id)">
         <img src="{{publication.cover_image}}" alt="">
         <div class="card-title">{{publication.title}}</div>
         <div class="card-subtitle">{{publication.views}} views</div>
