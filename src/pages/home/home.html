@@ -10,11 +10,14 @@
 
 </ion-header>
 <ion-content>
+  <div *ngFor="let p of publications">
+    {{p.title}}
+  </div>
 
   <ion-slides>
     <ion-slide *ngFor="let publication of publications">
       <ion-card (click)="publicationView(publication.id)">
-        <img src="{{publication.cover_image}}" alt="">
+        <!--<img src="" alt="">-->
         <div class="card-title">{{publication.title}}</div>
         <div class="card-subtitle">{{publication.views}} views</div>
       </ion-card>
@@ -37,7 +40,7 @@
               <p style="color: #fff;">Por: {{segment_publication.created_by.get_full_name()}}</p>
             </ion-item>
 
-            <img src="{{segment_publication.cover_image}}">
+            <!--<img src="">-->
 
             <ion-card-content>
               <p style="color:#fff;">{{segment_publication.title}}</p>

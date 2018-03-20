@@ -6,8 +6,12 @@ export class Params{
   }
 
   static readonly baseUrl = 'http://api.beenews.localhost';
+  static readonly frontUrl = 'http://beenews.localhost';
   static getBaseUrl(){
     return Params.baseUrl;
+  }
+  static getFrontUrl(){
+    return Params.frontUrl;
   }
   static readonly UserTypes ={
     'Leitor':1,

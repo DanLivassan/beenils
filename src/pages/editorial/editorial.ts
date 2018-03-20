@@ -21,20 +21,26 @@ export class EditorialPage {
   private new_editorial = new Editorial(0,'');
   private listing = true;
   constructor(public navCtrl: NavController, public navParams: NavParams,private edtProvider:EditorialProvider) {
+    this.refreshData();
     this.editoriais = edtProvider.getAll();
   }
 
   changeAction(){
-    this.listing=false;
+    this.listing=!this.listing;
   }
-  ionViewDidLoad() {
+  ionViewWillLoad(){
 
+  }
+
+  refreshData() {
+    this.edtProvider.refreshData();
   }
 
   addEditorial(){
     this.edtProvider.set(this.new_editorial);
     this.new_editorial = new Editorial(0,"");
     this.listing = true;
+    this.refreshData();
   }
 
 }

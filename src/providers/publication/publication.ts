@@ -1,17 +1,23 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Publication} from "../../models/publication";
 import {EditorialProvider} from "../editorial/editorial";
 import {User} from "../../models/user";
 import {PublicationCommentary} from "../../models/publication-commentary";
 import {Editorial} from "../../models/editorial";
+import {Observable} from "rxjs/Observable";
+import {UserProvider} from "../user/user";
+import {Params} from "../../utils/params";
+import {jsonpFactory} from "@angular/http/src/http_module";
 
 
 @Injectable()
 export class PublicationProvider {
 
   private publications:Publication[]=[];
-  constructor(public http: HttpClient, editorialProvider:EditorialProvider) {
+  constructor(public http: HttpClient,private editorialProvider:EditorialProvider, private userProvider:UserProvider) {
+    this.editorialProvider.refreshData();
+    /*
         this.publications.push(
           new Publication(
             1,
@@ -178,12 +184,57 @@ export class PublicationProvider {
         'Salvador',
         []
       )
-    );
+    );*/
 
   }
 
   getAll():Publication[]{
     return this.publications;
+  }
+
+  getAllFromServer(){
+
+      if(this.userProvider.isAuthenticated()) {
+        let url = Params.getFrontUrl() + '/site/get-publications?limit=10';
+        let headers = new HttpHeaders({
+          'Authorization': 'Bearer ' + this.userProvider.getToken(),
+        });
+        let params = new HttpParams();
+        params.set('limit','10');
+
+        this.http.get(url, {headers:headers, params:params}).subscribe((a:string)=>{
+          let publications = JSON.parse(a);
+
+          publications.forEach((publication)=>{
+            this.publications.push(new Publication(
+              publication['id'],
+              publication['title'],
+              publication['content'],
+              publication['created_at'],
+              new User(
+                publication['created_by']['id'],
+                publication['created_by']['name'],
+                publication['created_by']['last_name'],
+                publication['created_by']['type']['id'],
+                publication['created_by']['status']['id']
+              ),
+              publication['status']['description'],
+              this.editorialProvider.get(publication['editorial']['id']),
+              //new Editorial(publication['editorial']['id'], publication['editorial']['name']),
+              publication['type']['id'],
+              publication['exclusive']['id'],
+              publication['scope']['id'],
+              publication['cover_image'],
+              100,//faltando views
+              publication['address']['city'],
+              []//faltando comentários
+            ));
+          });
+        });
+      }
+
+
+
 
   }
 
@@ -196,10 +247,9 @@ export class PublicationProvider {
   }
 
   getByEditorial(editorial:Editorial):Publication[]{
-    let publications_filtered = this.publications.filter((publication)=>{
-      return publication.editorial == editorial
+    return this.publications.filter((publication)=>{
+      return publication.editorial.id == editorial.id
     })
-    return publications_filtered;
   }
 
 }

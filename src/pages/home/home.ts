@@ -14,7 +14,7 @@ import {PublicationViewPage} from "../publication-view/publication-view";
 export class HomePage {
   @ViewChild(Slides) slides: Slides;
   private task;
-  private editorials:Editorial[];
+  private editorials:Editorial[]=[];
   private editorial_segment = 1;
   private number_slide=1;
   private publications = [];
@@ -26,21 +26,29 @@ export class HomePage {
               private userProvider:UserProvider,
               private toastCtrl:ToastController
               ) {
-    this.editorials = this.edtProvider.getAll();
-    this.editorials.forEach((edit, i)=>{
-      this.segment_publications[edit.id]=this.pubProvider.getByEditorial(edit);
-    });
 
-    this.publications = pubProvider.getAll();
   }
 
   ionViewCanEnter(){
     return this.userProvider.isAuthenticated();
   }
+  ionViewWillEnter(){
+
+    this.edtProvider.refreshData();
+    this.pubProvider.getAllFromServer();
+    this.editorials = this.edtProvider.getAll();
+    this.publications = this.pubProvider.getAll();
+
+  }
   ionViewDidEnter(){
     this.task = setInterval(()=>{
       this.changeSlides();
     },3000);
+    console.log('this.publication: ')
+    console.log(this.publications);
+    this.editorials.forEach((edit, i)=>{
+      this.segment_publications[edit.id]=this.pubProvider.getByEditorial(edit);
+    });
 
   }
 

@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import {Editorial} from "../../models/editorial";
 import {Params} from "../../utils/params";
 import {UserProvider} from "../user/user";
-
+import {Observable} from "rxjs/Observable";
+import 'rxjs';
 /*
   Generated class for the EditorialProvider provider.
 
@@ -18,20 +19,36 @@ export class EditorialProvider {
     private http:HttpClient,
     private userProvider:UserProvider
   ) {
-    this.editorials.push(
+    /*this.editorials.push(
       new Editorial(1,'Esportes'),
       new Editorial(2,'Política'),
       new Editorial(3,'Saúde')
-    );
+    );*/
   }
 
   getAll():Editorial[]{
-
-
     return this.editorials;
-
   }
 
+  refreshData() {
+    if (this.userProvider.isAuthenticated()) {
+      let url = Params.getBaseUrl() + '/v1/editorial';
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.userProvider.getToken(),
+      });
+      const httpOptions = {
+        headers: headers
+      };
+      this.http.get(url, httpOptions).map(result => result['editorials']).subscribe((data) => {
+        if (data) {
+          this.editorials = [];
+          data.forEach((edt) => {
+            this.editorials.push(new Editorial(edt['id'], edt['name']));
+          });
+        }
+      });
+    }
+  }
   get(id:number):Editorial{
     let editorial = this.editorials.filter(ed=>ed.id===id)[0];
     if(typeof editorial === 'undefined'){
@@ -43,10 +60,12 @@ export class EditorialProvider {
   set(editorial: Editorial){
     if(this.userProvider.isAuthenticated()) {
 
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer '+this.userProvider.getToken(),
+      });
+
       const httpOptions = {
-        headers: new HttpHeaders({
-          'Authorization': 'Bearer '+this.userProvider.getToken(),
-        })
+        headers:headers
       };
 
       let url = Params.getBaseUrl() + '/v1/editorial/create';
