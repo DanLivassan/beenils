@@ -204,9 +204,9 @@ export class PublicationProvider {
 
         this.http.get(url, {headers:headers, params:params}).subscribe((a:string)=>{
           let publications = JSON.parse(a);
-
+          let pubs =[];
           publications.forEach((publication)=>{
-            this.publications.push(new Publication(
+            pubs.push(new Publication(
               publication['id'],
               publication['title'],
               publication['content'],
@@ -230,6 +230,7 @@ export class PublicationProvider {
               []//faltando comentários
             ));
           });
+          this.publications = pubs;
         });
       }
 

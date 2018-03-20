@@ -47,7 +47,10 @@ export class HomePage {
     console.log('this.publication: ')
     console.log(this.publications);
     this.editorials.forEach((edit, i)=>{
-      this.segment_publications[edit.id]=this.pubProvider.getByEditorial(edit);
+      if(edit !=null){
+        this.segment_publications[edit.id]=this.pubProvider.getByEditorial(edit);
+      }
+
     });
 
   }

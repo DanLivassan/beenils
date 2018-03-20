@@ -10,68 +10,65 @@
 
 </ion-header>
 <ion-content>
-  <div *ngFor="let p of publications">
-    {{p.title}}
-  </div>
 
   <ion-slides>
     <ion-slide *ngFor="let publication of publications">
       <ion-card (click)="publicationView(publication.id)">
-        <!--<img src="" alt="">-->
-        <div class="card-title">{{publication.title}}</div>
-        <div class="card-subtitle">{{publication.views}} views</div>
+        <ion-card-header>
+          {{publication.title}}
+        </ion-card-header>
+        <ion-card-content >
+          <img style="max-height: 250px;" src="http://beenews.localhost/{{publication.cover_image}}" alt="">
+        </ion-card-content>
       </ion-card>
     </ion-slide>
   </ion-slides>
-  <ion-segment [(ngModel)]="editorial_segment" color="primary">
+  <ion-segment [(ngModel)]="editorial_segment" color="primary" >
     <ion-segment-button *ngFor="let editorial of editorials" value="{{editorial.id}}">
       {{editorial.name}}
     </ion-segment-button>
   </ion-segment>
-
   <ng-container *ngFor="let editorial of editorials">
     <div *ngIf="editorial_segment==editorial.id">
       <ion-list>
         <ion-card (click)="publicationView(segment_publication.id)" *ngFor="let segment_publication of segment_publications[editorial.id]">
-            <ion-item>
-              <ion-avatar item-start>
-                <img src="https://thumbs.dreamstime.com/b/do-retrato-masculino-do-avatar-do-%C3%ADcone-do-perfil-pessoa-ocasional-46846325.jpg">
-              </ion-avatar>
-              <p style="color: #fff;">Por: {{segment_publication.created_by.get_full_name()}}</p>
-            </ion-item>
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="https://thumbs.dreamstime.com/b/do-retrato-masculino-do-avatar-do-%C3%ADcone-do-perfil-pessoa-ocasional-46846325.jpg">
+            </ion-avatar>
+            <p style="color: #fff;">Por: {{segment_publication.created_by.get_full_name()}}</p>
+          </ion-item>
 
-            <!--<img src="">-->
+          <img src="http://beenews.localhost/{{publication.cover_image}}">
 
-            <ion-card-content>
-              <p style="color:#fff;">{{segment_publication.title}}</p>
-            </ion-card-content>
+          <ion-card-content>
+            <p style="color:#fff;">{{segment_publication.title}}</p>
+          </ion-card-content>
 
-            <ion-row>
-              <ion-col>
-                <button ion-button icon-left small>
-                  <ion-icon name="thumbs-up"></ion-icon>
-                  <div> Like</div>
-                </button>
-              </ion-col>
-              <ion-col>
-                <button ion-button icon-left clear small>
-                  <ion-icon name="eye"></ion-icon>
-                  <div>{{segment_publication.views}} views</div>
-                </button>
-              </ion-col>
-              <ion-col center text-center>
-                <ion-note>
-                  {{segment_publication.created_at | date:"dd/MM/yyyy"}}
-                </ion-note>
-              </ion-col>
-            </ion-row>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div> Like</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="eye"></ion-icon>
+                <div>{{segment_publication.views}} views</div>
+              </button>
+            </ion-col>
+            <ion-col center text-center>
+              <ion-note>
+                {{segment_publication.created_at | date:"dd/MM/yyyy"}}
+              </ion-note>
+            </ion-col>
+          </ion-row>
 
 
         </ion-card>
       </ion-list>
     </div>
   </ng-container>
-
-
 
 </ion-content>
