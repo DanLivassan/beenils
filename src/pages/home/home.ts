@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, Slides, ToastController} from 'ionic-angular';
+import {IonicPage,Segment, NavController, NavParams, Slides, ToastController} from 'ionic-angular';
 import {EditorialProvider} from "../../providers/editorial/editorial";
 import {PublicationProvider} from "../../providers/publication/publication";
 import {Editorial} from "../../models/editorial";
@@ -13,9 +13,12 @@ import {PublicationViewPage} from "../publication-view/publication-view";
 })
 export class HomePage {
   @ViewChild(Slides) slides: Slides;
+  @ViewChild(Segment) private segment:Segment;
+
+  private relationship;
   private task;
   private editorials:Editorial[]=[];
-  private editorial_segment = 1;
+  private editorial_segment;
   private number_slide=1;
   private publications = [];
   private segment_publications = []
@@ -48,13 +51,18 @@ export class HomePage {
     console.log(this.publications);
     this.editorials.forEach((edit, i)=>{
       if(edit !=null){
+        if(i==1){
+          this.editorial_segment = edit.id;
+        }
+
         this.segment_publications[edit.id]=this.pubProvider.getByEditorial(edit);
       }
 
     });
-
+    if(this.segment){
+      this.segment.ngAfterContentInit();
+    }
   }
-
 
   changeSlides() {
     if(this.number_slide>=this.publications.length){
@@ -84,6 +92,10 @@ export class HomePage {
     });
 
     toast.present();
+  }
+
+  segmentChanged(event){
+    //console.log(this.editorial_segment);
   }
 
 }
