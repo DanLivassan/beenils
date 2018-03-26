@@ -228,12 +228,11 @@ export class PublicationProvider {
         ),
         publication['status']['description'],
         this.editorialProvider.get(publication['editorial']['id']),
-        //new Editorial(publication['editorial']['id'], publication['editorial']['name']),
         publication['type']['id'],
         publication['exclusive']['id'],
         publication['scope']['id'],
         publication['cover_image'],
-        100,//faltando views
+        publication['views'],
         publication['address']['city'],
         []//faltando comentários
       ));
