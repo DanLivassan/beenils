@@ -5,8 +5,8 @@ export class Params{
   constructor() {
   }
 
-  static readonly baseUrl = 'http://api.beenews.localhost';
-  static readonly frontUrl = 'http://beenews.localhost';
+  static readonly baseUrl = 'api';
+  static readonly frontUrl = 'front-api';
   static getBaseUrl(){
     return Params.baseUrl;
   }

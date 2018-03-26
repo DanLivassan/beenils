@@ -5,18 +5,25 @@ import {PublicationProvider} from "../../providers/publication/publication";
 import {Editorial} from "../../models/editorial";
 import {UserProvider} from "../../providers/user/user";
 import {PublicationViewPage} from "../publication-view/publication-view";
+import {Params} from "../../utils/params";
 
 @IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
+  styles:[
+    "assets/styles/styles.css",
+    "assets/styles/framework.css",
+    "assets/styles/font-awesome.css",
+  ],
 })
 export class HomePage {
   @ViewChild(Slides) slides: Slides;
   @ViewChild(Segment) private segment:Segment;
-
+  private frontUrl = Params.getFrontUrl();
   private task;
   private editorials:Editorial[]=[];
+  private editorial_guides=[];
   private editorial_segment;
   private number_slide=1;
   private publications = [];
@@ -41,11 +48,28 @@ export class HomePage {
         this.pubProvider.extractData(data);
         this.editorials = this.edtProvider.getAll();
         this.editorials = this.editorials.slice(0,4);
+
+        this.editorials.forEach((edt,index)=>{
+              this.editorial_guides.push(
+                {
+                  data:edt,
+                  is_active:index==0,
+                  publications:this.pubProvider.getByEditorial(edt)
+                });
+        });
         this.publications = this.pubProvider.getAll();
       });
     });
   }
 
+  changeEditorial(index:number){
+    this.editorial_guides.forEach((a,i)=>{
+      this.editorial_guides[i].is_active = false;
+    });
+
+    this.editorial_guides[index].is_active = true;
+    console.log(this.editorial_guides);
+  }
   ionViewDidEnter(){
     this.task = setInterval(()=>{
       this.changeSlides();

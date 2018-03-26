@@ -249,6 +249,46 @@ export class PublicationProvider {
     return publication;
   }
 
+  getOnServer(id:number){
+    if(this.userProvider.isAuthenticated()) {
+      let url = Params.getFrontUrl() + '/site/get-publication/'+id;
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.userProvider.getToken(),
+      });
+
+      return this.http.get(url, {headers:headers});
+    }
+    else{
+      return null;
+    }
+  }
+
+  formatResponse(publication):Publication{
+    let pub:Publication = new Publication(
+      publication['id'],
+      publication['title'],
+      publication['content'],
+      publication['created_at'],
+      new User(
+        publication['created_by']['id'],
+        publication['created_by']['name'],
+        publication['created_by']['last_name'],
+        publication['created_by']['type']['id'],
+        publication['created_by']['status']['id']
+      ),
+      publication['status']['description'],
+      this.editorialProvider.get(publication['editorial']['id']),
+      publication['type']['id'],
+      publication['exclusive']['id'],
+      publication['scope']['id'],
+      publication['cover_image'],
+      publication['views'],
+      publication['address']['city'],
+      []//faltando comentários
+    );
+  return pub;
+  }
+
   getByEditorial(editorial:Editorial):Publication[]{
     return this.publications.filter((publication)=>{
       return publication.editorial.id == editorial.id

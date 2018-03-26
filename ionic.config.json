@@ -9,6 +9,10 @@
     {
       "path": "/api",
       "proxyUrl": "http://api.beenews.localhost"
+    },
+    {
+      "path": "/front-api",
+      "proxyUrl": "http://beenews.localhost"
     }
   ]
 }

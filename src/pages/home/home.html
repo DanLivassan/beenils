@@ -13,63 +13,33 @@
 
   <ion-slides>
     <ion-slide *ngFor="let publication of publications">
-      <ion-card (click)="publicationView(publication.id)">
-        <ion-card-header>
-          {{publication.title}}
-        </ion-card-header>
-        <ion-card-content >
-          <img class="slider-img" src="http://beenews.localhost/{{publication.cover_image}}" alt="">
-        </ion-card-content>
-      </ion-card>
+      <div class="news-slider" (click)="publicationView(publication.id)">
+        <a href="#" class="news-slider-item">
+          <img style="max-height: 300px; margin: auto;" class="responsive-image" src="{{frontUrl}}/{{publication.cover_image}}" alt="img">
+          <h3>{{publication.title}}</h3>
+        </a>
+      </div>
     </ion-slide>
   </ion-slides>
-  <!-- Segment in content -->
-  <ion-segment [(ngModel)]="editorial_segment" color="primary" (ionChange)="segmentChanged($event)">
-    <ion-segment-button *ngFor="let editorial of editorials" value="{{editorial.name}}">
-      {{editorial.name}}
-    </ion-segment-button>
-  </ion-segment>
-  <ng-container *ngFor="let editorial of editorials">
-    <div *ngIf="editorial.name==editorial_segment">
-      <ion-list>
-        <ion-card (click)="publicationView(segment_publication.id)" *ngFor="let segment_publication of segment_publications[editorial.id]">
-          <ion-item>
-            <ion-avatar item-start>
-              <img src="https://thumbs.dreamstime.com/b/do-retrato-masculino-do-avatar-do-%C3%ADcone-do-perfil-pessoa-ocasional-46846325.jpg">
-            </ion-avatar>
-            <p style="color: #fff;">Por: {{segment_publication.created_by.get_full_name()}}</p>
-          </ion-item>
 
-          <img class="segment-img" src="http://beenews.localhost/{{segment_publication.cover_image}}">
-
-          <ion-card-content>
-            <p style="color:#fff;">{{segment_publication.title}}</p>
-          </ion-card-content>
-
-          <ion-row>
-            <ion-col>
-              <button ion-button icon-left small>
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div> Like</div>
-              </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button icon-left clear small>
-                <ion-icon name="eye"></ion-icon>
-                <div>{{segment_publication.views}} views</div>
-              </button>
-            </ion-col>
-            <ion-col center text-center>
-              <ion-note>
-                {{segment_publication.created_at | date:"dd/MM/yyyy"}}
-              </ion-note>
-            </ion-col>
-          </ion-row>
-
-
-        </ion-card>
-      </ion-list>
+  <div class="content">
+    <div class="home-tabs">
+      <ng-container *ngFor="let editorial of editorial_guides; let i=index">
+        <a *ngIf="i<3" (click)="changeEditorial(i)"  [ngClass]="{'active-home-tab':editorial.is_active}" class="activate-tab-{{i}}" >{{editorial.data.name}}</a>
+      </ng-container>
+      <div class="clear"></div>
     </div>
-  </ng-container>
+  </div>
+
+  <div [hidden]="!editorial.is_active" *ngFor="let editorial of editorial_guides; let i=index" class="content" id="tab-{{i}}">
+    <div class="thumb-layout">
+      <a style="overflow: hidden;" (click)="publicationView(publication.id)" *ngFor="let publication of editorial.publications" href="#">
+        <img  src="{{frontUrl}}/{{publication.cover_image}}">
+        <strong>{{editorial.data.name}}</strong>
+        <em>{{publication.title}}</em>
+      </a>
+    </div>
+    <div class="decoration"></div>
+  </div>
 
 </ion-content>

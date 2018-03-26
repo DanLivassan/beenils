@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Publication} from "../../models/publication";
 import {UserProvider} from "../../providers/user/user";
+import {PublicationProvider} from "../../providers/publication/publication";
 
 /**
  * Generated class for the PublicationViewPage page.
@@ -18,8 +19,11 @@ import {UserProvider} from "../../providers/user/user";
 export class PublicationViewPage {
 
   publication:Publication;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider:UserProvider) {
+  constructor(public navCtrl: NavController, private pubProvider:PublicationProvider,public navParams: NavParams, private userProvider:UserProvider) {
     this.publication = this.navParams.get('publication');
+    this.pubProvider.getOnServer(this.publication.id).subscribe((publication)=>{
+      this.publication = this.pubProvider.formatResponse(publication);
+    });
 
   }
   ionViewDidLoad() {
