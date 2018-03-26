@@ -15,7 +15,6 @@ export class HomePage {
   @ViewChild(Slides) slides: Slides;
   @ViewChild(Segment) private segment:Segment;
 
-  private relationship;
   private task;
   private editorials:Editorial[]=[];
   private editorial_segment;
@@ -36,19 +35,24 @@ export class HomePage {
     return this.userProvider.isAuthenticated();
   }
   ionViewWillEnter(){
-
-    this.edtProvider.refreshData();
-    this.pubProvider.getAllFromServer();
-    this.editorials = this.edtProvider.getAll();
-    this.publications = this.pubProvider.getAll();
-
+    this.edtProvider.refreshData().subscribe((data) => {
+      this.edtProvider.extractData(data);
+      this.pubProvider.refreshData().subscribe((data)=>{
+        this.pubProvider.extractData(data);
+        this.editorials = this.edtProvider.getAll();
+        this.editorials = this.editorials.slice(0,4);
+        this.publications = this.pubProvider.getAll();
+        if(this.segment){
+          this.segment.ngAfterContentInit();
+        }
+      });
+    });
   }
+
   ionViewDidEnter(){
     this.task = setInterval(()=>{
       this.changeSlides();
     },3000);
-    console.log('this.publication: ')
-    console.log(this.publications);
     this.editorials.forEach((edit, i)=>{
       if(edit !=null){
         if(i==1){
@@ -59,9 +63,7 @@ export class HomePage {
       }
 
     });
-    if(this.segment){
-      this.segment.ngAfterContentInit();
-    }
+
   }
 
   changeSlides() {

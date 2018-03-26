@@ -39,14 +39,20 @@ export class EditorialProvider {
       const httpOptions = {
         headers: headers
       };
-      this.http.get(url, httpOptions).map(result => result['editorials']).subscribe((data) => {
-        if (data) {
-          this.editorials = [];
-          data.forEach((edt) => {
-            this.editorials.push(new Editorial(edt['id'], edt['name']));
-          });
-        }
+      return this.http.get(url, httpOptions).map(result => result['editorials']);
+    }
+    else{
+      return null;
+    }
+  }
+
+  extractData(data){
+    if (data) {
+      this.editorials = [];
+      data.forEach((edt) => {
+        this.editorials.push(new Editorial(edt['id'], edt['name']));
       });
+      return this.editorials;
     }
   }
   get(id:number):Editorial{

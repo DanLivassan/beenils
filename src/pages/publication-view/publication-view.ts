@@ -19,11 +19,10 @@ export class PublicationViewPage {
   publication:Publication;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.publication = this.navParams.get('publication');
-    console.log(this.publication);
-  }
 
+  }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PublicationViewPage');
+
   }
 
 }

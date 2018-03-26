@@ -192,7 +192,7 @@ export class PublicationProvider {
     return this.publications;
   }
 
-  getAllFromServer(){
+  refreshData(){
 
       if(this.userProvider.isAuthenticated()) {
         let url = Params.getFrontUrl() + '/site/get-publications?limit=10';
@@ -202,41 +202,44 @@ export class PublicationProvider {
         let params = new HttpParams();
         params.set('limit','10');
 
-        this.http.get(url, {headers:headers, params:params}).subscribe((a:string)=>{
-          let publications = JSON.parse(a);
-          let pubs =[];
-          publications.forEach((publication)=>{
-            pubs.push(new Publication(
-              publication['id'],
-              publication['title'],
-              publication['content'],
-              publication['created_at'],
-              new User(
-                publication['created_by']['id'],
-                publication['created_by']['name'],
-                publication['created_by']['last_name'],
-                publication['created_by']['type']['id'],
-                publication['created_by']['status']['id']
-              ),
-              publication['status']['description'],
-              this.editorialProvider.get(publication['editorial']['id']),
-              //new Editorial(publication['editorial']['id'], publication['editorial']['name']),
-              publication['type']['id'],
-              publication['exclusive']['id'],
-              publication['scope']['id'],
-              publication['cover_image'],
-              100,//faltando views
-              publication['address']['city'],
-              []//faltando comentários
-            ));
-          });
-          this.publications = pubs;
-        });
+        return this.http.get(url, {headers:headers, params:params});
+      }
+      else{
+        return null;
       }
 
+  }
 
-
-
+  public extractData(data){
+    let publications = data;
+    let pubs =[];
+    publications.forEach((publication)=>{
+      pubs.push(new Publication(
+        publication['id'],
+        publication['title'],
+        publication['content'],
+        publication['created_at'],
+        new User(
+          publication['created_by']['id'],
+          publication['created_by']['name'],
+          publication['created_by']['last_name'],
+          publication['created_by']['type']['id'],
+          publication['created_by']['status']['id']
+        ),
+        publication['status']['description'],
+        this.editorialProvider.get(publication['editorial']['id']),
+        //new Editorial(publication['editorial']['id'], publication['editorial']['name']),
+        publication['type']['id'],
+        publication['exclusive']['id'],
+        publication['scope']['id'],
+        publication['cover_image'],
+        100,//faltando views
+        publication['address']['city'],
+        []//faltando comentários
+      ));
+    });
+    this.publications = pubs;
+    return pubs;
   }
 
   get(id:number):Publication{
