@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Publication} from "../../models/publication";
+import {UserProvider} from "../../providers/user/user";
 
 /**
  * Generated class for the PublicationViewPage page.
@@ -17,12 +18,16 @@ import {Publication} from "../../models/publication";
 export class PublicationViewPage {
 
   publication:Publication;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider:UserProvider) {
     this.publication = this.navParams.get('publication');
 
   }
   ionViewDidLoad() {
 
+  }
+
+  ionViewCanEnter(){
+    return this.userProvider.isAuthenticated();
   }
 
 }

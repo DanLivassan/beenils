@@ -15,6 +15,7 @@ import {EditorialPage} from "../pages/editorial/editorial";
 import {PublicationListPage} from "../pages/publication-list/publication-list";
 import {UserProvider} from "../providers/user/user";
 import {SigninPage} from "../pages/signin/signin";
+import {EditorialPublicationsViewPage} from "../pages/editorial-publications-view/editorial-publications-view";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {SigninPage} from "../pages/signin/signin";
     EditorialPage,
     PublicationListPage,
     PublicationViewPage,
+    EditorialPublicationsViewPage,
     SigninPage,
   ],
   imports: [
@@ -40,6 +42,7 @@ import {SigninPage} from "../pages/signin/signin";
     EditorialPage,
     PublicationViewPage,
     PublicationListPage,
+    EditorialPublicationsViewPage,
     SigninPage,
   ],
   providers: [

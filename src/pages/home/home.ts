@@ -42,9 +42,6 @@ export class HomePage {
         this.editorials = this.edtProvider.getAll();
         this.editorials = this.editorials.slice(0,4);
         this.publications = this.pubProvider.getAll();
-        if(this.segment){
-          this.segment.ngAfterContentInit();
-        }
       });
     });
   }
@@ -63,6 +60,10 @@ export class HomePage {
       }
 
     });
+
+    if(this.segment){
+      this.segment.ngAfterContentInit();
+    }
 
   }
 

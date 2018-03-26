@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {EditorialProvider} from "../../providers/editorial/editorial";
 import {Editorial} from "../../models/editorial";
+import {EditorialPublicationsViewPage} from "../editorial-publications-view/editorial-publications-view";
 
 /**
  * Generated class for the EditorialPage page.
@@ -41,6 +42,11 @@ export class EditorialPage {
     this.new_editorial = new Editorial(0,"");
     this.listing = true;
     this.refreshData();
+  }
+
+  openNews(editorial:Editorial){
+    this.navCtrl.push(EditorialPublicationsViewPage,{'editorial':editorial});
+
   }
 
 }

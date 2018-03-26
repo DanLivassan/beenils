@@ -11,7 +11,7 @@
 
 <ion-content padding>
   <ion-card>
-    <img src="{{publication.cover_image}}"/>
+    <img src="http://beenews.localhost/{{publication.cover_image}}"/>
     <ion-card-content>
       <ion-card-title>
         {{publication.title}}
@@ -41,5 +41,8 @@
       </ion-row>
     </ion-grid>
   </ion-card>
-  {{publication.content}}
+  <div class="content" [innerHtml] = "publication.content">
+
+  </div>
+
 </ion-content>
