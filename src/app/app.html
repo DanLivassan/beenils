@@ -2,18 +2,173 @@
 
   <ion-header>
     <ion-toolbar>
-      <ion-title>Páginas</ion-title>
+      <ion-title>Beenews</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
-    </ion-list>
+    <div class="sidebar-menu">
+
+      <a *ngFor="let page of pages" class="menu-item" (click)="openPage(page)">
+        <i class="fa {{page.icon}} bg-red-dark"></i>
+        {{page.title}}
+        <i class="fa fa-circle"></i>
+      </a>
+
+      <div class="sidebar-divider">
+        Beenews Mobile
+      </div>
+      <a class="menu-item" (click)="logout()">
+        <i class="fa fa-gift bg-green-dark"></i>
+        Logout
+        <i class="fa fa-circle"></i>
+      </a>
+    </div>
+
   </ion-content>
 
 </ion-menu>
+<div class="sidebar-left">
+  <div class="sidebar-scroll">
 
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+    <div class="sidebar-menu">
+      <a class="menu-item active-item" href="index.html"><!-- active-item -->
+        <i class="fa fa-home bg-red-dark"></i>
+        Front
+        <i class="fa fa-circle"></i>
+      </a>
+      <a class="menu-item" href="index-news-cover.html"><!-- active-item -->
+        <i class="fa fa-image bg-green-dark"></i>
+        Cover
+        <i class="fa fa-circle"></i>
+      </a>
+      <div class="has-submenu">
+        <a class="menu-item open-submenu" href="#"><!-- active-item -->
+          <i class="fa fa-list-ul bg-blue-dark"></i>
+          Lists
+          <i class="fa fa-angle-right"></i>
+        </a>
+        <div class="submenu"><!--active-submenu-->
+          <div class="sidebar-header left-sidebar-header">
+            <h3>News!</h3>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a class="close-sidebar" href="#"><i class="fa fa-times"></i></a>
+            <div class="clear"></div>
+          </div>
+          <div class="sidebar-divider">Article List Styles</div>
+          <a class="menu-item close-submenu" href="#">
+            <i class="fa fa-level-up"></i>
+            Back to Menu
+            <i class="fa fa-angle-left"></i>
+          </a>
+          <a class="menu-item" href="news-article-list-1.html">
+            <i class="fa fa-list-ul"></i>
+            Article List 1
+            <i class="fa fa-circle"></i>
+          </a>
+          <a class="menu-item" href="news-article-list-2.html">
+            <i class="fa fa-list-ul"></i>
+            Article List 2
+            <i class="fa fa-circle"></i>
+          </a>
+          <a class="menu-item" href="news-article-list-3.html">
+            <i class="fa fa-list-ul"></i>
+            Article List 3
+            <i class="fa fa-circle"></i>
+          </a>
+          <a class="menu-item close-submenu" href="#">
+            <i class="fa fa-level-up"></i>
+            Back to Menu
+            <i class="fa fa-angle-left"></i>
+          </a>
+        </div>
+      </div>
+      <div class="has-submenu">
+        <a class="menu-item open-submenu" href="#"><!-- active-item -->
+          <i class="fa fa-pencil bg-magenta-dark"></i>
+          Posts
+          <i class="fa fa-angle-right"></i>
+        </a>
+        <div class="submenu"><!--active-submenu-->
+          <div class="sidebar-header left-sidebar-header">
+            <h3>News!</h3>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a class="close-sidebar" href="#"><i class="fa fa-times"></i></a>
+            <div class="clear"></div>
+          </div>
+          <div class="sidebar-divider">Article post styles</div>
+          <a class="menu-item close-submenu" href="#">
+            <i class="fa fa-level-up"></i>
+            Back to Menu
+            <i class="fa fa-angle-left"></i>
+          </a>
+          <a class="menu-item" href="news-article-1.html">
+            <i class="fa fa-list-ul"></i>
+            Article Post 1
+            <i class="fa fa-circle"></i>
+          </a>
+          <a class="menu-item" href="news-article-2.html">
+            <i class="fa fa-list-ul"></i>
+            Article Post 2
+            <i class="fa fa-circle"></i>
+          </a>
+          <a class="menu-item" href="news-article-3.html">
+            <i class="fa fa-list-ul"></i>
+            Article Post 3
+            <i class="fa fa-circle"></i>
+          </a>
+          <a class="menu-item close-submenu" href="#">
+            <i class="fa fa-level-up"></i>
+            Back to Menu
+            <i class="fa fa-angle-left"></i>
+          </a>
+        </div>
+      </div>
+      <a class="menu-item" href="news-archive.html">
+        <i class="fa fa-archive bg-orange-dark"></i>
+        Arhive
+        <i class="fa fa-circle"></i>
+      </a>
+      <a class="menu-item" href="news-profile.html">
+        <i class="fa fa-user bg-teal-dark"></i>
+        Profile
+        <i class="fa fa-circle"></i>
+      </a>
+      <a class="menu-item" href="news-login.html">
+        <i class="fa fa-lock bg-night-dark"></i>
+        Login
+        <i class="fa fa-circle"></i>
+      </a>
+      <a class="menu-item" href="news-register.html">
+        <i class="fa fa-code bg-yellow-dark"></i>
+        Register
+        <i class="fa fa-circle"></i>
+      </a>
+      <a class="menu-item" href="contact.html">
+        <i class="fa fa-envelope-o bg-green-dark"></i>
+        Contact
+        <i class="fa fa-circle"></i>
+      </a>
+      <a class="close-sidebar menu-item" href="#">
+        <i class="fa fa-times bg-red-dark"></i>
+        Close
+        <i class="fa fa-circle"></i>
+      </a>
+      <div class="sidebar-divider">
+        BONUS! 50 extra pages included
+      </div>
+      <a class="menu-item" href="page-sitemap.html">
+        <i class="fa fa-gift bg-green-dark"></i>
+        Extra Pages
+        <i class="fa fa-circle"></i>
+      </a>
+    </div>
+    <em class="sidebar-copyright">Copyright 2016. All Rights Reserved</em>
+  </div>
+</div>
+
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false">
+</ion-nav>

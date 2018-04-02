@@ -4,6 +4,7 @@ import {PublicationProvider} from "../../providers/publication/publication";
 import {Editorial} from "../../models/editorial";
 import {PublicationViewPage} from "../publication-view/publication-view";
 import {UserProvider} from "../../providers/user/user";
+import {Params} from "../../utils/params";
 
 /**
  * Generated class for the EditorialPublicationsViewPage page.
@@ -21,6 +22,8 @@ export class EditorialPublicationsViewPage {
 
   private editorial:Editorial;
   private editorialPublications=[];
+  private front_url = Params.getFrontUrl();
+
   constructor(public navCtrl: NavController,private userProvider:UserProvider, public navParams: NavParams, private pubProvider:PublicationProvider) {
     this.editorial = this.navParams.get('editorial');
   }

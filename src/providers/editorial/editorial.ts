@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Editorial} from "../../models/editorial";
 import {Params} from "../../utils/params";
@@ -32,14 +32,17 @@ export class EditorialProvider {
 
   refreshData() {
     if (this.userProvider.isAuthenticated()) {
-      let url = Params.getBaseUrl() + '/v1/editorial';
+      let url = Params.getBaseUrl() + '/v1/editorial/all';
       let headers = new HttpHeaders({
         'Authorization': 'Bearer ' + this.userProvider.getToken(),
       });
+      let params = new HttpParams();
+      params = params.set('limit','50');
       const httpOptions = {
-        headers: headers
+        headers: headers,
+        params: params
       };
-      return this.http.get(url, httpOptions).map(result => result['editorials']);
+      return this.http.get(url, httpOptions);
     }
     else{
       return null;

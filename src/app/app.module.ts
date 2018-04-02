@@ -16,6 +16,7 @@ import {PublicationListPage} from "../pages/publication-list/publication-list";
 import {UserProvider} from "../providers/user/user";
 import {SigninPage} from "../pages/signin/signin";
 import {EditorialPublicationsViewPage} from "../pages/editorial-publications-view/editorial-publications-view";
+import {ComponentsModule} from "../components/components.module";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {EditorialPublicationsViewPage} from "../pages/editorial-publications-vie
   imports: [
     BrowserModule,
     HttpClientModule,
+    ComponentsModule,
     MomentModule,
     IonicModule.forRoot(MyApp),
   ],

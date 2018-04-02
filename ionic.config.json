@@ -8,11 +8,11 @@
   "proxies": [
     {
       "path": "/api",
-      "proxyUrl": "http://api.beenews.localhost"
+      "proxyUrl": "http://198.211.109.67:8000"
     },
     {
       "path": "/front-api",
-      "proxyUrl": "http://beenews.localhost"
+      "proxyUrl": "http://198.211.109.67"
     }
   ]
 }

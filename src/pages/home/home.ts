@@ -11,11 +11,6 @@ import {Params} from "../../utils/params";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  styles:[
-    "assets/styles/styles.css",
-    "assets/styles/framework.css",
-    "assets/styles/font-awesome.css",
-  ],
 })
 export class HomePage {
   @ViewChild(Slides) slides: Slides;
@@ -47,7 +42,6 @@ export class HomePage {
       this.pubProvider.refreshData().subscribe((data)=>{
         this.pubProvider.extractData(data);
         this.editorials = this.edtProvider.getAll();
-        this.editorials = this.editorials.slice(0,4);
 
         this.editorials.forEach((edt,index)=>{
               this.editorial_guides.push(
@@ -64,11 +58,8 @@ export class HomePage {
 
   changeEditorial(index:number){
     this.editorial_guides.forEach((a,i)=>{
-      this.editorial_guides[i].is_active = false;
+      this.editorial_guides[i].is_active = (index==i);
     });
-
-    this.editorial_guides[index].is_active = true;
-    console.log(this.editorial_guides);
   }
   ionViewDidEnter(){
     this.task = setInterval(()=>{

@@ -1,16 +1,12 @@
 <ion-header>
-  <ion-navbar [hideBackButton]="true">
-    <ion-buttons end>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>Beenews Mobile - Notícias</ion-title>
-  </ion-navbar>
-
+  <div class="header-fixed">
+    <a href="#" menuToggle class="header-icon-1 open-left-sidebar"><i class="fa fa-navicon"></i></a>
+    <a href="#" class="header-logo">BEENEWS</a>
+    <a href="#" class="header-icon-2 open-right-sidebar">{{userProvider.getUser().name}}</a>
+    <a href="#" class="header-icon-3 open-search-bar">10k</a>
+  </div>
 </ion-header>
 <ion-content>
-
   <ion-slides>
     <ion-slide *ngFor="let publication of publications">
       <div class="news-slider" (click)="publicationView(publication.id)">
@@ -40,6 +36,25 @@
       </a>
     </div>
     <div class="decoration"></div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-content">
+      <h3 class="footer-logo">BEENEWS MOBILE</h3>
+      <p class="footer-text">
+        Beenews é um portal de notícias e fonte de conteúdo técnico e digital para sua influente audiência em todo o mundo.
+      </p>
+    </div>
+    <div class="footer-socials">
+      <a href="#" class="scale-hover facebook-color"><i class="fa fa-facebook"></i></a>
+      <a href="#" class="scale-hover twitter-color"><i class="fa fa-twitter"></i></a>
+      <a href="#" class="scale-hover google-color"><i class="fa fa-google-plus"></i></a>
+      <a href="#" class="scale-hover phone-color"><i class="fa fa-phone"></i></a>
+      <a href="#" class="scale-hover mail-color"><i class="fa fa-envelope-o"></i></a>
+      <a href="#" class="scale-hover bg-night-dark back-to-top"><i class="fa fa-angle-up"></i></a>
+      <div class="clear"></div>
+    </div>
+    <p class="footer-strip">Copyright <span id="copyright-year"></span> Beenews. Todos os direitos reservados</p>
   </div>
 
 </ion-content>

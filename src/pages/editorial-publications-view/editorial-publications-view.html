@@ -13,47 +13,54 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
+  <div id="page-content"><!--Add sidebar-move to move with body-->
+    <div id="page-content-scroll"><!--Enables this element to be scrolled -->
+      <div class="header-clear"></div>
 
-      <ion-list>
-        <ion-card (click)="publicationView(publication)" *ngFor="let publication of editorialPublications">
-          <ion-item>
-            <ion-avatar item-start>
-              <img src="https://thumbs.dreamstime.com/b/do-retrato-masculino-do-avatar-do-%C3%ADcone-do-perfil-pessoa-ocasional-46846325.jpg">
-            </ion-avatar>
-            <p>Por: {{publication.created_by.get_full_name()}}</p>
-          </ion-item>
+      <div class="card-large-layout-page">
+        <div *ngFor="let publication of editorialPublications" class="card-large-layout" style="display: block;">
+          <div>
+            <img class="responsive-image preload-image" style="display: block;" src="{{front_url}}/{{publication.cover_image}}" alt="img">
+            <strong>{{publication.title}}</strong>
+            <div class="card-date-posted">
+              <em>em <u>{{publication.editorial.name}}</u> <u>{{publication.created_at | amLocale:'pt-BR' |amTimeAgo}}.</u></em>
+            </div>
 
-          <img class="segment-img" src="http://beenews.localhost/{{publication.cover_image}}">
+          </div>
+          <p [innerHtml]="publication.content|slice:0:100">
+          </p>
+          <a (click)="publicationView(publication)" class="badge-read">Ler mais</a>
+          <a href="#" class="badge-share show-share-bottom color-black"><i class="fa fa-share"></i></a>
+          <a href="#" class="badge-favorite color-gray-light"><i class="fa fa-heart"></i></a>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="decoration"></div>
+        <a href="#" class="load-more-large-cards button button-fullscreen button-green full-bottom">Load More</a>
+      </div>
 
-          <ion-card-content>
-            <p>{{publication.title}}</p>
-          </ion-card-content>
-
-          <ion-row>
-            <ion-col>
-              <button ion-button icon-left small>
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div> Like</div>
-              </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button icon-left clear small>
-                <ion-icon name="eye"></ion-icon>
-                <div>{{publication.views}} views</div>
-              </button>
-            </ion-col>
-            <ion-col center text-center>
-              <ion-note>
-                {{publication.created_at | date:"dd/MM/yyyy"}}
-              </ion-note>
-            </ion-col>
-          </ion-row>
-
-
-        </ion-card>
-      </ion-list>
-
-
+    <div class="footer">
+      <div class="footer-content">
+        <h3 class="footer-logo">BEENEWS MOBILE</h3>
+        <p class="footer-text">
+          Beenews é um portal de notícias e fonte de conteúdo técnico e digital para sua influente audiência em todo o mundo.
+        </p>
+      </div>
+      <div class="footer-socials">
+        <a href="#" class="scale-hover facebook-color"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="scale-hover twitter-color"><i class="fa fa-twitter"></i></a>
+        <a href="#" class="scale-hover google-color"><i class="fa fa-google-plus"></i></a>
+        <a href="#" class="scale-hover phone-color"><i class="fa fa-phone"></i></a>
+        <a href="#" class="scale-hover mail-color"><i class="fa fa-envelope-o"></i></a>
+        <a href="#" class="scale-hover bg-night-dark back-to-top"><i class="fa fa-angle-up"></i></a>
+        <div class="clear"></div>
+      </div>
+      <p class="footer-strip">Copyright <span id="copyright-year"></span> Beenews. Todos os direitos reservados</p>
+    </div>
+    </div>
+    <a href="#" class="back-to-top-badge"><i class="fa fa-caret-up"></i>Back to top</a>
+  </div>
 </ion-content>

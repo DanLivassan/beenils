@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { Platform, MenuController, Nav } from 'ionic-angular';
+import {Platform, MenuController, Nav, NavController, App} from 'ionic-angular';
 import {HomePage} from "../pages/home/home";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,14 +19,15 @@ export class MyApp {
   // make HelloIonicPage the root (or first) page
 
   rootPage;
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(
     public platform: Platform,
     public menu: MenuController,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public userProvider:UserProvider
+    public userProvider:UserProvider,
+    public app:App
   ) {
     this.initializeApp();
     if(!this.userProvider.isAuthenticated()){
@@ -37,9 +38,9 @@ export class MyApp {
     }
 
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'Editorial', component: EditorialPage},
-      { title: 'Notícias', component: PublicationListPage},
+      { title: 'Home', component: HomePage, icon:'fa-home' },
+      { title: 'Editorial', component: EditorialPage, icon: 'fa-list-ul'},
+      { title: 'Notícias', component: PublicationListPage, icon:'fa-pencil'},
     ];
   }
 
@@ -57,5 +58,19 @@ export class MyApp {
     this.menu.close();
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
+  }
+
+  logout(){
+    if(this.userProvider.isAuthenticated()){
+      //this.userProvider.logout();
+    }
+    this.menu.close();
+
+    let nav = this.app.getRootNav();
+    nav.setRoot(SigninPage);
+    nav.popAll().then(()=>{
+
+    })
+
   }
 }

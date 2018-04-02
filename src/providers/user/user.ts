@@ -16,7 +16,6 @@ import 'rxjs/Rx';
 export class UserProvider {
 
   user:User;
-  baseUrl:string = 'http://api.beenews.localhost';
   private isLogged = false;
   constructor(public http: HttpClient) {
 

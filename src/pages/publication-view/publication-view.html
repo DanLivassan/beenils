@@ -9,40 +9,63 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-card>
-    <img src="http://beenews.localhost/{{publication.cover_image}}"/>
-    <ion-card-content>
-      <ion-card-title>
-        {{publication.title}}
-      </ion-card-title>
+<ion-content>
+  <div id="page-content"><!--Add sidebar-move to move with body-->
+    <div id="page-content-scroll"><!--Enables this element to be scrolled -->
+      <div class="header-clear-large"></div>
+      <div class="content">
+        <h3 class="no-bottom">
+          {{publication.title}}
+        </h3>
+      </div>
+      <div class="single-item">
+        <img src="{{front_url}}/{{publication.cover_image}}" alt="img">
+      </div>
+      <p class="news-article-overlay-text">
+        Postado por <a href="#">{{publication.created_by.get_full_name()}}</a>
+        about <a href="#">{{publication.created_at |amLocale:'pt-BR' | amTimeAgo }}</a>
+        em <a href="#">{{publication.editorial.name}}</a>
+      </p>
+      <div class="news-article-share full-bottom">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=your_link_here"><i class="facebook-color fa fa-facebook"></i></a>
+        <a href="https://twitter.com/home?status=your_text_here"><i class="twitter-color fa fa-twitter"></i></a>
+        <a href="https://plus.google.com/share?url=your_link_here"><i class="google-color fa fa-google-plus"></i></a>
+        <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share"><i class="whatsapp-color fa fa-whatsapp"></i></a>
+        <a href="mailto:?&subject=Your_subject&body=Your_text_here"><i class="mail-color fa fa-envelope-o"></i></a>
+        <div class="clear"></div>
+      </div>
 
-    </ion-card-content>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>10 Likes</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="eye"></ion-icon>
-            <div>{{publication.views}} views</div>
-          </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-left clear small>
-            <ion-icon name="mail"></ion-icon>
-            <div>15 Comentários</div>
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-  <div class="content" [innerHtml] = "publication.content">
+      <div class="content">
+        <h4>{{publication.title}}</h4>
+        <div class="content" [innerHtml] = "publication.content"></div>
+      </div>
 
+
+      <div class="content">
+        <div class="decoration"></div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-content">
+          <h3 class="footer-logo">BEENEWS MOBILE</h3>
+          <p class="footer-text">
+            Beenews é um portal de notícias e fonte de conteúdo técnico e digital para sua influente audiência em todo o mundo.
+          </p>
+        </div>
+        <div class="footer-socials">
+          <a href="#" class="scale-hover facebook-color"><i class="fa fa-facebook"></i></a>
+          <a href="#" class="scale-hover twitter-color"><i class="fa fa-twitter"></i></a>
+          <a href="#" class="scale-hover google-color"><i class="fa fa-google-plus"></i></a>
+          <a href="#" class="scale-hover phone-color"><i class="fa fa-phone"></i></a>
+          <a href="#" class="scale-hover mail-color"><i class="fa fa-envelope-o"></i></a>
+          <a href="#" class="scale-hover bg-night-dark back-to-top"><i class="fa fa-angle-up"></i></a>
+          <div class="clear"></div>
+        </div>
+        <p class="footer-strip">Copyright <span id="copyright-year"></span> Beenews. Todos os direitos reservados</p>
+      </div>
+    </div>
   </div>
+
+
 
 </ion-content>

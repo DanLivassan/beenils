@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import {IonicPage, NavController, NavParams, Toast, ToastController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserProvider} from "../../providers/user/user";
@@ -30,7 +30,8 @@ export class SigninPage {
     public navCtrl: NavController,
     private userProvider:UserProvider,
     private formBuilder:FormBuilder,
-    private toastCtrl:ToastController
+    private toastCtrl:ToastController,
+    private renderer: Renderer2
   ) {
     this.loginForm = this.formBuilder.group(
       {
@@ -79,6 +80,9 @@ export class SigninPage {
 
   ionViewDidLoad() {
 
+  }
+
+  ionViewWillLoad(){
   }
 
   presentToast(message:string, duration:number, position:string) {

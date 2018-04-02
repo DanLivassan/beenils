@@ -10,4 +10,4 @@ import { EditorialPage } from './editorial';
     IonicPageModule.forChild(EditorialPage),
   ],
 })
-export class EditorialPageModule {}
+export class EditorialModule{}
