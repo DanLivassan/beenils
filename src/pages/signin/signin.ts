@@ -6,6 +6,7 @@ import {HomePage} from "../home/home";
 import {User} from "../../models/user";
 import {Address} from "../../models/address";
 import {Editorial} from "../../models/editorial";
+import {SignupPage} from "../signup/signup";
 
 /**
  * Generated class for the SigninPage page.
@@ -18,11 +19,6 @@ import {Editorial} from "../../models/editorial";
 @Component({
   selector: 'page-signin',
   templateUrl: 'signin.html',
-  styleUrls:[
-   /* '../../assets/styles/style.css',
-    '../../assets/styles/framework.css',
-    '../../assets/styles/font-awesome.css',*/
-  ],
 })
 export class SigninPage {
   private loginForm:FormGroup;
@@ -109,6 +105,10 @@ export class SigninPage {
     });
 
     toast.present();
+  }
+
+  goToSingUp(){
+    this.navCtrl.push(SignupPage);
   }
 
 }

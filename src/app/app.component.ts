@@ -65,6 +65,13 @@ export class MyApp {
       }
     });
 
+    this.events.subscribe('user:refresh_points', (user:User)=>{
+      this.userProvider.refreshPoints(user.id).subscribe((points)=>{
+        user.points = points['value'];
+        this.userProvider.setUser(user);
+      });
+    });
+
 
 
 

@@ -18,6 +18,7 @@ import {SigninPage} from "../pages/signin/signin";
 import {EditorialPublicationsViewPage} from "../pages/editorial-publications-view/editorial-publications-view";
 import {ComponentsModule} from "../components/components.module";
 import {ApproveNewsPage} from "../pages/approve-news/approve-news";
+import {SignupPage} from "../pages/signup/signup";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {ApproveNewsPage} from "../pages/approve-news/approve-news";
     PublicationListPage,
     PublicationViewPage,
     EditorialPublicationsViewPage,
+    SignupPage,
     SigninPage,
     ApproveNewsPage,
   ],
@@ -48,6 +50,7 @@ import {ApproveNewsPage} from "../pages/approve-news/approve-news";
     PublicationListPage,
     EditorialPublicationsViewPage,
     SigninPage,
+    SignupPage,
     ApproveNewsPage,
   ],
   providers: [

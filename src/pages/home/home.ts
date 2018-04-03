@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage,Segment, NavController, NavParams, Slides, ToastController} from 'ionic-angular';
+import {IonicPage, Segment, NavController, NavParams, Slides, ToastController, Events} from 'ionic-angular';
 import {EditorialProvider} from "../../providers/editorial/editorial";
 import {PublicationProvider} from "../../providers/publication/publication";
 import {Editorial} from "../../models/editorial";
@@ -23,13 +23,15 @@ export class HomePage {
   private number_slide=1;
   private publications = [];
   private segment_publications = [];
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private pubProvider:PublicationProvider,
-              private edtProvider:EditorialProvider,
-              private userProvider:UserProvider,
-              private toastCtrl:ToastController
-              ) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private pubProvider:PublicationProvider,
+    private edtProvider:EditorialProvider,
+    private userProvider:UserProvider,
+    private toastCtrl:ToastController,
+    private events:Events
+  ) {
 
   }
 
@@ -79,6 +81,8 @@ export class HomePage {
     if(this.segment){
       this.segment.ngAfterContentInit();
     }
+
+    this.events.publish('user:refresh_points',this.userProvider.getUser());
 
   }
 

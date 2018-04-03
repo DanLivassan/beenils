@@ -1,0 +1,72 @@
+
+<ion-header>
+  <ion-navbar [hideBackButton]="true">
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="content">
+    <ion-grid>
+      <ion-row>
+        <ion-col justify-content-center col-12>
+          <img  style="width: auto; margin: auto; display: block;" src="assets/imgs/logo.jpg" alt="logo">
+        </ion-col>
+      </ion-row>
+      <ion-row class="form-row">
+        <ion-col>
+          <form [formGroup]="loginForm" (ngSubmit)="signUp()">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Email</ion-label>
+                    <ion-input type="text" formControlName="email"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Name</ion-label>
+                    <ion-input type="text"  formControlName="name"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Sobrenome</ion-label>
+                    <ion-input type="text" formControlName="last_name"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Senha</ion-label>
+                    <ion-input #password type="password" formControlName="password"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Repita a Senha</ion-label>
+                    <ion-input #password_repeat type="password" formControlName="password_repeat"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <button ion-button full type="submit" [disabled]="(!loginForm.valid || (password.value!=password_repeat.value))">Entrar</button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
