@@ -11,12 +11,12 @@ export class Params{
   static readonly baseUrl = 'api';
   static readonly frontUrl = 'front-api';
   static getBaseUrl(){
-    return Params.baseUrl;
-    //return 'http://198.211.109.67:8000';
+    //return Params.baseUrl;
+    return 'http://198.211.109.67:8000';
   }
   static getFrontUrl(){
-    return Params.frontUrl;
-    //return 'http://198.211.109.67';
+    //return Params.frontUrl;
+    return 'http://198.211.109.67';
   }
   static readonly UserTypes ={
     'leitor':1,

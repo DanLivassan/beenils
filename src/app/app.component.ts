@@ -95,15 +95,8 @@ export class MyApp {
 
   logout(){
     if(this.userProvider.isAuthenticated()){
-      //this.userProvider.logout();
+      this.userProvider.logout();
     }
-    this.menu.close();
-
-    let nav = this.app.getRootNav();
-    nav.setRoot(SigninPage);
-    nav.popAll().then(()=>{
-
-    })
-
+    window.location.reload();
   }
 }

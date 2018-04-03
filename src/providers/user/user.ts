@@ -58,6 +58,7 @@ export class UserProvider {
     this.isLogged=false;
     this.user=null;
     localStorage.removeItem('token');
+    //localStorage.removeItem('user');
   }
 
   getToken(){
@@ -68,11 +69,17 @@ export class UserProvider {
   }
 
   isAuthenticated():boolean{
+    /*if(typeof localStorage.getItem('user')!=='undefined'){
+      this.user = JSON.parse(localStorage.getItem('user'));
+      return true;
+    }*/
+
     return this.isLogged;
   }
 
   setUser(user:User){
     this.user = user;
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   getUser():User{
