@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import {Platform, MenuController, Nav, NavController, App} from 'ionic-angular';
+import {Platform, MenuController, Nav, NavController, App, Events} from 'ionic-angular';
 import {HomePage} from "../pages/home/home";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -8,6 +8,9 @@ import {EditorialPage} from "../pages/editorial/editorial";
 import {PublicationListPage} from "../pages/publication-list/publication-list";
 import {UserProvider} from "../providers/user/user";
 import {SigninPage} from "../pages/signin/signin";
+import {User} from "../models/user";
+import {Params} from "../utils/params";
+import {ApproveNewsPage} from "../pages/approve-news/approve-news";
 
 
 @Component({
@@ -27,7 +30,8 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public userProvider:UserProvider,
-    public app:App
+    public app:App,
+    public events:Events
   ) {
     this.initializeApp();
     if(!this.userProvider.isAuthenticated()){
@@ -37,11 +41,33 @@ export class MyApp {
       this.rootPage = HomePage;
     }
 
-    this.pages = [
-      { title: 'Home', component: HomePage, icon:'fa-home' },
-      { title: 'Editorial', component: EditorialPage, icon: 'fa-list-ul'},
-      { title: 'Notícias', component: PublicationListPage, icon:'fa-pencil'},
-    ];
+    this.events.subscribe('user:logged',(user:User)=>{
+      if(user.is('administrador')){
+        this.pages = [
+          { title: 'Home', component: HomePage, icon:'fa-home' },
+          { title: 'Editorial', component: EditorialPage, icon: 'fa-list-ul'},
+          { title: 'Notícias', component: PublicationListPage, icon:'fa-pencil'},
+        ];
+      }
+      else if(user.is('leitor')){
+        this.pages = [
+          { title: 'Home', component: HomePage, icon:'fa-home' },
+          { title: 'Editorial', component: EditorialPage, icon: 'fa-list-ul'},
+          //{ title: 'Notícias', component: PublicationListPage, icon:'fa-pencil'},
+        ];
+      }
+      else if(user.is('editor')){
+        this.pages = [
+          { title: 'Home', component: HomePage, icon:'fa-home' },
+          { title: 'Editorial', component: EditorialPage, icon: 'fa-list-ul'},
+          { title: 'Aprovar Notícias', component: ApproveNewsPage, icon:'fa-pencil'},
+        ];
+      }
+    });
+
+
+
+
   }
 
   initializeApp() {

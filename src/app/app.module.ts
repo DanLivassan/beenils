@@ -17,6 +17,7 @@ import {UserProvider} from "../providers/user/user";
 import {SigninPage} from "../pages/signin/signin";
 import {EditorialPublicationsViewPage} from "../pages/editorial-publications-view/editorial-publications-view";
 import {ComponentsModule} from "../components/components.module";
+import {ApproveNewsPage} from "../pages/approve-news/approve-news";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {ComponentsModule} from "../components/components.module";
     PublicationViewPage,
     EditorialPublicationsViewPage,
     SigninPage,
+    ApproveNewsPage,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,7 @@ import {ComponentsModule} from "../components/components.module";
     PublicationListPage,
     EditorialPublicationsViewPage,
     SigninPage,
+    ApproveNewsPage,
   ],
   providers: [
     StatusBar,

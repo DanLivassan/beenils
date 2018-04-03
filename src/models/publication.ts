@@ -18,6 +18,11 @@ export class Publication{
   private _city:string;
   private _publicationCommentary:PublicationCommentary[];
 
+  static readonly NewsStatus = {
+    'pendente':'1',
+    'aprovada': '2',
+  };
+
 
   constructor(
     id: number,

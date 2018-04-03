@@ -1,4 +1,7 @@
 
+import {Platform} from "ionic-angular";
+
+
 export class Params{
 
 
@@ -9,22 +12,24 @@ export class Params{
   static readonly frontUrl = 'front-api';
   static getBaseUrl(){
     return Params.baseUrl;
+    //return 'http://198.211.109.67:8000';
   }
   static getFrontUrl(){
     return Params.frontUrl;
+    //return 'http://198.211.109.67';
   }
   static readonly UserTypes ={
-    'Leitor':1,
-    'Jornalista': 5,
-    'Moderador': 10,
-    'Editor':30,
-    'Colunista': 60,
-    'Administrador':100
+    'leitor':1,
+    'jornalista': 5,
+    'moderador': 10,
+    'editor':30,
+    'colunista': 60,
+    'administrador':100
   };
-  static readonly UserStatus = {
-    'Ativo':1,
-    'Inativo': 2,
-  };
+
+
+
+
 
 }
 

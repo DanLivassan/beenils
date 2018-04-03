@@ -1,0 +1,29 @@
+<ion-header>
+  <div class="header-fixed">
+    <a href="#" menuToggle class="header-icon-1 open-left-sidebar"><i class="fa fa-navicon"></i></a>
+    <a href="#" class="header-logo">BEENEWS</a>
+    <a href="#" class="header-icon-2 open-right-sidebar">{{userProvider.getUser().name}}</a>
+    <a href="#" class="header-icon-3 open-search-bar">{{userProvider.getUser().points}} pt</a>
+  </div>
+</ion-header>
+
+
+<ion-content>
+  <div class="main-content">
+
+  <div class="content" *ngFor="let editorial of unapproved_news">
+    {{editorial.editorial.name}}
+    <div class="thumb-layout">
+      <div style="margin-bottom: 15px;" *ngFor="let publication of editorial.publications">
+        <a style="overflow: hidden;" (click)="publicationView(publication.id)"  href="#">
+          <img  src="{{baseUrl}}/{{publication.cover_image}}">
+          <strong>{{publication.editorial.name}}</strong>
+          <em>{{publication.title}}</em>
+        </a>
+        <button ion-button color="secondary" full>Aprovar</button>
+      </div>
+    </div>
+    <div class="decoration"></div>
+  </div>
+  </div>
+</ion-content>

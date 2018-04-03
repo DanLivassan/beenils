@@ -7,12 +7,12 @@
   },
   "proxies": [
     {
-      "path": "/api",
-      "proxyUrl": "http://198.211.109.67:8000"
+      "path": "/api/",
+      "proxyUrl": "http://198.211.109.67:8000/"
     },
     {
-      "path": "/front-api",
-      "proxyUrl": "http://198.211.109.67"
+      "path": "/front-api/",
+      "proxyUrl": "http://198.211.109.67/"
     }
   ]
 }

@@ -1,5 +1,6 @@
 import {Editorial} from "./editorial";
 import {Address} from "./address";
+import {Params} from "../utils/params";
 
 export class User{
 
@@ -17,9 +18,17 @@ export class User{
   private _email:string;
   private _picture:string;
   private _phone_number:string;
+  private _points:number;
+
 
   //UserToken
   private _user_token:string;
+
+
+  static readonly UserStatus = {
+    'ativo':1,
+    'inativo': 2,
+  };
 
 
   constructor(id: number, name: string, last_name: string, type: number, status: number) {
@@ -129,5 +138,18 @@ export class User{
 
   set address(value: Address) {
     this._address = value;
+  }
+
+  public is(group:string):boolean{
+    return Params.UserTypes[group]==this.type;
+  }
+
+
+  get points(): number {
+    return this._points;
+  }
+
+  set points(value: number) {
+    this._points = value;
   }
 }

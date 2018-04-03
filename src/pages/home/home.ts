@@ -22,7 +22,7 @@ export class HomePage {
   private editorial_segment;
   private number_slide=1;
   private publications = [];
-  private segment_publications = []
+  private segment_publications = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private pubProvider:PublicationProvider,

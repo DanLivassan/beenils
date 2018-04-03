@@ -1,10 +1,11 @@
 import { Component, Renderer2 } from '@angular/core';
-import {IonicPage, NavController, NavParams, Toast, ToastController} from 'ionic-angular';
+import {Events, IonicPage, NavController, NavParams, Toast, ToastController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserProvider} from "../../providers/user/user";
 import {HomePage} from "../home/home";
 import {User} from "../../models/user";
 import {Address} from "../../models/address";
+import {Editorial} from "../../models/editorial";
 
 /**
  * Generated class for the SigninPage page.
@@ -31,7 +32,8 @@ export class SigninPage {
     private userProvider:UserProvider,
     private formBuilder:FormBuilder,
     private toastCtrl:ToastController,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private events:Events
   ) {
     this.loginForm = this.formBuilder.group(
       {
@@ -47,13 +49,25 @@ export class SigninPage {
     this.userProvider.login(credentials['email'], credentials['password']).subscribe(
       (data)=>{
         if(data['token']!=='undefined'){
-          this.userProvider.setUser(new User(
+          let logged_user = new User(
             data['user']['id'],
             data['user']['name'],
             data['user']['last_name'],
             data['user']['type']['id'],
             data['user']['status']['id'],
-          ));
+          );
+          let editorials:Editorial[] = [];
+
+          data['user']['editorials'].forEach((edt)=>{
+            editorials.push(new Editorial(edt['id'], edt['name']));
+          });
+          logged_user.editorials = editorials;
+
+          logged_user.picture = data['user']['picture'];
+          logged_user.points = data['user']['points'];
+
+          this.userProvider.setUser(logged_user);
+
           localStorage.setItem('token', data['token']);
           this.userProvider.successLogin();
           this.presentToast(
@@ -61,18 +75,20 @@ export class SigninPage {
             2000,
             'bottom'
             );
-
+          this.events.publish('user:logged',this.userProvider.getUser());
           this.navCtrl.goToRoot({});
 
         }
 
       },(error)=>{
-
+        console.log(JSON.stringify(error));
         this.presentToast(
           'Erro, '+error['error']['message'],
+          //JSON.stringify(error),
           2000,
           'bottom'
         );
+
           this.userProvider.erroLogin();
 
       });

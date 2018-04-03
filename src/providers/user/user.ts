@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {User} from "../../models/user";
 import {Params} from "../../utils/params";
 import {Address} from "../../models/address";
 import 'rxjs/Rx';
+import {Platform} from "ionic-angular";
 
 
 /*
@@ -33,14 +34,17 @@ export class UserProvider {
 
     let url =Params.getBaseUrl()+'/access/login';
     this.user=null;
-
+    let headers = new HttpHeaders();
+    headers.append('Access-Control-Allow-Origin','*');
     let form_data:FormData=new FormData();
     form_data.append('email', email);
     form_data.append('password', password);
 
     return this.http.post(
       url,
-      form_data);
+      form_data,
+      {headers:headers}
+    );
 
   }
 

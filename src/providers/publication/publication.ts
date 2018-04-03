@@ -122,10 +122,33 @@ export class PublicationProvider {
 
   getByEditorial(editorial:Editorial):Publication[]{
 
-
     return this.publications.filter((publication)=>{
       return publication.editorial.id == editorial.id
     });
+  }
+
+
+  getPendingNews(editorial_id:string){
+    if(this.userProvider.isAuthenticated()) {
+      let url = Params.getBaseUrl() + '/v1/publication/all';
+      let params = new HttpParams();
+      params = params.append('limit','5');
+      params = params.append('editorial',editorial_id);
+      params = params.append('status',Publication.NewsStatus['pendente']);
+
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.userProvider.getToken(),
+      });
+
+      return this.http.get(url,
+        {
+          headers:headers,
+          params:params,
+        });
+    }
+    else{
+      return null;
+    }
   }
 
 }
