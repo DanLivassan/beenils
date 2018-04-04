@@ -6,11 +6,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {EditorialPage} from "../pages/editorial/editorial";
 import {PublicationListPage} from "../pages/publication-list/publication-list";
+import {EditorialPublicationsViewPage} from "../pages/editorial-publications-view/editorial-publications-view";
 import {UserProvider} from "../providers/user/user";
 import {SigninPage} from "../pages/signin/signin";
 import {User} from "../models/user";
 import {Params} from "../utils/params";
 import {ApproveNewsPage} from "../pages/approve-news/approve-news";
+import {EditorialProvider} from "../providers/editorial/editorial";
 
 
 @Component({
@@ -22,7 +24,7 @@ export class MyApp {
   // make HelloIonicPage the root (or first) page
 
   rootPage;
-  pages: Array<{title: string, component: any, icon: string}>;
+  pages: Array<{title: string, component: any, icon: string, color: string, editorial_id?:number}>;
 
   constructor(
     public platform: Platform,
@@ -31,6 +33,7 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public userProvider:UserProvider,
     public app:App,
+    public editorialProvider:EditorialProvider,
     public events:Events
   ) {
     this.initializeApp();
@@ -44,23 +47,25 @@ export class MyApp {
     this.events.subscribe('user:logged',(user:User)=>{
       if(user.is('administrador')){
         this.pages = [
-          { title: 'Home', component: HomePage, icon:'fa-home' },
-          { title: 'Editorial', component: EditorialPage, icon: 'fa-list-ul'},
-          { title: 'Notícias', component: PublicationListPage, icon:'fa-pencil'},
+          { title: 'Home', component: HomePage, icon:'fa-home', color:'bg-red-dark'},
+          { title: 'Editoriais', component: EditorialPage, icon: 'fa-list-ul', color:'bg-night-dark'},
+          { title: 'Notícias', component: PublicationListPage, icon:'fa-pencil', color:'bg-greem-dark'},
         ];
       }
       else if(user.is('leitor')){
         this.pages = [
-          { title: 'Home', component: HomePage, icon:'fa-home' },
-          { title: 'Editorial', component: EditorialPage, icon: 'fa-list-ul'},
-          //{ title: 'Notícias', component: PublicationListPage, icon:'fa-pencil'},
+          { title: 'Home', component: HomePage, icon:'fa-home', color:'bg-red-dark' },
+          { title: 'Notícias', component: EditorialPublicationsViewPage, icon: 'fa-list-ul', color:'bg-night-dark', editorial_id:1},
+          { title: 'Esportes', component: EditorialPublicationsViewPage, icon: 'fa-futbol-o', color:'bg-green-dark', editorial_id:2},
+          { title: 'Entretenimento', component: EditorialPublicationsViewPage, icon: 'fa-thumbs-up', color:'bg-blue-dark', editorial_id:3},
+          { title: 'Cultura', component: EditorialPublicationsViewPage, icon: 'fa-image', color:'bg-magenta-dark', editorial_id:4},
         ];
       }
       else if(user.is('editor')){
         this.pages = [
-          { title: 'Home', component: HomePage, icon:'fa-home' },
-          { title: 'Editorial', component: EditorialPage, icon: 'fa-list-ul'},
-          { title: 'Aprovar Notícias', component: ApproveNewsPage, icon:'fa-pencil'},
+          { title: 'Home', component: HomePage, icon:'fa-home', color:'bg-red-dark'},
+          { title: 'Editoriais', component: EditorialPage, icon: 'fa-list-ul', color:'bg-night-dark'},
+          { title: 'Aprovar Notícias', component: ApproveNewsPage, icon:'fa-pencil', color:'bg-green-dark'},
         ];
       }
     });
@@ -87,10 +92,15 @@ export class MyApp {
   }
 
   openPage(page) {
-    // close the menu when clicking a link from the menu
+
     this.menu.close();
-    // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
+    if(page.editorial_id!=null){
+      this.nav.push(page.component,{'editorial':this.editorialProvider.get(page.editorial_id)});
+    }
+    else{
+      this.nav.setRoot(page.component);
+    }
+
   }
 
   logout(){

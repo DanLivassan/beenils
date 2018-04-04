@@ -66,6 +66,10 @@ export class EditorialProvider {
     return editorial;
   }
 
+
+
+
+
   set(editorial: Editorial){
     if(this.userProvider.isAuthenticated()) {
 

@@ -10,10 +10,11 @@
     <div class="sidebar-menu">
 
       <a *ngFor="let page of pages" class="menu-item" (click)="openPage(page)">
-        <i class="fa {{page.icon}} bg-red-dark"></i>
+        <i class="fa {{page.icon}} {{page.color}}"></i>
         {{page.title}}
         <i class="fa fa-circle"></i>
       </a>
+
 
       <div class="sidebar-divider">
         Beenews Mobile
@@ -165,7 +166,7 @@
         <i class="fa fa-circle"></i>
       </a>
     </div>
-    <em class="sidebar-copyright">Copyright 2016. All Rights Reserved</em>
+    <em class="sidebar-copyright">Beenews 2018. Todos os direitos reservados</em>
   </div>
 </div>
 
