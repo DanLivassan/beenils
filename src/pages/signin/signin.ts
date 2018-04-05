@@ -72,8 +72,7 @@ export class SigninPage {
             'bottom'
             );
           this.events.publish('user:logged',this.userProvider.getUser());
-          this.navCtrl.goToRoot({});
-
+          this.navCtrl.setRoot(HomePage);
         }
 
       },(error)=>{
@@ -95,6 +94,7 @@ export class SigninPage {
   }
 
   ionViewWillLoad(){
+
   }
 
   presentToast(message:string, duration:number, position:string) {

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import {User} from "../../models/user";
 import {Params} from "../../utils/params";
 import 'rxjs/Rx';
+import {Editorial} from "../../models/editorial";
+import {Events} from "ionic-angular";
 
 
 
@@ -17,7 +19,7 @@ export class UserProvider {
 
   user:User;
   private isLogged = false;
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public events:Events) {
 
   }
 
@@ -58,7 +60,7 @@ export class UserProvider {
     this.isLogged=false;
     this.user=null;
     localStorage.removeItem('token');
-    //localStorage.removeItem('user');
+    localStorage.removeItem('user');
   }
 
   getToken(){
@@ -69,12 +71,14 @@ export class UserProvider {
   }
 
   isAuthenticated():boolean{
-    /*if(typeof localStorage.getItem('user')!=='undefined'){
-      this.user = JSON.parse(localStorage.getItem('user'));
+    if(localStorage.getItem('user')!=null && localStorage.getItem('token')!=null){
+      //this.user = JSON.parse(localStorage.getItem('user'));
+      this.formatLocalUser(localStorage.getItem('user'));
       return true;
-    }*/
+    }
+    return false;
 
-    return this.isLogged;
+    //return this.isLogged;
   }
 
   setUser(user:User){
@@ -89,6 +93,24 @@ export class UserProvider {
   refreshPoints(id:number){
     let url =Params.getBaseUrl()+'/v1/user/'+id+'/points';
     return this.http.get(url);
+  }
+
+  formatLocalUser(user:string):User{
+    try{
+      let u = JSON.parse(user);
+      let recover_user = new User(u._id,u._name,u._last_name,u._type, u._status);
+      recover_user.points = u._points;
+      /*recover_user.editorials = u._editorials.forEach((edt)=>{
+        return new Editorial(edt._id, edt._name);
+      });*/
+      recover_user.picture = u._picture;
+      this.user = recover_user;
+      this.events.publish('user:logged',this.user);
+    }
+    catch(e){
+      console.log(e);
+      return null;
+    }
   }
 
 }

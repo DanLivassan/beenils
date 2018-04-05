@@ -49,7 +49,7 @@ export class MyApp {
         this.pages = [
           { title: 'Home', component: HomePage, icon:'fa-home', color:'bg-red-dark'},
           { title: 'Editoriais', component: EditorialPage, icon: 'fa-list-ul', color:'bg-night-dark'},
-          { title: 'Notícias', component: PublicationListPage, icon:'fa-pencil', color:'bg-greem-dark'},
+          //{ title: 'Notícias', component: PublicationListPage, icon:'fa-pencil', color:'bg-green-dark'},
         ];
       }
       else if(user.is('leitor')){
@@ -105,8 +105,12 @@ export class MyApp {
 
   logout(){
     if(this.userProvider.isAuthenticated()){
-      this.userProvider.logout();
+      this.menu.close();
+      this.nav.setRoot(SigninPage).then(()=>{
+        this.userProvider.logout();
+      });
     }
-    window.location.reload();
+
+    //window.location.reload();
   }
 }

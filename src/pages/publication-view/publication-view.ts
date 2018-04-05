@@ -27,6 +27,7 @@ export class PublicationViewPage {
     this.publication = this.navParams.get('publication');
     this.pubProvider.getOnServer(this.publication.id).subscribe((publication)=>{
       this.publication = this.pubProvider.formatResponse(publication);
+      console.log(publication);
     });
 
   }
