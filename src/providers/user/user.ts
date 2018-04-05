@@ -72,8 +72,9 @@ export class UserProvider {
 
   isAuthenticated():boolean{
     if(localStorage.getItem('user')!=null && localStorage.getItem('token')!=null){
-      //this.user = JSON.parse(localStorage.getItem('user'));
-      this.formatLocalUser(localStorage.getItem('user'));
+      if(typeof this.user==='undefined'){
+        this.restoreLocalUser(localStorage.getItem('user'));
+      }
       return true;
     }
     return false;
@@ -83,7 +84,16 @@ export class UserProvider {
 
   setUser(user:User){
     this.user = user;
-    localStorage.setItem('user', JSON.stringify(user));
+    let string_user = {
+      id:user.id,
+      name:user.name,
+      last_name:user.last_name,
+      type:user.type,
+      status:user.status,
+      points:user.points,
+      picture:user.picture,
+    };
+    localStorage.setItem('user', JSON.stringify(string_user));
   }
 
   getUser():User{
@@ -95,17 +105,18 @@ export class UserProvider {
     return this.http.get(url);
   }
 
-  formatLocalUser(user:string):User{
+  restoreLocalUser(user:string):User{
     try{
+
       let u = JSON.parse(user);
-      let recover_user = new User(u._id,u._name,u._last_name,u._type, u._status);
-      recover_user.points = u._points;
+      this.user = new User(u.id,u.name,u.last_name,u.type, u.status);
+      this.user.points = u.points;
       /*recover_user.editorials = u._editorials.forEach((edt)=>{
         return new Editorial(edt._id, edt._name);
       });*/
-      recover_user.picture = u._picture;
-      this.user = recover_user;
+      this.user.picture = u.picture;
       this.events.publish('user:logged',this.user);
+
     }
     catch(e){
       console.log(e);

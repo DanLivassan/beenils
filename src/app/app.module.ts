@@ -19,6 +19,7 @@ import {EditorialPublicationsViewPage} from "../pages/editorial-publications-vie
 import {ComponentsModule} from "../components/components.module";
 import {ApproveNewsPage} from "../pages/approve-news/approve-news";
 import {SignupPage} from "../pages/signup/signup";
+import { PublicationReactionProvider } from '../providers/publication-reaction/publication-reaction';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {SignupPage} from "../pages/signup/signup";
     PublicationProvider,
     EditorialProvider,
     UserProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PublicationReactionProvider
   ]
 })
 export class AppModule {}

@@ -61,7 +61,6 @@ export class SigninPage {
 
           logged_user.picture = data['user']['picture'];
           logged_user.points = data['user']['points'];
-
           this.userProvider.setUser(logged_user);
 
           localStorage.setItem('token', data['token']);
