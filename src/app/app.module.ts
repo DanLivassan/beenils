@@ -20,6 +20,7 @@ import {ComponentsModule} from "../components/components.module";
 import {ApproveNewsPage} from "../pages/approve-news/approve-news";
 import {SignupPage} from "../pages/signup/signup";
 import { PublicationReactionProvider } from '../providers/publication-reaction/publication-reaction';
+import { CommentaryProvider } from '../providers/commentary/commentary';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { PublicationReactionProvider } from '../providers/publication-reaction/p
     EditorialProvider,
     UserProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PublicationReactionProvider
+    PublicationReactionProvider,
+    CommentaryProvider
   ]
 })
 export class AppModule {}

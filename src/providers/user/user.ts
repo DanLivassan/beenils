@@ -124,4 +124,18 @@ export class UserProvider {
     }
   }
 
+
+  formatUser(u:any):User{
+    let user:User;
+    try{
+      user = new User(u.id, u.name, u.last_name, u.type.id, u.status.id);
+      user.points = u.points;
+      user.picture = u.picture;
+      return user;
+    }
+    catch (e){
+      console.error(e);
+    }
+    return null;
+  }
 }

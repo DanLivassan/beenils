@@ -45,7 +45,28 @@
       <div class="content">
         <div class="decoration"></div>
       </div>
+      <div class="content">
 
+
+      <div class="commentaries">
+        <div class="commentary" *ngFor="let comment of publication_comments">
+          <p class="commentary-author"><b>{{comment.commented_by.name}}</b></p>
+          <p class="commentary-content">
+            {{comment.content}}
+          </p>
+          <p class="commentary-date">
+            {{comment.commented_at | amLocale:'pt-BR' | amTimeAgo}}
+          </p>
+
+
+        </div>
+        <div class="formTextareaWrap">
+          <label class="field-title contactMessageTextarea" for="contactMessageTextarea">Comentário: <span>(contador)</span></label>
+          <textarea [(ngModel)]="new_comment" class="contactTextarea requiredField" id="contactMessageTextarea"></textarea>
+          <button (click)="performComment()" ion-button color="secondary" full>Comentar</button>
+        </div>
+      </div>
+      </div>
       <div class="footer">
         <div class="footer-content">
           <h3 class="footer-logo">BEENEWS MOBILE</h3>

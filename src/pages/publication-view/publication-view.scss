@@ -3,4 +3,28 @@ page-publication-view {
   .content{
     text-align: justify;
   }
+  .commentary{
+    border: solid #b2b2b2;
+    padding-left: 5px;
+    border-radius: 5px;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  .commentary > p{
+    margin: 0;
+
+  }
+  .commentary-content{
+    font-style: italic;
+    line-height: 5px;
+  }
+  .commentary-author{
+    font-weight:bold;
+  }
+  .commentary-date{
+    font-size: 12px;
+    font-style: italic;
+    color: #4c4c4c;
+  }
+
 }
