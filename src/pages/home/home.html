@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <div [hidden]="!editorial.is_active" *ngFor="let editorial of editorial_guides; let i=index" class="content" id="tab-{{i}}">
+  <div [hidden]="!editorial.is_active" *ngFor="let editorial of editorial_guides.slice(0,3); let i=index" class="content" id="tab-0">
     <div class="thumb-layout">
       <a style="overflow: hidden;" (click)="publicationView(publication.id)" *ngFor="let publication of editorial.publications" href="#">
         <img  src="{{frontUrl}}/{{publication.cover_image}}">

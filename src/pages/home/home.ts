@@ -52,6 +52,7 @@ export class HomePage {
                   is_active:index==0,
                   publications:this.pubProvider.getByEditorial(edt)
                 });
+
         });
         this.publications = this.pubProvider.getAll();
       });
@@ -59,6 +60,7 @@ export class HomePage {
   }
 
   changeEditorial(index:number){
+
     this.editorial_guides.forEach((a,i)=>{
       this.editorial_guides[i].is_active = (index==i);
     });

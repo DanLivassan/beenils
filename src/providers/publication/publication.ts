@@ -65,10 +65,11 @@ export class PublicationProvider {
         publication['cover_image'],
         publication['views'],
         publication['address']['city'],
-        []//faltando comentários
+        []
       ));
     });
     this.publications = pubs;
+
     return pubs;
   }
 
@@ -115,7 +116,7 @@ export class PublicationProvider {
       publication['cover_image'],
       publication['views'],
       publication['address']['city'],
-      []//faltando comentários
+      []
     );
   return pub;
   }
