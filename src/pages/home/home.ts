@@ -6,8 +6,10 @@ import {Editorial} from "../../models/editorial";
 import {UserProvider} from "../../providers/user/user";
 import {PublicationViewPage} from "../publication-view/publication-view";
 import {Params} from "../../utils/params";
+import {Functions} from "../../utils/functions"
+import {ProfilePage} from "../profile/profile";
 
-@IonicPage()
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -17,6 +19,7 @@ export class HomePage {
   @ViewChild(Segment) private segment:Segment;
   private frontUrl = Params.getFrontUrl();
   private task;
+  private user_points;
   private editorials:Editorial[]=[];
   private editorial_guides=[];
   private editorial_segment;
@@ -85,7 +88,8 @@ export class HomePage {
     }
 
     this.events.publish('user:refresh_points',this.userProvider.getUser());
-
+    this.events.publish('user:logged',this.userProvider.getUser());
+    this.user_points = Functions.formatPoints(this.userProvider.getUser().points);
   }
 
   changeSlides() {
@@ -120,6 +124,13 @@ export class HomePage {
 
   segmentChanged(event){
     //console.log(this.editorial_segment);
+  }
+
+  goToProfile(){
+    this.navCtrl.push(ProfilePage,
+      {
+        user:this.userProvider.getUser()
+      });
   }
 
 }

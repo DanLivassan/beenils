@@ -2,8 +2,8 @@
   <div class="header-fixed">
     <a href="#" menuToggle class="header-icon-1 open-left-sidebar"><i class="fa fa-navicon"></i></a>
     <a href="#" class="header-logo">BEENEWS</a>
-    <a href="#" class="header-icon-2 open-right-sidebar">{{userProvider.getUser().name}}</a>
-    <a href="#" class="header-icon-3 open-search-bar">{{userProvider.getUser().points}} pt</a>
+    <a (click)="goToProfile()" class="header-icon-2 open-right-sidebar">{{userProvider.getUser().name}}</a>
+    <a href="#" class="header-icon-3 open-search-bar">{{user_points}}</a>
   </div>
 </ion-header>
 <ion-content>

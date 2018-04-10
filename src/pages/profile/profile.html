@@ -1,0 +1,88 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Perfil</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div id="page-content-scroll"><!--Enables this element to be scrolled -->
+
+    <div class="content-fullscreen">
+      <div class="page-profile">
+        <div class="page-profile-header">
+          <a href="#" class="show-gallery" title="Profile Image!"><img data-original="images/pictures/5t.jpg" class="preload-image" alt="img"></a>
+          <h3>{{user.get_full_name()}}</h3>
+          <em><i class="fa fa-location-arrow"></i>{{user.address.city}}, {{user.address.state}}</em>
+          <div class="overlay bg-black"></div>
+          <div class="follow-buttons">
+            <a href="#">Enviar email</a>
+            <a href="#">Ligar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="page-profile">
+        <div class="page-profile-followers">
+          <a href="#">
+            <i class="fa fa-trophy"></i>
+            {{user.points}} pontos
+          </a>
+          <a href="#">
+            <i class="fa fa-twitter"></i>
+
+          </a>
+          <a href="#">
+            <i class="fa fa-envelope-o"></i>
+
+          </a>
+        </div>
+
+        <div class="decoration"></div>
+
+        <div class="container no-bottom">
+          <div class="sidebar-left-small">
+            <img data-original="images/pictures/1.jpg" class="preload-image responsive-image half-bottom" alt="img">
+            <h4 class="no-bottom">{{user.get_full_name()}}</h4>
+
+            <div class="decoration"></div>
+            <ul class="font-icon-list">
+              <li><a href="#"><i class="fa fa-phone"></i>+ 1 234 556 887</a></li>
+              <li><a href="#"><i class="fa fa-envelope"></i>mail@domain.com</a></li>
+              <li><a href="#"><i class="fa fa-dollar"></i>Min. Budget: $500</a></li>
+              <li><a href="#"><i class="fa fa-clock-o"></i>Available 24/7</a></li>
+              <li><a href="#"><i class="fa fa-location-arrow"></i>521 King Street, Melbourne Australia</a></li>
+            </ul>
+            <br>
+          </div>
+          <div class="decoration hide-if-responsive"></div>
+          <div class="sidebar-right-big">
+            <h4>Sobre {{user.name}}</h4>
+            <p>
+              {{this.user.about}}
+            </p>
+            <div *ngIf="this.user.editorials?.length>0" class="sidebar-left-small">
+              <h4>Editorias</h4>
+              <ul>
+                <li *ngFor="let editorial of this.user.editorials">{{editorial.name}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</ion-content>

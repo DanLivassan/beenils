@@ -5,6 +5,7 @@ import {Params} from "../../utils/params";
 import 'rxjs/Rx';
 import {Editorial} from "../../models/editorial";
 import {Events} from "ionic-angular";
+import {Address} from "../../models/address";
 
 
 
@@ -92,6 +93,8 @@ export class UserProvider {
       status:user.status,
       points:user.points,
       picture:user.picture,
+      address:user.address,
+      about:user.about,
     };
     localStorage.setItem('user', JSON.stringify(string_user));
   }
@@ -111,12 +114,15 @@ export class UserProvider {
       let u = JSON.parse(user);
       this.user = new User(u.id,u.name,u.last_name,u.type, u.status);
       this.user.points = u.points;
-      /*recover_user.editorials = u._editorials.forEach((edt)=>{
-        return new Editorial(edt._id, edt._name);
-      });*/
+      if(typeof u.editorials !== 'undefined'){
+        u.editorials = u._editorials.forEach((edt)=>{
+          u.setEditorial(new Editorial(edt._id, edt._name));
+        });
+      }
+      this.user.address = new Address(u.address._id, u.address._city, u.address._state);
       this.user.picture = u.picture;
+      this.user.about = u.about;
       this.events.publish('user:logged',this.user);
-
     }
     catch(e){
       console.log(e);

@@ -14,7 +14,7 @@ import {PublicationViewPage} from "../publication-view/publication-view";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-approve-news',
   templateUrl: 'approve-news.html',

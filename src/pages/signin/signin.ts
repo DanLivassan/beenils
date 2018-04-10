@@ -15,7 +15,7 @@ import {SignupPage} from "../signup/signup";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-signin',
   templateUrl: 'signin.html',
@@ -58,9 +58,14 @@ export class SigninPage {
             editorials.push(new Editorial(edt['id'], edt['name']));
           });
           logged_user.editorials = editorials;
-
           logged_user.picture = data['user']['picture'];
           logged_user.points = data['user']['points'];
+          logged_user.address = new Address(
+            data['user']['address']['id'],
+            data['user']['address']['city'],
+            data['user']['address']['state']['state']
+          );
+          logged_user.about = data['user']['about'];
           this.userProvider.setUser(logged_user);
 
           localStorage.setItem('token', data['token']);

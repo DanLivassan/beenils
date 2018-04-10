@@ -19,6 +19,7 @@ export class User{
   private _picture:string;
   private _phone_number:string;
   private _points:number;
+  private _about:string;
 
 
   //UserToken
@@ -91,6 +92,10 @@ export class User{
     this._editorials = value;
   }
 
+  setEditorial(value:Editorial){
+    this._editorials.push(value);
+  }
+
   get column() {
     return this._column;
   }
@@ -151,5 +156,14 @@ export class User{
 
   set points(value: number) {
     this._points = value;
+  }
+
+
+  get about(): string {
+    return this._about;
+  }
+
+  set about(value: string) {
+    this._about = value;
   }
 }

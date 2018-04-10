@@ -13,7 +13,7 @@ import {Params} from "../../utils/params";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-editorial-publications-view',
   templateUrl: 'editorial-publications-view.html',

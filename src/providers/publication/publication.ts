@@ -152,4 +152,7 @@ export class PublicationProvider {
     }
   }
 
+  getUrl(publicationId:number):string{
+    return Params.getFrontUrl()+'/publication/view/'+publicationId;
+  }
 }

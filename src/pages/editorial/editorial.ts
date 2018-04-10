@@ -11,7 +11,7 @@ import {EditorialPublicationsViewPage} from "../editorial-publications-view/edit
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-editorial',
   templateUrl: 'editorial.html',

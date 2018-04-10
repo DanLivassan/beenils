@@ -8,6 +8,7 @@ import {PublicationReactionProvider} from "../../providers/publication-reaction/
 import {PublicationReaction} from "../../models/publication-reaction";
 import {CommentaryProvider} from "../../providers/commentary/commentary";
 import {Commentary} from "../../models/commentary";
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 
 
@@ -18,7 +19,7 @@ import {Commentary} from "../../models/commentary";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-publication-view',
   templateUrl: 'publication-view.html',
@@ -43,6 +44,7 @@ export class PublicationViewPage {
     private commentsProvider:CommentaryProvider,
     public events:Events,
     public toastCtrl:ToastController,
+    public socialSharing:SocialSharing,
   ) {
     this.publication = this.navParams.get('publication');
     this.pubProvider.getOnServer(this.publication.id).subscribe((publication)=>{
@@ -109,6 +111,47 @@ export class PublicationViewPage {
     });
 
     toast.present();
+  }
+
+  shareFacebook(){
+    this.socialSharing.shareViaFacebook(
+      "shareViaFacebook",
+      this.publication.cover_image,
+      this.pubProvider.getUrl(this.publication.id)
+    );
+  }
+
+  shareWhatsApp(){
+
+    this.socialSharing.shareViaWhatsApp(
+      'shareViaWhatsApp',
+      this.publication.cover_image,
+      this.pubProvider.getUrl(this.publication.id)
+    );
+  }
+
+  shareTwitter(){
+    this.socialSharing.shareViaTwitter(
+      'shareViaTwitter',
+      this.publication.cover_image,
+      this.pubProvider.getUrl(this.publication.id)
+    );
+  }
+
+  shareInstagram(){
+    this.socialSharing.shareViaInstagram(
+      'shareViaInstagram',
+      this.publication.cover_image
+    );
+  }
+
+  share(){
+    this.socialSharing.share(
+      'share',
+      this.publication.title,
+      null,
+      this.pubProvider.getUrl(this.publication.id
+      ));
   }
 
 }

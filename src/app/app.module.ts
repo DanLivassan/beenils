@@ -21,6 +21,8 @@ import {ApproveNewsPage} from "../pages/approve-news/approve-news";
 import {SignupPage} from "../pages/signup/signup";
 import { PublicationReactionProvider } from '../providers/publication-reaction/publication-reaction';
 import { CommentaryProvider } from '../providers/commentary/commentary';
+import {SocialSharing} from "@ionic-native/social-sharing";
+import {ProfilePage} from "../pages/profile/profile";
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { CommentaryProvider } from '../providers/commentary/commentary';
     SignupPage,
     SigninPage,
     ApproveNewsPage,
+    ProfilePage,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { CommentaryProvider } from '../providers/commentary/commentary';
     SigninPage,
     SignupPage,
     ApproveNewsPage,
+    ProfilePage,
   ],
   providers: [
     StatusBar,
@@ -63,7 +67,8 @@ import { CommentaryProvider } from '../providers/commentary/commentary';
     UserProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PublicationReactionProvider,
-    CommentaryProvider
+    CommentaryProvider,
+    SocialSharing
   ]
 })
 export class AppModule {}

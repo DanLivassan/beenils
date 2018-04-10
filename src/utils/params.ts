@@ -12,11 +12,11 @@ export class Params{
   static readonly frontUrl = 'front-api';
   static getBaseUrl(){
     return Params.baseUrl;
-    //return 'http://198.211.109.67:8000';
+    //return 'http://beenils.com.br:8000';
   }
   static getFrontUrl(){
     return Params.frontUrl;
-    //return 'http://198.211.109.67';
+    //return 'http://beenils.com.br';
   }
   static readonly UserTypes ={
     'leitor':1,
