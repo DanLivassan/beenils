@@ -147,7 +147,7 @@ export class PublicationViewPage {
 
   share(){
     this.socialSharing.share(
-      'share',
+      this.publication.title,
       this.publication.title,
       null,
       this.pubProvider.getUrl(this.publication.id

@@ -95,6 +95,8 @@ export class UserProvider {
       picture:user.picture,
       address:user.address,
       about:user.about,
+      email:user.email,
+      editorials:user.editorials,
     };
     localStorage.setItem('user', JSON.stringify(string_user));
   }
@@ -114,18 +116,20 @@ export class UserProvider {
       let u = JSON.parse(user);
       this.user = new User(u.id,u.name,u.last_name,u.type, u.status);
       this.user.points = u.points;
+
       if(typeof u.editorials !== 'undefined'){
-        u.editorials = u._editorials.forEach((edt)=>{
-          u.setEditorial(new Editorial(edt._id, edt._name));
+        u.editorials.forEach((edt)=>{
+          this.user.setEditorial(new Editorial(edt._id, edt._name));
         });
       }
       this.user.address = new Address(u.address._id, u.address._city, u.address._state);
       this.user.picture = u.picture;
       this.user.about = u.about;
+      this.user.email = u.email;
       this.events.publish('user:logged',this.user);
     }
     catch(e){
-      console.log(e);
+      console.error(e);
       return null;
     }
   }

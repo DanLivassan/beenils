@@ -6,6 +6,8 @@ import {UserProvider} from "../../providers/user/user";
 import {Editorial} from "../../models/editorial";
 import {Params} from "../../utils/params";
 import {PublicationViewPage} from "../publication-view/publication-view";
+import {isArray} from "rxjs/util/isArray";
+import {Functions} from "../../utils/functions";
 
 /**
  * Generated class for the ApproveNewsPage page.
@@ -22,6 +24,7 @@ import {PublicationViewPage} from "../publication-view/publication-view";
 export class ApproveNewsPage {
   private baseUrl = Params.getFrontUrl();
   private unapproved_news=[];
+  private user_points;
   editorials:Editorial[];
   constructor(
     public navCtrl: NavController,
@@ -41,13 +44,16 @@ export class ApproveNewsPage {
     this.editorials.forEach((edt)=>{
       let unapproved_news = [];
       this.pubProvider.getPendingNews(edt.id.toString()).subscribe((pubs:Array<any>)=>{
-        pubs.forEach((pub)=>{
-          unapproved_news.push(this.pubProvider.formatResponse(pub));
-        });
-
+        if(isArray(pubs)){
+          pubs.forEach((pub)=>{
+            unapproved_news.push(this.pubProvider.formatResponse(pub));
+          });
+        }
       });
       this.unapproved_news.push({editorial:edt, publications:unapproved_news});
+
     });
+    this.user_points = Functions.formatPoints(this.userProvider.getUser().points);
   }
 
   publicationView(id:number){
@@ -68,6 +74,15 @@ export class ApproveNewsPage {
     });
 
     toast.present();
+  }
+
+  approvePublication(publicationId:number){
+    this.pubProvider.approvePublication(publicationId).subscribe((msg)=>{
+      console.log(msg);
+    },
+      (error)=>{
+        console.error(error);
+      });
   }
 
 }

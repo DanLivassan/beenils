@@ -26,12 +26,9 @@
         about <a href="#">{{publication.created_at |amLocale:'pt-BR' | amTimeAgo }}</a>
         em <a href="#">{{publication.editorial.name}}</a>
       </p>
+
       <div class="news-article-share full-bottom">
-        <a (click)="shareFacebook()"><i class="facebook-color fa fa-facebook"></i></a>
-        <a (click)="shareTwitter()"><i class="twitter-color fa fa-twitter"></i></a>
-        <a (click)="shareInstagram()"><i class="google-color fa fa-instagram"></i></a>
-        <a (click)="shareWhatsApp()"><i class="whatsapp-color fa fa-whatsapp"></i></a>
-        <a (click)="share()"><i class="mail-color fa fa-envelope-o"></i></a>
+        <button ion-button full (click)="share()"><i class="mail-color fa fa-envelope-o"></i>Compartilhar</button>
         <div class="clear"></div>
       </div>
 

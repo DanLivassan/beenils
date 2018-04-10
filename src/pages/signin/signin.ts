@@ -53,7 +53,7 @@ export class SigninPage {
             data['user']['status']['id'],
           );
           let editorials:Editorial[] = [];
-
+          logged_user.email = data['user']['email'];
           data['user']['editorials'].forEach((edt)=>{
             editorials.push(new Editorial(edt['id'], edt['name']));
           });

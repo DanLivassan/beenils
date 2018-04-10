@@ -93,6 +93,9 @@ export class User{
   }
 
   setEditorial(value:Editorial){
+    if(typeof this.editorials ==='undefined'){
+      this.editorials = [];
+    }
     this._editorials.push(value);
   }
 

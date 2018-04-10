@@ -57,10 +57,9 @@
             <div class="decoration"></div>
             <ul class="font-icon-list">
               <li><a href="#"><i class="fa fa-phone"></i>+ 1 234 556 887</a></li>
-              <li><a href="#"><i class="fa fa-envelope"></i>mail@domain.com</a></li>
-              <li><a href="#"><i class="fa fa-dollar"></i>Min. Budget: $500</a></li>
-              <li><a href="#"><i class="fa fa-clock-o"></i>Available 24/7</a></li>
-              <li><a href="#"><i class="fa fa-location-arrow"></i>521 King Street, Melbourne Australia</a></li>
+              <li><a href="#"><i class="fa fa-envelope"></i>{{user.email}}</a></li>
+              <li><a href="#"><i class="fa fa-dollar"></i>Pontos: {{user.points}}</a></li>
+              <li><a href="#"><i class="fa fa-location-arrow"></i>{{user.address.city}}, {{user.address.state}}</a></li>
             </ul>
             <br>
           </div>

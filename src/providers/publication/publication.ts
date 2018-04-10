@@ -152,6 +152,17 @@ export class PublicationProvider {
     }
   }
 
+  approvePublication(publicationId:number){
+    if(this.userProvider.isAuthenticated() && this.userProvider.getUser().is('editor')){
+      let url = Params.getBaseUrl()+'/v1/publication/'+publicationId+'/approve';
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.userProvider.getToken(),
+      });
+      return this.http.patch(url,{},{headers:headers});
+    }
+    return null;
+  }
+
   getUrl(publicationId:number):string{
     return Params.getFrontUrl()+'/publication/view/'+publicationId;
   }
