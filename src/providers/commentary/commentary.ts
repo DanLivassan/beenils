@@ -4,6 +4,9 @@ import {Commentary} from "../../models/commentary";
 import {UserProvider} from "../user/user";
 import {Params} from "../../utils/params";
 import {Observable} from "rxjs/Observable";
+import * as moment from "moment";
+import "moment-timezone";
+
 
 
 @Injectable()
@@ -32,7 +35,7 @@ export class CommentaryProvider {
         this.userProvider.formatUser(comment.commented_by),
         comment.publication,
         comment.commentary,
-        comment.commented_at
+        moment(comment.commented_at).tz('America/Sao_paulo').format()
         ));
     });
   }

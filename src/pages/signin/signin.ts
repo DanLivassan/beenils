@@ -44,40 +44,17 @@ export class SigninPage {
     let credentials = this.loginForm.value;
     this.userProvider.login(credentials['email'], credentials['password']).subscribe(
       (data)=>{
-        if(data['token']!=='undefined'){
-          let logged_user = new User(
-            data['user']['id'],
-            data['user']['name'],
-            data['user']['last_name'],
-            data['user']['type']['id'],
-            data['user']['status']['id'],
-          );
-          let editorials:Editorial[] = [];
-          logged_user.email = data['user']['email'];
-          data['user']['editorials'].forEach((edt)=>{
-            editorials.push(new Editorial(edt['id'], edt['name']));
-          });
-          logged_user.editorials = editorials;
-          logged_user.picture = data['user']['picture'];
-          logged_user.points = data['user']['points'];
-          logged_user.address = new Address(
-            data['user']['address']['id'],
-            data['user']['address']['city'],
-            data['user']['address']['state']['state']
-          );
-          logged_user.about = data['user']['about'];
-          this.userProvider.setUser(logged_user);
-
-          localStorage.setItem('token', data['token']);
-          this.userProvider.successLogin();
+        this.userProvider.extractData(data);
+        if(this.userProvider.isAuthenticated()){
           this.presentToast(
             'Bem vindo, '+this.userProvider.getUser().get_full_name(),
             2000,
             'bottom'
-            );
+          );
           this.events.publish('user:logged',this.userProvider.getUser());
           this.navCtrl.setRoot(HomePage);
         }
+
 
       },(error)=>{
         console.log(JSON.stringify(error));
@@ -114,5 +91,7 @@ export class SigninPage {
   goToSingUp(){
     this.navCtrl.push(SignupPage);
   }
+
+
 
 }

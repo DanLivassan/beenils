@@ -8,11 +8,11 @@
   "proxies": [
     {
       "path": "/api/",
-      "proxyUrl": "http://198.211.109.67:8000/"
+      "proxyUrl": "http://127.0.0.1:8000/"
     },
     {
       "path": "/front-api/",
-      "proxyUrl": "http://198.211.109.67/"
+      "proxyUrl": "http://127.0.0.1/"
     }
   ]
 }

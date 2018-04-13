@@ -5,6 +5,7 @@ import {Editorial} from "../../models/editorial";
 import {PublicationViewPage} from "../publication-view/publication-view";
 import {UserProvider} from "../../providers/user/user";
 import {Params} from "../../utils/params";
+import {AppFooterComponent} from "../../components/app-footer/app-footer"
 
 /**
  * Generated class for the EditorialPublicationsViewPage page.
@@ -29,6 +30,9 @@ export class EditorialPublicationsViewPage {
   }
   ionViewWillLoad(){
     if(this.editorial){
+      let search:Array<{name:string,value:string}> = [];
+      search.push({name:'editorial', value:this.editorial.id.toString()});
+      this.pubProvider.getPublications('10', null,null,null,null, search)
       this.editorialPublications = this.pubProvider.getByEditorial(this.editorial);
     }
   }
@@ -41,8 +45,13 @@ export class EditorialPublicationsViewPage {
     return this.userProvider.isAuthenticated();
   }
 
-  publicationView(publication){
-    this.navCtrl.push(PublicationViewPage,{'publication':publication});
+  publicationView(id){
+      if(id != null){
+        this.pubProvider.get(id).subscribe((pub)=>{
+          let publication = this.pubProvider.formatResponse(pub);
+          this.navCtrl.push(PublicationViewPage, {'publication':publication});
+        });
+      }
   }
 
 }

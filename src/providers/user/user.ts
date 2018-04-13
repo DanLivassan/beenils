@@ -49,6 +49,43 @@ export class UserProvider {
 
   }
 
+
+  extractData(data:any):User{
+    if(data['token']!=='undefined'){
+      let logged_user = new User(
+        data['user']['id'],
+        data['user']['name'],
+        data['user']['last_name'],
+        data['user']['type']['id'],
+        data['user']['status']['id'],
+      );
+      logged_user.email = data['user']['email'];
+
+      let editorials:Editorial[] = [];
+      data['user']['editorials'].forEach((edt)=>{
+        editorials.push(new Editorial(edt['id'], edt['name']));
+      });
+
+      logged_user.editorials = editorials;
+      logged_user.picture = data['user']['picture'];
+      logged_user.points = data['user']['points'];
+      if(data['user']['address']!==null){
+        logged_user.address = new Address(
+          data['user']['address']['id'],
+          data['user']['address']['city'],
+          data['user']['address']['state']['state']
+        );
+      }
+      logged_user.about = data['user']['about'];
+
+      this.setUser(logged_user);
+      localStorage.setItem('token', data['token']);
+
+      this.successLogin();
+    }
+    return null;
+  }
+
   successLogin(){
     this.isLogged = true;
   }
@@ -122,7 +159,9 @@ export class UserProvider {
           this.user.setEditorial(new Editorial(edt._id, edt._name));
         });
       }
-      this.user.address = new Address(u.address._id, u.address._city, u.address._state);
+      if(typeof u.address !=='undefined'){
+        this.user.address = new Address(u.address._id, u.address._city, u.address._state);
+      }
       this.user.picture = u.picture;
       this.user.about = u.about;
       this.user.email = u.email;

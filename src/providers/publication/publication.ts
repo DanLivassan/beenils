@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import {Publication} from "../../models/publication";
 import {EditorialProvider} from "../editorial/editorial";
 import {User} from "../../models/user";
-import {PublicationCommentary} from "../../models/publication-commentary";
 import {Editorial} from "../../models/editorial";
-import {Observable} from "rxjs/Observable";
 import {UserProvider} from "../user/user";
 import {Params} from "../../utils/params";
-import {jsonpFactory} from "@angular/http/src/http_module";
+import * as moment from "moment";
+import "moment-timezone";
+
 
 
 @Injectable()
@@ -23,7 +23,8 @@ export class PublicationProvider {
     return this.publications;
   }
 
-  refreshData(){
+
+  getPublications(limit?:string, address?:string, page?:string, except?:string, treding?:string, search?:Array<{name:string, value:string}>){
 
       if(this.userProvider.isAuthenticated()) {
         let url = Params.getBaseUrl() + '/v1/publication/all';
@@ -31,7 +32,42 @@ export class PublicationProvider {
           'Authorization': 'Bearer ' + this.userProvider.getToken(),
         });
         let params = new HttpParams();
-        params = params.set('limit','50');
+        if(limit !=null){
+          try{
+            let value = parseInt(limit)
+            params = params.append('limit',value.toString());
+          }
+          catch (e){
+            console.error(e);
+          }
+        }
+        if(address !=null){
+          params = params.append('address',address);
+        }
+        if(page !=null){
+          try{
+            let value = parseInt(page)
+            params = params.append('page',value.toString());
+          }
+          catch (e){
+            console.error(e);
+          }
+        }
+        if(except !=null){
+
+          params = params.append('except',except.toString());
+
+        }
+        if(treding !=null){
+
+          params = params.append('except',treding.toString());
+
+        }
+        if(search !=null){
+          search.forEach((s)=>{
+            params = params.append('search['+s.name+']',s.value);
+          })
+        }
 
         return this.http.get(url, {headers:headers, params:params});
       }
@@ -42,14 +78,17 @@ export class PublicationProvider {
   }
 
   public extractData(data){
+
     let publications = data;
     let pubs =[];
+
     publications.forEach((publication)=>{
+
       pubs.push(new Publication(
         publication['id'],
         publication['title'],
         publication['content'],
-        publication['created_at'],
+        moment(publication['created_at']).tz('America/Sao_paulo').format(),
         new User(
           publication['created_by']['id'],
           publication['created_by']['name'],
@@ -73,17 +112,9 @@ export class PublicationProvider {
     return pubs;
   }
 
-  get(id:number):Publication{
-    let publication = this.publications.filter(pub=>pub.id===id)[0];
-    if(typeof publication === 'undefined'){
-      return null;
-    }
-    return publication;
-  }
-
-  getOnServer(id:number){
+  get(id:number){
     if(this.userProvider.isAuthenticated()) {
-      let url = Params.getFrontUrl() + '/site/get-publication/'+id;
+      let url = Params.getBaseUrl() + '/v1/publication/'+id;
       let headers = new HttpHeaders({
         'Authorization': 'Bearer ' + this.userProvider.getToken(),
       });
@@ -94,6 +125,8 @@ export class PublicationProvider {
       return null;
     }
   }
+
+
 
   formatResponse(publication):Publication{
     let pub:Publication = new Publication(
@@ -129,17 +162,22 @@ export class PublicationProvider {
   }
 
 
-  getPendingNews(editorial_id:string){
+  getPendingNews(limit?:string, address?:string, page?:string, search?:Array<{name:string, value:string}>){
     if(this.userProvider.isAuthenticated()) {
-      let url = Params.getBaseUrl() + '/v1/publication/all';
-      let params = new HttpParams();
-      params = params.append('limit','5');
-      params = params.append('editorial',editorial_id);
-      params = params.append('status',Publication.NewsStatus['pendente']);
+      let url = Params.getBaseUrl() + '/v1/publication/all-pending';
 
       let headers = new HttpHeaders({
         'Authorization': 'Bearer ' + this.userProvider.getToken(),
       });
+
+      let params = new HttpParams();
+      if(limit){
+        params = params.append('limit',limit);
+      }
+      else{
+        params = params.append('limit','1');
+      }
+
 
       return this.http.get(url,
         {
@@ -155,6 +193,17 @@ export class PublicationProvider {
   approvePublication(publicationId:number){
     if(this.userProvider.isAuthenticated() && this.userProvider.getUser().is('editor')){
       let url = Params.getBaseUrl()+'/v1/publication/'+publicationId+'/approve';
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.userProvider.getToken(),
+      });
+      return this.http.patch(url,{},{headers:headers});
+    }
+    return null;
+  }
+
+  submitPublication(publicationId:number){
+    if(this.userProvider.isAuthenticated() && this.userProvider.getUser().is('jornalista')){
+      let url = Params.getBaseUrl()+'/v1/publication/'+publicationId+'/submit';
       let headers = new HttpHeaders({
         'Authorization': 'Bearer ' + this.userProvider.getToken(),
       });

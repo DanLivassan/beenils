@@ -1,6 +1,9 @@
 export class Functions{
 
   static formatPoints(value:number):string{
+    if(value==null){
+      return '0 pts';
+    }
     let value_formated = value+' pts';
     let multiplies:Array<{multiplie:number, l:string}> = [
       {multiplie:1000000, l:'mi'},

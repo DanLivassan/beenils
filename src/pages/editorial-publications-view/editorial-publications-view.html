@@ -31,7 +31,7 @@
           </div>
           <p [innerHtml]="publication.content|slice:0:100">
           </p>
-          <a (click)="publicationView(publication)" class="badge-read">Ler mais</a>
+          <a (click)="publicationView(publication.id)" class="badge-read">Ler mais</a>
 
           <div class="clear"></div>
         </div>
@@ -41,24 +41,7 @@
         <a href="#" class="load-more-large-cards button button-fullscreen button-green full-bottom">Load More</a>
       </div>
 
-    <div class="footer">
-      <div class="footer-content">
-        <h3 class="footer-logo">BEENEWS MOBILE</h3>
-        <p class="footer-text">
-          Beenews é um portal de notícias e fonte de conteúdo técnico e digital para sua influente audiência em todo o mundo.
-        </p>
-      </div>
-      <div class="footer-socials">
-        <a href="#" class="scale-hover facebook-color"><i class="fa fa-facebook"></i></a>
-        <a href="#" class="scale-hover twitter-color"><i class="fa fa-twitter"></i></a>
-        <a href="#" class="scale-hover google-color"><i class="fa fa-google-plus"></i></a>
-        <a href="#" class="scale-hover phone-color"><i class="fa fa-phone"></i></a>
-        <a href="#" class="scale-hover mail-color"><i class="fa fa-envelope-o"></i></a>
-        <a href="#" class="scale-hover bg-night-dark back-to-top"><i class="fa fa-angle-up"></i></a>
-        <div class="clear"></div>
-      </div>
-      <p class="footer-strip">Copyright <span id="copyright-year"></span> Beenews. Todos os direitos reservados</p>
-    </div>
+    <app-footer></app-footer>
     </div>
     <a href="#" class="back-to-top-badge"><i class="fa fa-caret-up"></i>Back to top</a>
   </div>

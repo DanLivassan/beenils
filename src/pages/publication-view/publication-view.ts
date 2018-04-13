@@ -9,6 +9,7 @@ import {PublicationReaction} from "../../models/publication-reaction";
 import {CommentaryProvider} from "../../providers/commentary/commentary";
 import {Commentary} from "../../models/commentary";
 import {SocialSharing} from "@ionic-native/social-sharing";
+import {AppFooterComponent} from "../../components/app-footer/app-footer"
 
 
 
@@ -26,6 +27,7 @@ import {SocialSharing} from "@ionic-native/social-sharing";
   providers:[PublicationReactionProvider, CommentaryProvider],
 })
 export class PublicationViewPage {
+
 
   publication:Publication;
   publication_reactions:PublicationReaction[]=[];
@@ -47,9 +49,6 @@ export class PublicationViewPage {
     public socialSharing:SocialSharing,
   ) {
     this.publication = this.navParams.get('publication');
-    this.pubProvider.getOnServer(this.publication.id).subscribe((publication)=>{
-      this.publication = this.pubProvider.formatResponse(publication);
-    });
 
   }
   ionViewDidLoad() {

@@ -1,27 +1,26 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
-import {PublicationProvider} from "../../providers/publication/publication";
-import {Publication} from "../../models/publication";
-import {UserProvider} from "../../providers/user/user";
+import {NavController, NavParams, ToastController} from 'ionic-angular';
+import {Functions} from "../../utils/functions";
+import {isArray} from "rxjs/util/isArray";
+import {PublicationViewPage} from "../publication-view/publication-view";
 import {Editorial} from "../../models/editorial";
 import {Params} from "../../utils/params";
-import {PublicationViewPage} from "../publication-view/publication-view";
-import {isArray} from "rxjs/util/isArray";
-import {Functions} from "../../utils/functions";
+import {PublicationProvider} from "../../providers/publication/publication";
+import {UserProvider} from "../../providers/user/user";
 
 /**
- * Generated class for the ApproveNewsPage page.
+ * Generated class for the SubmitNewsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
-
 @Component({
-  selector: 'page-approve-news',
-  templateUrl: 'approve-news.html',
+  selector: 'page-submit-news',
+  templateUrl: 'submit-news.html',
 })
-export class ApproveNewsPage {
+export class SubmitNewsPage {
+
   private baseUrl = Params.getFrontUrl();
   private unapproved_news=[];
   private user_points;
@@ -36,7 +35,7 @@ export class ApproveNewsPage {
   }
 
   ionViewCanEnter(){
-    return this.userProvider.getUser().is('editor');
+    return this.userProvider.getUser().is('jornalista');
   }
   ionViewWillLoad(){
     this.editorials= this.userProvider.getUser().editorials;
@@ -79,14 +78,13 @@ export class ApproveNewsPage {
     toast.present();
   }
 
-  approvePublication(publicationId:number){
-    this.pubProvider.approvePublication(publicationId).subscribe((msg)=>{
-      this.refreshNews();
-      this.presentToast("Publicação aprovada",3000, "bottom");
-    },
+  submitPublication(publicationId:number){
+    this.pubProvider.submitPublication(publicationId).subscribe((msg)=>{
+        this.presentToast('Publicação submetida para o editor',3000,'bottom');
+        this.refreshNews();
+      },
       (error)=>{
-        this.presentToast("Publicação não aprovada",3000, "bottom");
-        console.error(error);
+        this.presentToast('Erro. Publicação não submetida',3000,'bottom');
       });
   }
 

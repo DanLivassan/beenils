@@ -1,7 +1,7 @@
 <ion-header>
   <div class="header-fixed">
     <a href="#" menuToggle class="header-icon-1 open-left-sidebar"><i class="fa fa-navicon"></i></a>
-    <a href="#" class="header-logo">BEENEWS</a>
+    <a href="#" class="header-logo">BEENILS</a>
     <a href="#" class="header-icon-2 open-right-sidebar">{{userProvider.getUser().name}}</a>
     <a href="#" class="header-icon-3 open-search-bar">{{user_points}}</a>
   </div>
@@ -11,10 +11,10 @@
 <ion-content>
   <div class="main-content">
 
-  <div class="content" *ngFor="let editorial of unapproved_news">
-    {{editorial.editorial.name}}
-    <div class="thumb-layout">
-      <div style="margin-bottom: 18px;" *ngFor="let publication of editorial.publications">
+  <div class="content" >
+
+    <div *ngIf="unapproved_news.length!=0" class="thumb-layout">
+      <div style="margin-bottom: 18px;" *ngFor="let publication of unapproved_news">
         <a style="overflow: hidden; margin-bottom: 0px" (click)="publicationView(publication.id)"  href="#">
           <img  src="{{baseUrl}}/{{publication.cover_image}}">
           <strong>{{publication.editorial.name}}</strong>
@@ -25,5 +25,8 @@
     </div>
     <div class="decoration"></div>
   </div>
+    <div *ngIf="unapproved_news.length==0">
+      <p>Não existem notícias para aprovar</p>
+    </div>
   </div>
 </ion-content>

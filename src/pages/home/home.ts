@@ -8,11 +8,14 @@ import {PublicationViewPage} from "../publication-view/publication-view";
 import {Params} from "../../utils/params";
 import {Functions} from "../../utils/functions"
 import {ProfilePage} from "../profile/profile";
+import {AppFooterComponent} from "../../components/app-footer/app-footer"
+import {Publication} from "../../models/publication";
 
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
+
 })
 export class HomePage {
   @ViewChild(Slides) slides: Slides;
@@ -42,23 +45,28 @@ export class HomePage {
     return this.userProvider.isAuthenticated();
   }
   ionViewWillEnter(){
+    //Slider Publications
+    this.pubProvider.getPublications('5',null, null, null, null, null).subscribe((data:Array<any>)=>{
+      this.publications = this.pubProvider.extractData(data);
+    });
+
+    //Guides Publications
     this.edtProvider.refreshData().subscribe((data) => {
-      this.edtProvider.extractData(data);
-      this.pubProvider.refreshData().subscribe((data)=>{
-        this.pubProvider.extractData(data);
-        this.editorials = this.edtProvider.getAll();
+      this.editorials = this.edtProvider.extractData(data);
+      this.editorials.forEach((edt,index)=>{
 
-        this.editorials.forEach((edt,index)=>{
-              this.editorial_guides.push(
-                {
-                  data:edt,
-                  is_active:index==0,
-                  publications:this.pubProvider.getByEditorial(edt)
-                });
-
+        let search:Array<{name:string, value:string}> = [];
+        search.push({name:'editorial', value:edt.id.toString()});
+        this.pubProvider.getPublications('10',null, null, null, null, search).subscribe((data)=>{
+          this.editorial_guides.push(
+            {
+              data:edt,
+              is_active:index==0,
+              publications:this.pubProvider.extractData(data)
+            });
         });
-        this.publications = this.pubProvider.getAll();
       });
+
     });
   }
 
@@ -103,9 +111,12 @@ export class HomePage {
   }
 
   publicationView(id:number){
-    let publication = this.pubProvider.get(id);
-    if(publication != null){
-      this.navCtrl.push(PublicationViewPage, {'publication':publication});
+    if(id != null){
+      this.pubProvider.get(id).subscribe((pub)=>{
+        let publication = this.pubProvider.formatResponse(pub);
+        this.navCtrl.push(PublicationViewPage, {'publication':publication});
+      });
+
     }
     else{
       this.presentToast("Notícia não encontrada", 3000, 'top');

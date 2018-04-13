@@ -21,6 +21,14 @@ export class User{
   private _points:number;
   private _about:string;
 
+  static readonly UserTypesNames ={
+    1: 'Leitor',
+    5: 'Jornalista',
+    10: 'Moderador',
+    30: 'Editor',
+    60: 'Colunista',
+    100: 'Administrador'
+  };
 
   //UserToken
   private _user_token:string;
@@ -168,5 +176,9 @@ export class User{
 
   set about(value: string) {
     this._about = value;
+  }
+
+  public getUserTypeName(){
+    return User.UserTypesNames[this.type];
   }
 }

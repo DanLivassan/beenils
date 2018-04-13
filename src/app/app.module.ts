@@ -23,6 +23,7 @@ import { PublicationReactionProvider } from '../providers/publication-reaction/p
 import { CommentaryProvider } from '../providers/commentary/commentary';
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {ProfilePage} from "../pages/profile/profile";
+import {SubmitNewsPage} from "../pages/submit-news/submit-news";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {ProfilePage} from "../pages/profile/profile";
     SigninPage,
     ApproveNewsPage,
     ProfilePage,
+    SubmitNewsPage,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +60,7 @@ import {ProfilePage} from "../pages/profile/profile";
     SignupPage,
     ApproveNewsPage,
     ProfilePage,
+    SubmitNewsPage,
   ],
   providers: [
     StatusBar,
