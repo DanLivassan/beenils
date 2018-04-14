@@ -57,7 +57,7 @@ export class SigninPage {
 
 
       },(error)=>{
-        console.log(JSON.stringify(error));
+        console.error(JSON.stringify(error));
         this.presentToast(
           'Erro, '+error['error']['message'],
           //JSON.stringify(error),

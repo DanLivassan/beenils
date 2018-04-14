@@ -14,6 +14,7 @@ import {Params} from "../utils/params";
 import {ApproveNewsPage} from "../pages/approve-news/approve-news";
 import {EditorialProvider} from "../providers/editorial/editorial";
 import {SubmitNewsPage} from "../pages/submit-news/submit-news";
+import {Editorial} from "../models/editorial";
 
 
 @Component({
@@ -56,10 +57,10 @@ export class MyApp {
       else if(user.is('leitor')){
         this.pages = [
           { title: 'Home', component: HomePage, icon:'fa-home', color:'bg-red-dark' },
-          { title: 'Notícias', component: EditorialPublicationsViewPage, icon: 'fa-list-ul', color:'bg-night-dark', editorial_id:1},
-          { title: 'Esportes', component: EditorialPublicationsViewPage, icon: 'fa-futbol-o', color:'bg-green-dark', editorial_id:2},
-          { title: 'Entretenimento', component: EditorialPublicationsViewPage, icon: 'fa-thumbs-up', color:'bg-blue-dark', editorial_id:3},
-          { title: 'Cultura', component: EditorialPublicationsViewPage, icon: 'fa-image', color:'bg-magenta-dark', editorial_id:4},
+          { title: 'Notícias', component: EditorialPublicationsViewPage, icon: 'fa-list-ul', color:'bg-night-dark', editorial_id:Editorial.NOTICIAS_ID},
+          { title: 'Esportes', component: EditorialPublicationsViewPage, icon: 'fa-futbol-o', color:'bg-green-dark', editorial_id:Editorial.ESPORTES_ID},
+          { title: 'Entretenimento', component: EditorialPublicationsViewPage, icon: 'fa-thumbs-up', color:'bg-blue-dark', editorial_id:Editorial.ENTRETENIMENTO_ID},
+          { title: 'Cultura', component: EditorialPublicationsViewPage, icon: 'fa-image', color:'bg-magenta-dark', editorial_id:Editorial.CULTURA_ID},
         ];
       }
       else if(user.is('editor')){
@@ -67,10 +68,10 @@ export class MyApp {
           { title: 'Home', component: HomePage, icon:'fa-home', color:'bg-red-dark'},
           { title: 'Editoriais', component: EditorialPage, icon: 'fa-list-ul', color:'bg-night-dark'},
           { title: 'Aprovar Notícias', component: ApproveNewsPage, icon:'fa-pencil', color:'bg-green-dark'},
-          { title: 'Notícias', component: EditorialPublicationsViewPage, icon: 'fa-list-ul', color:'bg-night-dark', editorial_id:1},
-          { title: 'Esportes', component: EditorialPublicationsViewPage, icon: 'fa-futbol-o', color:'bg-green-dark', editorial_id:2},
-          { title: 'Entretenimento', component: EditorialPublicationsViewPage, icon: 'fa-thumbs-up', color:'bg-blue-dark', editorial_id:3},
-          { title: 'Cultura', component: EditorialPublicationsViewPage, icon: 'fa-image', color:'bg-magenta-dark', editorial_id:4},
+          { title: 'Notícias', component: EditorialPublicationsViewPage, icon: 'fa-list-ul', color:'bg-night-dark', editorial_id:Editorial.NOTICIAS_ID},
+          { title: 'Esportes', component: EditorialPublicationsViewPage, icon: 'fa-futbol-o', color:'bg-green-dark', editorial_id:Editorial.ESPORTES_ID},
+          { title: 'Entretenimento', component: EditorialPublicationsViewPage, icon: 'fa-thumbs-up', color:'bg-blue-dark', editorial_id:Editorial.ENTRETENIMENTO_ID},
+          { title: 'Cultura', component: EditorialPublicationsViewPage, icon: 'fa-image', color:'bg-magenta-dark', editorial_id:Editorial.CULTURA_ID},
         ];
       }
       else if(user.is('jornalista')){
@@ -78,10 +79,10 @@ export class MyApp {
           { title: 'Home', component: HomePage, icon:'fa-home', color:'bg-red-dark'},
           { title: 'Editoriais', component: EditorialPage, icon: 'fa-list-ul', color:'bg-night-dark'},
           { title: 'Submeter Notícias', component: SubmitNewsPage, icon:'fa-pencil', color:'bg-green-dark'},
-          { title: 'Notícias', component: EditorialPublicationsViewPage, icon: 'fa-list-ul', color:'bg-night-dark', editorial_id:1},
-          { title: 'Esportes', component: EditorialPublicationsViewPage, icon: 'fa-futbol-o', color:'bg-green-dark', editorial_id:2},
-          { title: 'Entretenimento', component: EditorialPublicationsViewPage, icon: 'fa-thumbs-up', color:'bg-blue-dark', editorial_id:3},
-          { title: 'Cultura', component: EditorialPublicationsViewPage, icon: 'fa-image', color:'bg-magenta-dark', editorial_id:4},
+          { title: 'Notícias', component: EditorialPublicationsViewPage, icon: 'fa-list-ul', color:'bg-night-dark', editorial_id:Editorial.NOTICIAS_ID},
+          { title: 'Esportes', component: EditorialPublicationsViewPage, icon: 'fa-futbol-o', color:'bg-green-dark', editorial_id:Editorial.ESPORTES_ID},
+          { title: 'Entretenimento', component: EditorialPublicationsViewPage, icon: 'fa-thumbs-up', color:'bg-blue-dark', editorial_id:Editorial.ENTRETENIMENTO_ID},
+          { title: 'Cultura', component: EditorialPublicationsViewPage, icon: 'fa-image', color:'bg-magenta-dark', editorial_id:Editorial.CULTURA_ID},
         ];
       }
     });
@@ -111,7 +112,11 @@ export class MyApp {
 
     this.menu.close();
     if(page.editorial_id!=null){
-      this.nav.push(page.component,{'editorial':this.editorialProvider.get(page.editorial_id)});
+      this.editorialProvider.refreshData().subscribe((edt)=>{
+          this.editorialProvider.extractData(edt);
+          this.nav.push(page.component,{'editorial':this.editorialProvider.get(page.editorial_id)});
+      });
+
     }
     else{
       this.nav.setRoot(page.component);

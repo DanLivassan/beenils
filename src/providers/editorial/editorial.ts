@@ -30,6 +30,25 @@ export class EditorialProvider {
     return this.editorials;
   }
 
+  getDefault(){
+    if (this.userProvider.isAuthenticated()) {
+      let url = Params.getBaseUrl() + '/v1/editorial/all';
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.userProvider.getToken(),
+      });
+      let params = new HttpParams();
+      params = params.set('limit','3');
+      params = params.set('default','1');
+      const httpOptions = {
+        headers: headers,
+        params: params
+      };
+      return this.http.get(url, httpOptions);
+    }
+    else{
+      return null;
+    }
+  }
   refreshData() {
     if (this.userProvider.isAuthenticated()) {
       let url = Params.getBaseUrl() + '/v1/editorial/all';
@@ -96,6 +115,9 @@ export class EditorialProvider {
 
     }
   }
+
+
+
 
 
 

@@ -76,6 +76,9 @@ export class UserProvider {
           data['user']['address']['state']['state']
         );
       }
+      else{
+        logged_user.address = null;
+      }
       logged_user.about = data['user']['about'];
 
       this.setUser(logged_user);
@@ -159,8 +162,11 @@ export class UserProvider {
           this.user.setEditorial(new Editorial(edt._id, edt._name));
         });
       }
-      if(typeof u.address !=='undefined'){
+      if(typeof u.address !=null && typeof u.address != 'undefined'){
         this.user.address = new Address(u.address._id, u.address._city, u.address._state);
+      }
+      else{
+        this.user.address = null;
       }
       this.user.picture = u.picture;
       this.user.about = u.about;

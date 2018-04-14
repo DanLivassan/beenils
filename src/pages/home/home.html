@@ -6,6 +6,7 @@
     <a href="#" class="header-icon-3 open-search-bar">{{user_points}}</a>
   </div>
 </ion-header>
+
 <ion-content>
   <div class="main-content">
 
@@ -24,7 +25,7 @@
   <div class="content">
     <div class="home-tabs">
       <ng-container *ngFor="let editorial of editorial_guides; let i=index">
-        <a *ngIf="i<3" (click)="changeEditorial(i)"  [ngClass]="{'active-home-tab':editorial.is_active}" class="activate-tab-{{i}}" >{{editorial.data.name}}</a>
+        <a *ngIf="i<3" (click)="changeEditorial(i)"  [ngClass]="{'active-home-tab':editorial.is_active}" class="activate-tab-{{i}}" >{{editorial.editorial.name}}</a>
       </ng-container>
       <div class="clear"></div>
     </div>
@@ -34,13 +35,17 @@
     <div class="thumb-layout">
       <a style="overflow: hidden;" (click)="publicationView(publication.id)" *ngFor="let publication of editorial.publications" href="#">
         <img  src="{{frontUrl}}/{{publication.cover_image}}">
-        <strong>{{editorial.data.name}}</strong>
+        <strong>{{editorial.editorial.name}}</strong>
         <em>{{publication.title}}</em>
       </a>
     </div>
     <div class="decoration"></div>
   </div>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais notícias..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
-<app-footer></app-footer>
   </div>
+
+
 </ion-content>

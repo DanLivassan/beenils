@@ -21,7 +21,7 @@
         <div class="page-profile-header">
           <a href="#" class="show-gallery" title="Profile Image!"><img data-original="images/pictures/5t.jpg" class="preload-image" alt="img"></a>
           <h3>{{user.get_full_name()}}</h3>
-          <em><i class="fa fa-location-arrow"></i>{{user.address.city}}, {{user.address.state}}</em>
+          <em *ngIf="user.address!=null"><i class="fa fa-location-arrow"></i>{{user.address.city}}, {{user.address.state}}</em>
           <div class="overlay bg-black"></div>
           <div class="follow-buttons">
             <a href="#">Enviar email</a>
@@ -56,10 +56,11 @@
 
             <div class="decoration"></div>
             <ul class="font-icon-list">
-              <li><a href="#"><i class="fa fa-phone"></i>+ 1 234 556 887</a></li>
+              <li><a href="#"><i class="fa fa-phone"></i>{{user.phone_number!=null?user.phone_number:'Sem telefone'}}</a></li>
               <li><a href="#"><i class="fa fa-envelope"></i>{{user.email}}</a></li>
               <li><a href="#"><i class="fa fa-dollar"></i>Pontos: {{user.points}}</a></li>
-              <li><a href="#"><i class="fa fa-location-arrow"></i>{{user.address.city}}, {{user.address.state}}</a></li>
+
+              <li *ngIf="user.address!=null"><a href="#"><i class="fa fa-location-arrow"></i>{{user.address.city}}, {{user.address?.state}}</a></li>
             </ul>
             <br>
           </div>

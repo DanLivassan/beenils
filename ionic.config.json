@@ -8,11 +8,11 @@
   "proxies": [
     {
       "path": "/api/",
-      "proxyUrl": "http://127.0.0.1:8000/"
+      "proxyUrl": "http://beenils.com.br:8000/"
     },
     {
       "path": "/front-api/",
-      "proxyUrl": "http://127.0.0.1/"
+      "proxyUrl": "http://beenils.com.br/"
     }
   ]
 }

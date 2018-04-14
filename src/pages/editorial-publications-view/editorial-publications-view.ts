@@ -32,8 +32,10 @@ export class EditorialPublicationsViewPage {
     if(this.editorial){
       let search:Array<{name:string,value:string}> = [];
       search.push({name:'editorial', value:this.editorial.id.toString()});
-      this.pubProvider.getPublications('10', null,null,null,null, search)
-      this.editorialPublications = this.pubProvider.getByEditorial(this.editorial);
+      this.pubProvider.getPublications('10', null,null,null,null, search).subscribe((pubs)=>{
+        this.editorialPublications = this.pubProvider.extractData(pubs);
+      });
+
     }
   }
 
