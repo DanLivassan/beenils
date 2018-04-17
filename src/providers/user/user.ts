@@ -24,8 +24,26 @@ export class UserProvider {
 
   }
 
-  signUp(user:User){
-    let route = Params.baseUrl+'/create';
+  signUp(user:User, credentials:{password:string, password_repeat:string}){
+    let url =Params.getBaseUrl()+'/v1/user/request-sign-up';
+    this.user=null;
+    let headers = new HttpHeaders();
+    let form_data:FormData=new FormData();
+    form_data.append('SignUpForm[name]', user.name);
+    form_data.append('SignUpForm[last_name]', user.last_name);
+    form_data.append('SignUpForm[email]', user.email);
+    form_data.append('SignUpForm[phone_number]', user.phone_number);
+    form_data.append('SignUpForm[picture]', user.picture!=null?user.picture:'');
+    form_data.append('SignUpForm[about]', user.picture!=null?user.about:'');
+
+    form_data.append('SignUpForm[password]', credentials.password);
+    form_data.append('SignUpForm[password_repeat]', credentials.password_repeat);
+
+    return this.http.post(
+      url,
+      form_data,
+      {headers:headers}
+    );
   }
 
   delete(user:User){
@@ -193,4 +211,6 @@ export class UserProvider {
     }
     return null;
   }
+
+
 }

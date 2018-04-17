@@ -24,6 +24,7 @@ import { CommentaryProvider } from '../providers/commentary/commentary';
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {ProfilePage} from "../pages/profile/profile";
 import {SubmitNewsPage} from "../pages/submit-news/submit-news";
+import {BrMaskerIonic3, BrMaskerModule} from "brmasker-ionic-3";
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {SubmitNewsPage} from "../pages/submit-news/submit-news";
     HttpClientModule,
     ComponentsModule,
     MomentModule,
+    BrMaskerModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

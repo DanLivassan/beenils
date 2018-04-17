@@ -8,35 +8,12 @@
 </ion-header>
 
 
-<ion-content padding>
-<ion-list [hidden]="!listing">
-  <ion-item-sliding #item *ngFor="let editorial of editoriais">
-    <ion-item>
-      {{editorial.name}}
-    </ion-item>
-    <ion-item-options side="left">
-      <button (click)="openNews(editorial)" ion-button>Notícias</button>
-    </ion-item-options>
-
-    <ion-item-options side="right">
-      <button ion-button>Ocultar</button>
-    </ion-item-options>
-  </ion-item-sliding>
-</ion-list>
-  <div [hidden]="listing">
-  <form (ngSubmit)="addEditorial()">
-    <ion-item>
-      <ion-label>Nome</ion-label>
-      <ion-input type="text" [(ngModel)]="new_editorial.name" name="Editorial[name]"></ion-input>
-    </ion-item>
-    <button ion-button type="submit" block>Adicionar Editorial</button>
-  </form>
+<ion-content>
+  <div class="main-content">
+    <ion-list [hidden]="!listing">
+      <ion-item #item *ngFor="let editorial of editorials" (click)="openNews(editorial)">
+        {{editorial.name}}
+      </ion-item>
+    </ion-list>
   </div>
-  <ion-fab right bottom>
-    <button ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
-    <ion-fab-list side="left">
-      <button ion-fab><ion-icon (click)="changeAction()" name="add"></ion-icon></button>
-    </ion-fab-list>
-  </ion-fab>
-
 </ion-content>

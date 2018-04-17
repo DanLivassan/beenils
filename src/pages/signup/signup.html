@@ -45,6 +45,30 @@
               <ion-row>
                 <ion-col>
                   <ion-item>
+                    <ion-label floating>Telefone</ion-label>
+                    <ion-input [brmasker]="{mask:'(00)00000-0000', len:14}" type="text" formControlName="phone_number"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label floating>Foto</ion-label>
+                    <ion-input type="text" formControlName="photo"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label floating>Sobre</ion-label>
+                    <ion-textarea type="text" formControlName="about"></ion-textarea>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
                     <ion-label floating>Senha</ion-label>
                     <ion-input #password type="password" formControlName="password"></ion-input>
                   </ion-item>
@@ -58,6 +82,7 @@
                   </ion-item>
                 </ion-col>
               </ion-row>
+
               <ion-row>
                 <ion-col>
                   <button ion-button full type="submit" [disabled]="(!loginForm.valid || (password.value!=password_repeat.value))">Entrar</button>

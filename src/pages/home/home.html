@@ -41,11 +41,11 @@
     </div>
     <div class="decoration"></div>
   </div>
-    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais notícias..."></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+
 
   </div>
 
-
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais notícias..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

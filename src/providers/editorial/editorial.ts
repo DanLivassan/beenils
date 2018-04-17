@@ -19,11 +19,7 @@ export class EditorialProvider {
     private http:HttpClient,
     private userProvider:UserProvider
   ) {
-    /*this.editorials.push(
-      new Editorial(1,'Esportes'),
-      new Editorial(2,'Política'),
-      new Editorial(3,'Saúde')
-    );*/
+
   }
 
   getAll():Editorial[]{

@@ -48,7 +48,7 @@ export class HomePage {
 
     this.active_guide = Editorial.NOTICIAS_ID;
     //Slider Publications
-    this.pubProvider.getPublications('5',null, null, null, null, null).subscribe((data:Array<any>)=>{
+    this.pubProvider.getPublications('5',null, null, null, '1', null).subscribe((data:Array<any>)=>{
       this.publications = this.pubProvider.extractData(data);
     });
 
@@ -148,8 +148,6 @@ export class HomePage {
   }
 
   loadMore(infiniteScroll){
-    console.log(this.editorial_guides);
-    console.log(this.active_guide);
     setTimeout(()=>{
       this.moreNews(this.active_guide);
       infiniteScroll.complete();

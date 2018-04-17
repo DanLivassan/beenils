@@ -60,4 +60,15 @@ export class CommentaryProvider {
     }
   }
 
+  approveComment(commentId:number, publicationId:number){
+    if(this.userProvider.isAuthenticated() && (this.userProvider.getUser().is('editor')||this.userProvider.getUser().is('moderador'))){
+      let url = Params.getBaseUrl()+'/v1/publication/'+publicationId+'/commentary/'+commentId+'/approve';
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.userProvider.getToken(),
+      });
+      return this.http.patch(url,{},{headers:headers});
+    }
+    return null;
+  }
+
 }

@@ -60,7 +60,7 @@ export class PublicationProvider {
         }
         if(treding !=null){
 
-          params = params.append('except',treding.toString());
+          params = params.append('treding',treding.toString());
 
         }
         if(search !=null){

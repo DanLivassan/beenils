@@ -18,23 +18,26 @@ import {EditorialPublicationsViewPage} from "../editorial-publications-view/edit
 })
 export class EditorialPage {
 
-  private editoriais;
+  private editorials;
   private new_editorial = new Editorial(0,'');
   private listing = true;
   constructor(public navCtrl: NavController, public navParams: NavParams,private edtProvider:EditorialProvider) {
-    this.refreshData();
-    this.editoriais = edtProvider.getAll();
+
+
   }
 
   changeAction(){
     this.listing=!this.listing;
   }
-  ionViewWillLoad(){
+  ionViewDidLoad(){
+    this.refreshData();
 
   }
 
   refreshData() {
-    this.edtProvider.refreshData();
+    this.edtProvider.refreshData().subscribe((edts)=>{
+      this.editorials = this.edtProvider.extractData(edts);
+    });
   }
 
   addEditorial(){

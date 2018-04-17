@@ -38,7 +38,7 @@
       </div>
       <div class="content">
         <div class="decoration"></div>
-        <button ion-button full color="green-theme" (click)="loadMore()">Mais notícias</button>
+        <button *ngIf="btn_visible" ion-button full color="green-theme" (click)="moreNews()">Mais notícias</button>
       </div>
 
     <app-footer></app-footer>

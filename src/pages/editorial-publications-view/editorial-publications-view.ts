@@ -23,16 +23,19 @@ export class EditorialPublicationsViewPage {
 
   private editorial:Editorial;
   private editorialPublications=[];
+  private page:number;
   private front_url = Params.getFrontUrl();
+  private btn_visible:boolean = true;
 
   constructor(public navCtrl: NavController,private userProvider:UserProvider, public navParams: NavParams, private pubProvider:PublicationProvider) {
     this.editorial = this.navParams.get('editorial');
   }
   ionViewWillLoad(){
+    this.page = 1
     if(this.editorial){
       let search:Array<{name:string,value:string}> = [];
       search.push({name:'editorial', value:this.editorial.id.toString()});
-      this.pubProvider.getPublications('10', null,null,null,null, search).subscribe((pubs)=>{
+      this.pubProvider.getPublications('5', null,this.page.toString(),null,null, search).subscribe((pubs)=>{
         this.editorialPublications = this.pubProvider.extractData(pubs);
       });
 
@@ -54,6 +57,28 @@ export class EditorialPublicationsViewPage {
           this.navCtrl.push(PublicationViewPage, {'publication':publication});
         });
       }
+  }
+
+  moreNews(){
+    let search:Array<{name:string, value:string}> = [];
+    search.push({name:'editorial', value:this.editorial.id.toString()});
+    this.page++;
+    this.pubProvider.getPublications(
+      '5',
+      null,
+      this.page.toString(),
+      null,
+      null,
+      search).subscribe((data)=>{
+      let pubs = this.pubProvider.extractData(data);
+      pubs.forEach((pub)=>{
+        this.editorialPublications.push(pub);
+      });
+      if(pubs.length==0){
+        this.btn_visible = false;
+        this.page--;
+      }
+    });
   }
 
 }
