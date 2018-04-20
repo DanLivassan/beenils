@@ -71,4 +71,15 @@ export class CommentaryProvider {
     return null;
   }
 
+  getPendingComments(){
+    if(this.userProvider.isAuthenticated() && (this.userProvider.getUser().is('editor')||this.userProvider.getUser().is('moderador'))){
+      let url = Params.getBaseUrl()+'/v1/commentary/all-pending';
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.userProvider.getToken(),
+      });
+      return this.http.get(url,{headers:headers});
+    }
+    return null;
+  }
+
 }

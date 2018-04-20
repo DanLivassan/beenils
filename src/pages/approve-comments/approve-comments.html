@@ -1,0 +1,44 @@
+<ion-header>
+  <div class="header-fixed">
+    <a href="#" menuToggle class="header-icon-1 open-left-sidebar"><i class="fa fa-navicon"></i></a>
+    <a href="#" class="header-logo">BEENILS</a>
+    <a href="#" class="header-icon-2 open-right-sidebar">{{userProvider.getUser().name}}</a>
+    <a href="#" class="header-icon-3 open-search-bar">{{user_points}}</a>
+  </div>
+</ion-header>
+
+
+<ion-content>
+<div class="main-content">
+  <ion-card *ngFor="let comment of comments">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{baseUrl}}/{{comment.commented_by.picture}}">
+      </ion-avatar>
+      <h2>{{comment.commented_by.get_full_name()}}</h2>
+      <p>{{comment.commented_at | amLocale:'pt-BR' | amTimeAgo}}</p>
+    </ion-item>
+
+    <ion-card-content>
+      <p>{{comment.content}}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button (click)="approveComment(comment)" ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>Aprovar</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button (click)="publicationView(comment.publication_id)" ion-button icon-left clear small>
+          <ion-icon name="eye"></ion-icon>
+          <div>Ver Publicação</div>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+</div>
+</ion-content>

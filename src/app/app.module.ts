@@ -25,6 +25,7 @@ import {SocialSharing} from "@ionic-native/social-sharing";
 import {ProfilePage} from "../pages/profile/profile";
 import {SubmitNewsPage} from "../pages/submit-news/submit-news";
 import {BrMaskerIonic3, BrMaskerModule} from "brmasker-ionic-3";
+import {ApproveCommentsPage} from "../pages/approve-comments/approve-comments";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {BrMaskerIonic3, BrMaskerModule} from "brmasker-ionic-3";
     ApproveNewsPage,
     ProfilePage,
     SubmitNewsPage,
+    ApproveCommentsPage
   ],
   imports: [
     BrowserModule,
@@ -63,6 +65,7 @@ import {BrMaskerIonic3, BrMaskerModule} from "brmasker-ionic-3";
     ApproveNewsPage,
     ProfilePage,
     SubmitNewsPage,
+    ApproveCommentsPage
   ],
   providers: [
     StatusBar,

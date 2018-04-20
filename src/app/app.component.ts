@@ -15,6 +15,7 @@ import {ApproveNewsPage} from "../pages/approve-news/approve-news";
 import {EditorialProvider} from "../providers/editorial/editorial";
 import {SubmitNewsPage} from "../pages/submit-news/submit-news";
 import {Editorial} from "../models/editorial";
+import {ApproveCommentsPage} from "../pages/approve-comments/approve-comments";
 
 
 @Component({
@@ -68,6 +69,7 @@ export class MyApp {
           { title: 'Home', component: HomePage, icon:'fa-home', color:'bg-red-dark'},
           { title: 'Editoriais', component: EditorialPage, icon: 'fa-list-ul', color:'bg-night-dark'},
           { title: 'Aprovar Notícias', component: ApproveNewsPage, icon:'fa-pencil', color:'bg-green-dark'},
+          { title: 'Aprovar Comentários', component: ApproveCommentsPage, icon:'fa-pencil', color:'bg-red-dark'},
           { title: 'Notícias', component: EditorialPublicationsViewPage, icon: 'fa-list-ul', color:'bg-night-dark', editorial_id:Editorial.NOTICIAS_ID},
           { title: 'Esportes', component: EditorialPublicationsViewPage, icon: 'fa-futbol-o', color:'bg-green-dark', editorial_id:Editorial.ESPORTES_ID},
           { title: 'Entretenimento', component: EditorialPublicationsViewPage, icon: 'fa-thumbs-up', color:'bg-blue-dark', editorial_id:Editorial.ENTRETENIMENTO_ID},
