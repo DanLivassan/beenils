@@ -26,6 +26,7 @@ import {ProfilePage} from "../pages/profile/profile";
 import {SubmitNewsPage} from "../pages/submit-news/submit-news";
 import {BrMaskerIonic3, BrMaskerModule} from "brmasker-ionic-3";
 import {ApproveCommentsPage} from "../pages/approve-comments/approve-comments";
+import {PublicationPreviewPage} from "../pages/publication-preview/publication-preview";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {ApproveCommentsPage} from "../pages/approve-comments/approve-comments";
     ApproveNewsPage,
     ProfilePage,
     SubmitNewsPage,
-    ApproveCommentsPage
+    ApproveCommentsPage,
+    PublicationPreviewPage,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import {ApproveCommentsPage} from "../pages/approve-comments/approve-comments";
     ApproveNewsPage,
     ProfilePage,
     SubmitNewsPage,
-    ApproveCommentsPage
+    ApproveCommentsPage,
+    PublicationPreviewPage,
   ],
   providers: [
     StatusBar,

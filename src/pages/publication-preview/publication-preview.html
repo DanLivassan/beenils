@@ -1,0 +1,35 @@
+<!--
+  Generated template for the PublicationPreviewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Preview da Notícia</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<div class="main-content">
+  <div class="content">
+    <h3 class="no-bottom">
+      {{publication.title}}
+    </h3>
+  </div>
+  <div class="single-item">
+    <img src="{{front_url}}/{{publication.cover_image}}" alt="img">
+  </div>
+  <p class="news-article-overlay-text">
+    Submetido por <a href="#">{{publication.created_by.get_full_name()}}</a>
+    <a href="#">{{publication.created_at |amLocale:'pt-BR' | amTimeAgo }}</a>
+    em <a href="#">{{publication.editorial.name}}</a>
+  </p>
+  <div class="content">
+    <div class="content" [innerHtml] = "publication.content"></div>
+  </div>
+</div>
+</ion-content>

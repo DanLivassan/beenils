@@ -8,6 +8,7 @@ import {Params} from "../../utils/params";
 import {PublicationViewPage} from "../publication-view/publication-view";
 import {isArray} from "rxjs/util/isArray";
 import {Functions} from "../../utils/functions";
+import {PublicationPreviewPage} from "../publication-preview/publication-preview";
 
 /**
  * Generated class for the ApproveNewsPage page.
@@ -59,10 +60,10 @@ export class ApproveNewsPage {
     this.user_points = Functions.formatPoints(this.userProvider.getUser().points);
   }
 
-  publicationView(id:number){
-    let publication = this.pubProvider.get(id);
+  publicationView(publication:Publication){
+
     if(publication != null){
-      this.navCtrl.push(PublicationViewPage, {'publication':publication});
+      this.navCtrl.push(PublicationPreviewPage, {'publication':publication});
     }
     else{
       this.presentToast("Notícia não encontrada", 3000, 'top');

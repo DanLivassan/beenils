@@ -13,11 +13,6 @@
   <div id="page-content"><!--Add sidebar-move to move with body-->
     <div id="page-content-scroll"><!--Enables this element to be scrolled -->
       <div class="header-clear"></div>
-      <div class="content">
-        <h3 class="no-bottom">
-          {{publication.title}}
-        </h3>
-      </div>
       <div class="single-item">
         <img src="{{front_url}}/{{publication.cover_image}}" alt="img">
       </div>
@@ -28,7 +23,7 @@
       </p>
 
       <div class="news-article-share full-bottom">
-        <button ion-button full (click)="share()"><i class="mail-color fa fa-envelope-o"></i>Compartilhar</button>
+        <button ion-button full (click)="share()" color="green-theme"><i class="fa fa-whatsapp"></i>Compartilhar</button>
         <div class="clear"></div>
       </div>
 
@@ -58,7 +53,7 @@
 
         </div>
         <div class="formTextareaWrap">
-          <label class="field-title contactMessageTextarea" for="contactMessageTextarea">Comentário: <span>(contador)</span></label>
+          <label class="field-title contactMessageTextarea" for="contactMessageTextarea">Comentário: </label>
           <textarea [(ngModel)]="new_comment" class="contactTextarea requiredField" id="contactMessageTextarea"></textarea>
           <button (click)="performComment()" ion-button color="green-theme" full>Comentar</button>
         </div>

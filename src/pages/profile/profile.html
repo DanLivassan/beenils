@@ -23,10 +23,10 @@
           <h3>{{user.get_full_name()}}</h3>
           <em *ngIf="user.address!=null"><i class="fa fa-location-arrow"></i>{{user.address.city}}, {{user.address.state}}</em>
           <div class="overlay bg-black"></div>
-          <div class="follow-buttons">
-            <a href="#">Enviar email</a>
-            <a href="#">Ligar</a>
+          <div class='change-image-button'>
+            <a href="#">Alterar foto</a>
           </div>
+
         </div>
       </div>
     </div>
@@ -41,10 +41,7 @@
             <i class="fa fa-user"></i>
             {{user.getUserTypeName()}}
           </a>
-          <a href="#">
-            <i class="fa fa-envelope-o"></i>
 
-          </a>
         </div>
 
         <div class="decoration"></div>

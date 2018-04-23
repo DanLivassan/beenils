@@ -15,7 +15,7 @@
 
     <div *ngIf="unapproved_news.length!=0" class="thumb-layout">
       <div style="margin-bottom: 18px;" *ngFor="let publication of unapproved_news">
-        <a style="overflow: hidden; margin-bottom: 0px" (click)="publicationView(publication.id)"  href="#">
+        <a style="overflow: hidden; margin-bottom: 0px" (click)="publicationView(publication)"  href="#">
           <img  src="{{baseUrl}}/{{publication.cover_image}}">
           <strong>{{publication.editorial.name}}</strong>
           <em>{{publication.title}}</em>
