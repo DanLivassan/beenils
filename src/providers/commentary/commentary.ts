@@ -56,7 +56,7 @@ export class CommentaryProvider {
         'Authorization': 'Bearer ' + this.userProvider.getToken(),
       });
       let form_data:FormData=new FormData();
-      form_data.append('PublicationCommentary[commentary]',content);
+      form_data.append('commentary',content);
       return this.http.post(url,form_data,{headers:headers});
     }
   }

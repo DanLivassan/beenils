@@ -46,11 +46,12 @@ export class ApproveCommentsPage {
   refreshData(){
     this.comments=[];
     this.commentsProvider.getPendingComments().subscribe((data:any)=>{
+      data = data['items'];
       data.forEach((comment)=>{
         this.comments.push(new Commentary(
           comment.id,
           this.userProvider.formatUser(comment.commented_by),
-          comment.publication,
+          comment.publication.id,
           comment.commentary,
           moment(comment.commented_at).tz('America/Sao_paulo').format()
         ));

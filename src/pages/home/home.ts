@@ -38,6 +38,7 @@ export class HomePage {
     private userProvider:UserProvider,
     private toastCtrl:ToastController,
     private events:Events,
+    private socket:Socket
   ) {
 
   }
@@ -74,7 +75,12 @@ export class HomePage {
 
     });
 
+    //testing socket
+    this.socket.connect();
 
+    this.socket.on('message',(a)=>{
+      this.presentToast(a.message,3000, 'top');
+    });
 
   }
 

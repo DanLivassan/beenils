@@ -14,7 +14,7 @@
 
     <ion-item>
       <ion-avatar item-start>
-        <img src="{{baseUrl}}/{{comment.commented_by.picture}}">
+        <img src="{{comment.commented_by.picture}}">
       </ion-avatar>
       <h2>{{comment.commented_by.get_full_name()}}</h2>
       <p>{{comment.commented_at | amLocale:'pt-BR' | amTimeAgo}}</p>
