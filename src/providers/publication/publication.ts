@@ -79,7 +79,7 @@ export class PublicationProvider {
 
   public extractData(data){
 
-    let publications = data;
+    let publications = data['items'];
     let pubs =[];
 
     publications.forEach((publication)=>{

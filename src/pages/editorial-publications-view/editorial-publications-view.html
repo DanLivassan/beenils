@@ -22,7 +22,7 @@
       <div class="card-large-layout-page">
         <div *ngFor="let publication of editorialPublications" class="card-large-layout" style="display: block;">
           <div>
-            <img class="responsive-image preload-image" style="display: block;" src="{{front_url}}/{{publication.cover_image}}" alt="img">
+            <img class="responsive-image preload-image" style="display: block;" src="{{publication.cover_image}}" alt="img">
             <strong>{{publication.title}}</strong>
             <div class="card-date-posted">
               <em>em <u>{{publication.editorial.name}}</u> <u>{{publication.created_at | amLocale:'pt-BR' |amTimeAgo}}.</u></em>

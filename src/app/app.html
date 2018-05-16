@@ -8,14 +8,20 @@
 
   <ion-content>
     <div class="sidebar-menu">
-
       <a *ngFor="let page of pages" class="menu-item" (click)="openPage(page)">
         <i class="fa {{page.icon}} {{page.color}}"></i>
         {{page.title}}
         <i class="fa fa-circle"></i>
       </a>
+      <div *ngIf="group_pages" class="sidebar-divider">
+        Menu {{group_name}}
+      </div>
 
-
+      <a *ngFor="let page of group_pages" class="menu-item" (click)="openPage(page)">
+        <i class="fa {{page.icon}} {{page.color}}"></i>
+        {{page.title}}
+        <i class="fa fa-circle"></i>
+      </a>
       <div class="sidebar-divider">
         Beenils Mobile
       </div>

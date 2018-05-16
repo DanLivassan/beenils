@@ -18,6 +18,10 @@ export class Params{
     return Params.frontUrl;
     //return 'http://beenils.com.br';
   }
+
+  static getWebSocketUrl(){
+    return 'http://localhost:3000';
+  }
   static readonly UserTypes ={
     'leitor':1,
     'jornalista': 5,

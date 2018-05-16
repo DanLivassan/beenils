@@ -65,6 +65,7 @@ export class EditorialProvider {
   }
 
   extractData(data){
+    data = data['items'];
     if (data) {
       this.editorials = [];
       data.forEach((edt) => {

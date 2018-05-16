@@ -27,6 +27,10 @@ import {SubmitNewsPage} from "../pages/submit-news/submit-news";
 import {BrMaskerIonic3, BrMaskerModule} from "brmasker-ionic-3";
 import {ApproveCommentsPage} from "../pages/approve-comments/approve-comments";
 import {PublicationPreviewPage} from "../pages/publication-preview/publication-preview";
+import { SocketIoModule, SocketIoConfig} from "ng-socket-io";
+import {Params} from "../utils/params";
+const config: SocketIoConfig = {url:Params.getWebSocketUrl(), options:{}};
+
 
 @NgModule({
   declarations: [
@@ -47,6 +51,7 @@ import {PublicationPreviewPage} from "../pages/publication-preview/publication-p
   ],
   imports: [
     BrowserModule,
+    SocketIoModule.forRoot(config),
     HttpClientModule,
     ComponentsModule,
     MomentModule,

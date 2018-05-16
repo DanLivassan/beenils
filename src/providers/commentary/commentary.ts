@@ -29,6 +29,7 @@ export class CommentaryProvider {
   }
 
   extractData(data:Array<any>){
+    data = data['items'];
     data.forEach((comment)=>{
       this.commentaries.push(new Commentary(
         comment.id,

@@ -26,6 +26,7 @@ export class PublicationReactionProvider {
   }
 
   extractData(data:any){
+    data = data['items'];
     if(data instanceof Array){
       let reacts:PublicationReaction[]=[];
       data.forEach((reaction:{type:number, publication:number, user:number})=>{

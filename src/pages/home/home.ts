@@ -10,6 +10,7 @@ import {Functions} from "../../utils/functions"
 import {ProfilePage} from "../profile/profile";
 import {AppFooterComponent} from "../../components/app-footer/app-footer"
 import {Publication} from "../../models/publication";
+import {Socket} from 'ng-socket-io';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class HomePage {
     private edtProvider:EditorialProvider,
     private userProvider:UserProvider,
     private toastCtrl:ToastController,
-    private events:Events
+    private events:Events,
   ) {
 
   }
@@ -72,6 +73,9 @@ export class HomePage {
       });
 
     });
+
+
+
   }
 
   changeEditorial(index:number){

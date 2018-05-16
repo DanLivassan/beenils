@@ -15,7 +15,7 @@
     <ion-slide *ngFor="let publication of publications">
       <div class="news-slider" (click)="publicationView(publication.id)">
         <a href="#" class="news-slider-item">
-          <img style="height:auto; width: 100%; margin: auto;" class="responsive-image" src="{{frontUrl}}/{{publication.cover_image}}" alt="img">
+          <img style="height:auto; width: 100%; margin: auto;" class="responsive-image" src="{{publication.cover_image}}" alt="img">
           <h3>{{publication.title}}</h3>
         </a>
       </div>
@@ -34,7 +34,7 @@
   <div [hidden]="!editorial.is_active" *ngFor="let editorial of editorial_guides.slice(0,3); let i=index" class="content" id="tab-0">
     <div class="thumb-layout">
       <a style="overflow: hidden;" (click)="publicationView(publication.id)" *ngFor="let publication of editorial.publications" href="#">
-        <img  src="{{frontUrl}}/{{publication.cover_image}}">
+        <img  src="{{publication.cover_image}}">
         <strong>{{editorial.editorial.name}}</strong>
         <em>{{publication.title}}</em>
       </a>
