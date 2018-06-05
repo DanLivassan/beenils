@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "91647209082",
+    "firebase_url": "https://beenils-aec7a.firebaseio.com",
+    "project_id": "beenils-aec7a",
+    "storage_bucket": "beenils-aec7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91647209082:android:b740499227a38beb",
+        "android_client_info": {
+          "package_name": "beenils.app.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91647209082-arts64641kaokc24o9do4md2k6s3k89a.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "91647209082-arts64641kaokc24o9do4md2k6s3k89a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgY4QY-l-kCynIIsoZXX8EUM3cpMf1jBM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

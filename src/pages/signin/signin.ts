@@ -7,6 +7,7 @@ import {User} from "../../models/user";
 import {Address} from "../../models/address";
 import {Editorial} from "../../models/editorial";
 import {SignupPage} from "../signup/signup";
+import {Push, PushObject, PushOptions} from "@ionic-native/push";
 
 /**
  * Generated class for the SigninPage page.
@@ -29,7 +30,8 @@ export class SigninPage {
     private formBuilder:FormBuilder,
     private toastCtrl:ToastController,
     private renderer: Renderer2,
-    private events:Events
+    private events:Events,
+    private push:Push
   ) {
     this.loginForm = this.formBuilder.group(
       {
@@ -75,6 +77,46 @@ export class SigninPage {
   }
 
   ionViewWillLoad(){
+
+    // to check if we have permission
+
+    this.push.hasPermission()
+      .then((res: any) => {
+
+        if (res.isEnabled) {
+          const options: PushOptions = {
+            android: {},
+            ios: {
+              alert: 'true',
+              badge: true,
+              sound: 'false'
+            },
+            windows: {},
+            browser: {
+              pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+            }
+          };
+
+          const pushObject: PushObject = this.push.init(options);
+
+
+          pushObject.on('notification').subscribe((notification: any) => {
+            alert(notification.message)
+          });
+
+          pushObject.on('registration').subscribe((notification: any) => {
+            alert(notification.message)
+          });
+          pushObject.on('error').subscribe((error: any) => {
+            alert(error)
+          });
+        } else {
+          alert('We do not have permission to send push notifications');
+        }
+
+      });
+
+
 
   }
 

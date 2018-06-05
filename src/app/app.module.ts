@@ -29,7 +29,8 @@ import {ApproveCommentsPage} from "../pages/approve-comments/approve-comments";
 import {PublicationPreviewPage} from "../pages/publication-preview/publication-preview";
 import { SocketIoModule, SocketIoConfig} from "ng-socket-io";
 import {Params} from "../utils/params";
-const config: SocketIoConfig = {url:Params.getWebSocketUrl(), options:{}};
+import {Push} from "@ionic-native/push";
+//const config: SocketIoConfig = {url:Params.getWebSocketUrl(), options:{}};
 
 
 @NgModule({
@@ -51,7 +52,7 @@ const config: SocketIoConfig = {url:Params.getWebSocketUrl(), options:{}};
   ],
   imports: [
     BrowserModule,
-    SocketIoModule.forRoot(config),
+    //SocketIoModule.forRoot(config),
     HttpClientModule,
     ComponentsModule,
     MomentModule,
@@ -84,7 +85,8 @@ const config: SocketIoConfig = {url:Params.getWebSocketUrl(), options:{}};
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PublicationReactionProvider,
     CommentaryProvider,
-    SocialSharing
+    SocialSharing,
+    Push
   ]
 })
 export class AppModule {}
