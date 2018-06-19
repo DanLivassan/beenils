@@ -10,7 +10,9 @@ import {Functions} from "../../utils/functions"
 import {ProfilePage} from "../profile/profile";
 import {AppFooterComponent} from "../../components/app-footer/app-footer"
 import {Publication} from "../../models/publication";
-import {Socket} from 'ng-socket-io';
+import {AdMobFree, AdMobFreeBannerConfig} from "@ionic-native/admob-free";
+
+
 
 
 @Component({
@@ -38,7 +40,9 @@ export class HomePage {
     private userProvider:UserProvider,
     private toastCtrl:ToastController,
     private events:Events,
-    //private socket:Socket
+    //private socket:Socket,
+    private admob:AdMobFree,
+    //private firebase:Firebase
   ) {
 
   }
@@ -47,7 +51,12 @@ export class HomePage {
     return this.userProvider.isAuthenticated();
   }
   ionViewWillEnter(){
-
+   /* this.firebase.getToken().then((token)=>{
+      alert(token);
+    });
+    this.firebase.onTokenRefresh().subscribe((token:string)=>{
+      alert('Novo token: '+token);
+    });*/
     this.active_guide = Editorial.NOTICIAS_ID;
     //Slider Publications
     this.pubProvider.getPublications('5',null, null, null, '1', null).subscribe((data:Array<any>)=>{
@@ -81,6 +90,24 @@ export class HomePage {
     // this.socket.on('message',(a)=>{
     //   this.presentToast(a.message,3000, 'top');
     // });
+
+
+  this.showBanner();
+  }
+
+  showBanner(){
+    //Adding Banner Advertisement
+    let bannerConfig: AdMobFreeBannerConfig = {
+      isTesting: true, // Remove in production
+      autoShow: true,
+      id: Params.getBannerAdMobId()
+    };
+
+    this.admob.banner.config(bannerConfig);
+
+    this.admob.banner.prepare().then(() => {
+
+    }).catch(e => console.log(e));
 
   }
 

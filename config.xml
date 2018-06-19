@@ -90,5 +90,6 @@
     <plugin name="phonegap-plugin-push" spec="^2.2.3">
         <variable name="SENDER_ID" value="91647209082" />
     </plugin>
+    <plugin name="cordova-plugin-admob-free" spec="^0.17.0" />
     <engine name="android" spec="~7.1.0" />
 </widget>

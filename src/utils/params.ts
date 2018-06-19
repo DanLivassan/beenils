@@ -24,6 +24,12 @@ export class Params{
   }
 
   public admob_id = 'ca-app-pub-6068620621300147~7023827753';
+  public home_banner_ad = 'ca-app-pub-6068620621300147/3642560914';
+
+  static getBannerAdMobId(){
+    //return Params.frontUrl;
+    return 'ca-app-pub-6068620621300147/3642560914';
+  }
 
   static readonly UserTypes ={
     'leitor':1,

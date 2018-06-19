@@ -16,6 +16,8 @@ import {EditorialProvider} from "../providers/editorial/editorial";
 import {SubmitNewsPage} from "../pages/submit-news/submit-news";
 import {Editorial} from "../models/editorial";
 import {ApproveCommentsPage} from "../pages/approve-comments/approve-comments";
+import {SharePage} from "../pages/share/share";
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 
 @Component({
@@ -27,7 +29,7 @@ export class MyApp {
   // make HelloIonicPage the root (or first) page
 
   rootPage;
-  pages: Array<{title: string, component: any, icon: string, color: string, editorial_id?:number}>;
+  pages: Array<{title: string, component: any, icon: string, color: string, editorial_id?:number}>=[];
   group_pages:Array<{title: string, component: any, icon: string, color: string, editorial_id?:number}>=[];
   group_name = null;
   constructor(
@@ -38,7 +40,8 @@ export class MyApp {
     public userProvider:UserProvider,
     public app:App,
     public editorialProvider:EditorialProvider,
-    public events:Events
+    public events:Events,
+    public socialSharing:SocialSharing,
   ) {
     this.initializeApp();
     if(!this.userProvider.isAuthenticated()){
@@ -93,6 +96,7 @@ export class MyApp {
           { title: 'Mais editorias', component: EditorialPage, icon: 'fa-list-ul', color:'bg-night-dark'},
         ];
       }
+
     });
 
     this.events.subscribe('user:refresh_points', (user:User)=>{
@@ -141,5 +145,17 @@ export class MyApp {
     }
 
     //window.location.reload();
+  }
+
+  shareApp(){
+
+    if(this.userProvider.isAuthenticated()){
+      this.socialSharing.share(
+        "Faça sua conta!",
+        "Beenils Mobile",
+        null,
+        'http://beenils/user/sign-up/'+this.userProvider.getToken()
+        );
+    }
   }
 }

@@ -30,6 +30,9 @@ import {PublicationPreviewPage} from "../pages/publication-preview/publication-p
 import { SocketIoModule, SocketIoConfig} from "ng-socket-io";
 import {Params} from "../utils/params";
 import {Push} from "@ionic-native/push";
+import {AdMobFree} from "@ionic-native/admob-free";
+import {SharePage} from "../pages/share/share";
+//import {Firebase} from "@ionic-native/firebase";
 //const config: SocketIoConfig = {url:Params.getWebSocketUrl(), options:{}};
 
 
@@ -49,6 +52,7 @@ import {Push} from "@ionic-native/push";
     SubmitNewsPage,
     ApproveCommentsPage,
     PublicationPreviewPage,
+    SharePage
   ],
   imports: [
     BrowserModule,
@@ -75,6 +79,7 @@ import {Push} from "@ionic-native/push";
     SubmitNewsPage,
     ApproveCommentsPage,
     PublicationPreviewPage,
+    SharePage
   ],
   providers: [
     StatusBar,
@@ -86,7 +91,9 @@ import {Push} from "@ionic-native/push";
     PublicationReactionProvider,
     CommentaryProvider,
     SocialSharing,
-    Push
+    Push,
+    AdMobFree,
+    //Firebase,
   ]
 })
 export class AppModule {}
