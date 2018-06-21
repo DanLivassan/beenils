@@ -31,10 +31,18 @@ import { SocketIoModule, SocketIoConfig} from "ng-socket-io";
 import {Params} from "../utils/params";
 import {Push} from "@ionic-native/push";
 import {AdMobFree} from "@ionic-native/admob-free";
-import {SharePage} from "../pages/share/share";
-//import {Firebase} from "@ionic-native/firebase";
-//const config: SocketIoConfig = {url:Params.getWebSocketUrl(), options:{}};
+import {Firebase} from "@ionic-native/firebase";
+import { FcmProvider } from '../providers/fcm/fcm';
 
+//const config: SocketIoConfig = {url:Params.getWebSocketUrl(), options:{}};
+const firebase = {
+  apiKey:'',
+  authDomain:'',
+  databaseURL:'',
+  projectId:'',
+  storageBucket:'',
+  messagingSenderId:''
+}
 
 @NgModule({
   declarations: [
@@ -52,7 +60,7 @@ import {SharePage} from "../pages/share/share";
     SubmitNewsPage,
     ApproveCommentsPage,
     PublicationPreviewPage,
-    SharePage
+
   ],
   imports: [
     BrowserModule,
@@ -79,7 +87,6 @@ import {SharePage} from "../pages/share/share";
     SubmitNewsPage,
     ApproveCommentsPage,
     PublicationPreviewPage,
-    SharePage
   ],
   providers: [
     StatusBar,
@@ -93,7 +100,8 @@ import {SharePage} from "../pages/share/share";
     SocialSharing,
     Push,
     AdMobFree,
-    //Firebase,
+    Firebase,
+    FcmProvider,
   ]
 })
 export class AppModule {}

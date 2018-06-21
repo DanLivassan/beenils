@@ -29,11 +29,13 @@
     "@ionic-native/status-bar": "4.4.0",
     "@ionic/storage": "2.1.3",
     "angular2-moment": "^1.8.0",
+    "angularfire2": "^5.0.0-rc.10",
     "brmasker-ionic-3": "^1.0.9",
     "cordova-admob-sdk": "^0.17.0",
     "cordova-android": "7.1.0",
     "cordova-plugin-admob-free": "^0.17.0",
     "cordova-plugin-device": "^2.0.1",
+    "cordova-plugin-firebase": "^1.0.5",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.19",
     "cordova-plugin-splashscreen": "^5.0.2",
@@ -70,7 +72,8 @@
       "phonegap-plugin-push": {
         "SENDER_ID": "91647209082"
       },
-      "cordova-plugin-admob-free": {}
+      "cordova-plugin-admob-free": {},
+      "cordova-plugin-firebase": {}
     },
     "platforms": [
       "android"

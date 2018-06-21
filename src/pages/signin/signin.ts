@@ -78,43 +78,6 @@ export class SigninPage {
 
   ionViewWillLoad(){
 
-    // to check if we have permission
-
-    this.push.hasPermission()
-      .then((res: any) => {
-
-        if (res.isEnabled) {
-          const options: PushOptions = {
-            android: {},
-            ios: {
-              alert: 'true',
-              badge: true,
-              sound: 'false'
-            },
-            windows: {},
-            browser: {
-              pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-            }
-          };
-
-          const pushObject: PushObject = this.push.init(options);
-
-
-          pushObject.on('notification').subscribe((notification: any) => {
-            alert(notification.message)
-          });
-
-          pushObject.on('registration').subscribe((notification: any) => {
-            alert(notification.message)
-          });
-          pushObject.on('error').subscribe((error: any) => {
-            alert(error)
-          });
-        } else {
-          alert('We do not have permission to send push notifications');
-        }
-
-      });
 
 
 

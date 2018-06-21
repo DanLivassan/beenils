@@ -11,6 +11,8 @@ import {ProfilePage} from "../profile/profile";
 import {AppFooterComponent} from "../../components/app-footer/app-footer"
 import {Publication} from "../../models/publication";
 import {AdMobFree, AdMobFreeBannerConfig} from "@ionic-native/admob-free";
+import {FcmProvider} from "../../providers/fcm/fcm";
+
 
 
 
@@ -42,7 +44,7 @@ export class HomePage {
     private events:Events,
     //private socket:Socket,
     private admob:AdMobFree,
-    //private firebase:Firebase
+    private fcm:FcmProvider
   ) {
 
   }
@@ -50,13 +52,10 @@ export class HomePage {
   ionViewCanEnter(){
     return this.userProvider.isAuthenticated();
   }
+
+
   ionViewWillEnter(){
-   /* this.firebase.getToken().then((token)=>{
-      alert(token);
-    });
-    this.firebase.onTokenRefresh().subscribe((token:string)=>{
-      alert('Novo token: '+token);
-    });*/
+
     this.active_guide = Editorial.NOTICIAS_ID;
     //Slider Publications
     this.pubProvider.getPublications('5',null, null, null, '1', null).subscribe((data:Array<any>)=>{
@@ -138,6 +137,9 @@ export class HomePage {
     this.events.publish('user:refresh_points',this.userProvider.getUser());
     this.events.publish('user:logged',this.userProvider.getUser());
     this.user_points = Functions.formatPoints(this.userProvider.getUser().points);
+    this.fcm.firebase.onNotificationOpen().subscribe((a)=>{
+      this.publicationView(a.publicationId);
+    });
   }
 
   changeSlides() {

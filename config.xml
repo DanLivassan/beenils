@@ -92,4 +92,5 @@
     </plugin>
     <plugin name="cordova-plugin-admob-free" spec="^0.17.0" />
     <engine name="android" spec="~7.1.0" />
+    <plugin name="cordova-plugin-firebase" spec="^1.0.5" />
 </widget>

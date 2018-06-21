@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import {Platform, MenuController, Nav, NavController, App, Events} from 'ionic-angular';
+import {Platform, MenuController, Nav, NavController, App, Events, ToastController} from 'ionic-angular';
 import {HomePage} from "../pages/home/home";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -16,8 +16,12 @@ import {EditorialProvider} from "../providers/editorial/editorial";
 import {SubmitNewsPage} from "../pages/submit-news/submit-news";
 import {Editorial} from "../models/editorial";
 import {ApproveCommentsPage} from "../pages/approve-comments/approve-comments";
-import {SharePage} from "../pages/share/share";
 import {SocialSharing} from "@ionic-native/social-sharing";
+import {FcmProvider} from "../providers/fcm/fcm";
+import {tap} from "rxjs/operators";
+import {Push, PushObject, PushOptions} from "@ionic-native/push";
+import {PublicationViewPage} from "../pages/publication-view/publication-view";
+import {PublicationProvider} from "../providers/publication/publication";
 
 
 @Component({
@@ -42,6 +46,10 @@ export class MyApp {
     public editorialProvider:EditorialProvider,
     public events:Events,
     public socialSharing:SocialSharing,
+    public fcm:FcmProvider,
+    public push:Push,
+    public pubProvider:PublicationProvider,
+    public toastCtrl:ToastController
   ) {
     this.initializeApp();
     if(!this.userProvider.isAuthenticated()){
@@ -99,6 +107,9 @@ export class MyApp {
 
     });
 
+
+    // Tratando os eventos para atualizar os pontos.
+    // Este evento é disparado sempre que exista uma ação que modifique pontos
     this.events.subscribe('user:refresh_points', (user:User)=>{
       this.userProvider.refreshPoints(user.id).subscribe((points:number)=>{
         user.points = points;
@@ -107,7 +118,47 @@ export class MyApp {
     });
 
 
+    //Enviar token para o serviço de push
+    this.fcm.getToken();
 
+    // to check if we have permission
+
+    this.push.hasPermission()
+      .then((res: any) => {
+
+        if (res.isEnabled) {
+          const options: PushOptions = {
+            android: {},
+            ios: {
+              alert: 'true',
+              badge: true,
+              sound: 'false'
+            },
+            windows: {},
+            browser: {
+              pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+              //https://fcm.googleapis.com/fcm/send
+            }
+          };
+
+          const pushObject: PushObject = this.push.init(options);
+
+
+          pushObject.on('notification').subscribe((notification: any) => {
+            this.presentToast(notification.title+'\n'+notification.message,2000,'bottom');
+          });
+
+          pushObject.on('registration').subscribe((notification: any) => {
+
+          });
+          pushObject.on('error').subscribe((error: any) => {
+            alert(error)
+          });
+        } else {
+          //alert('We do not have permission to send push notifications');
+        }
+
+      });
 
   }
 
@@ -154,8 +205,27 @@ export class MyApp {
         "Faça sua conta!",
         "Beenils Mobile",
         null,
-        'http://beenils/user/sign-up/'+this.userProvider.getToken()
+        'http://admin.beenils.com.br/user/sign-up/'+this.userProvider.getUser().token
         );
     }
+  }
+
+  publicationView(id:number){
+    if(id != null){
+      this.pubProvider.get(id).subscribe((pub)=>{
+        let publication = this.pubProvider.formatResponse(pub);
+        this.nav.push(PublicationViewPage, {'publication':publication});
+      });
+    }
+  }
+
+  presentToast(message:string, duration:number, position:string) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: duration,
+      position: position
+    });
+
+    toast.present();
   }
 }

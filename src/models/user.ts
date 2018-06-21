@@ -20,6 +20,7 @@ export class User{
   private _phone_number:string;
   private _points:number;
   private _about:string;
+  private _token:string;
 
   static readonly UserTypesNames ={
     1: 'Leitor',
@@ -180,5 +181,14 @@ export class User{
 
   public getUserTypeName(){
     return User.UserTypesNames[this.type];
+  }
+
+
+  get token(): string {
+    return this._token;
+  }
+
+  set token(value: string) {
+    this._token = value;
   }
 }
