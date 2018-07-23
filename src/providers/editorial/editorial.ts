@@ -33,7 +33,7 @@ export class EditorialProvider {
         'Authorization': 'Bearer ' + this.userProvider.getToken(),
       });
       let params = new HttpParams();
-      params = params.set('limit','3');
+      params = params.set('limit','5');
       params = params.set('default','1');
       const httpOptions = {
         headers: headers,

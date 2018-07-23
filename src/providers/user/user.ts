@@ -155,6 +155,7 @@ export class UserProvider {
       about:user.about,
       email:user.email,
       editorials:user.editorials,
+      user_token:user.user_token
     };
     localStorage.setItem('user', JSON.stringify(string_user));
   }
@@ -189,6 +190,7 @@ export class UserProvider {
       this.user.picture = u.picture;
       this.user.about = u.about;
       this.user.email = u.email;
+      this.user.user_token = u.user_token;
       this.events.publish('user:logged',this.user);
     }
     catch(e){

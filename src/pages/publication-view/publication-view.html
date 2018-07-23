@@ -17,9 +17,9 @@
         <img src="{{publication.cover_image}}" alt="img">
       </div>
       <p class="news-article-overlay-text">
-        Postado por <a href="#">{{publication.created_by.get_full_name()}}</a>
+        Postado por {{publication.created_by.get_full_name()}}
         <a href="#">{{publication.created_at |amLocale:'pt-BR' | amTimeAgo }}</a>
-        em <a href="#">{{publication.editorial.name}}</a>
+        em <a (click)="openNews(publication.editorial)" href="#">{{publication.editorial.name}}</a>
       </p>
 
       <div class="news-article-share full-bottom">
@@ -30,7 +30,8 @@
       <div class="content">
         <h4>{{publication.title}}</h4>
         <div class="content" [innerHtml] = "publication.content"></div>
-        <a href="#" (click)="performLike()" [ngClass]="{'color-gray-light':!is_liked,'color-red-dark':is_liked}" ><i class="fa fa-heart"></i></a>
+        <a *ngIf="!is_liked" href="#" (click)="performLike()" [ngClass]="{'mail-color':!is_liked,'facebook-color':is_liked}" class="social-button"><i class="fa fa-thumbs-up"></i>Curtir</a>
+        <a *ngIf="is_liked" [ngClass]="{'mail-color':!is_liked,'facebook-color':is_liked}" class="social-button"><i class="fa fa-thumbs-up"></i>Curtida</a>
       </div>
 
 

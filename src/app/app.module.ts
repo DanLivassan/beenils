@@ -33,6 +33,7 @@ import {Push} from "@ionic-native/push";
 import {AdMobFree} from "@ionic-native/admob-free";
 import {Firebase} from "@ionic-native/firebase";
 import { FcmProvider } from '../providers/fcm/fcm';
+import { CineinsiteProvider } from '../providers/cineinsite/cineinsite';
 
 //const config: SocketIoConfig = {url:Params.getWebSocketUrl(), options:{}};
 const firebase = {
@@ -102,6 +103,7 @@ const firebase = {
     AdMobFree,
     Firebase,
     FcmProvider,
+    CineinsiteProvider,
   ]
 })
 export class AppModule {}

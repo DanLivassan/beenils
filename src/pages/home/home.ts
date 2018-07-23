@@ -66,6 +66,14 @@ export class HomePage {
     this.edtProvider.getDefault().subscribe((data) => {
       this.editorials = this.edtProvider.extractData(data);
 
+      //Garantir ordem dos editoriais
+      this.editorials.sort((edt1:Editorial, edt2:Editorial)=>{
+        if(edt1.id>edt2.id) return 1;
+        if(edt1.id<edt2.id) return -1;
+        return 0;
+      });
+      console.log(this.editorials);
+
       this.editorials.forEach((edt,index)=>{
 
         let search:Array<{name:string, value:string}> = [];
@@ -79,6 +87,7 @@ export class HomePage {
               publications:this.pubProvider.extractData(data)
             });
         });
+        if(index>3) return false;
       });
 
     });
@@ -96,6 +105,7 @@ export class HomePage {
 
   showBanner(){
     //Adding Banner Advertisement
+    /*
     let bannerConfig: AdMobFreeBannerConfig = {
       isTesting: true, // Remove in production
       autoShow: true,
@@ -107,7 +117,7 @@ export class HomePage {
     this.admob.banner.prepare().then(() => {
 
     }).catch(e => console.log(e));
-
+    */
   }
 
   changeEditorial(index:number){

@@ -10,6 +10,8 @@ import {CommentaryProvider} from "../../providers/commentary/commentary";
 import {Commentary} from "../../models/commentary";
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {AppFooterComponent} from "../../components/app-footer/app-footer"
+import {EditorialPublicationsViewPage} from "../editorial-publications-view/editorial-publications-view";
+import {Editorial} from "../../models/editorial";
 
 
 
@@ -151,6 +153,10 @@ export class PublicationViewPage {
       null,
       this.pubProvider.getUrl(this.publication.id
       ));
+  }
+
+  openNews(editorial:Editorial){
+    this.navCtrl.push(EditorialPublicationsViewPage,{'editorial':editorial});
   }
 
 }

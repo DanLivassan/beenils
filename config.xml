@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="beenils.app.mobile" version="0.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>beenews</name>
-    <description>An awesome Ionic/Cordova app.</description>
+<widget id="viva.beenils.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Beenils</name>
+    <description>Aplicativo de Notícias</description>
     <author email="daniloxc@msn.com" href="http://vivainovacao.com/">Viva Inovação Tecnologica</author>
     <content src="index.html" />
     <access origin="*" />
@@ -81,6 +81,7 @@
     <platform name="android">
         <resource-file src="google-services.json" target="google-services.json" />
     </platform>
+    <engine name="android" spec="7.1.0" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.19" />
@@ -91,6 +92,5 @@
         <variable name="SENDER_ID" value="91647209082" />
     </plugin>
     <plugin name="cordova-plugin-admob-free" spec="^0.17.0" />
-    <engine name="android" spec="~7.1.0" />
     <plugin name="cordova-plugin-firebase" spec="^1.0.5" />
 </widget>
