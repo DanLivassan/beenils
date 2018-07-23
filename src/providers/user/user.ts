@@ -98,7 +98,7 @@ export class UserProvider {
         logged_user.address = null;
       }
       logged_user.about = data['user']['about'];
-      logged_user.token = data['user']['token'];
+      logged_user.user_token = data['user']['token'];
       this.setUser(logged_user);
       localStorage.setItem('token', data['token']);
       console.log(data['user']);

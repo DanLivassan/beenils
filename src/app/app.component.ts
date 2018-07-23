@@ -205,7 +205,7 @@ export class MyApp {
         "Faça sua conta!",
         "Beenils Mobile",
         null,
-        'http://admin.beenils.com.br/user/sign-up/'+this.userProvider.getUser().token
+        'http://admin.beenils.com.br/user/sign-up/'+this.userProvider.getUser().user_token
         );
     }
   }
