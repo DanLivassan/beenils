@@ -69,6 +69,7 @@ export class UserProvider {
 
 
   extractData(data:any):User{
+
     if(data['token']!=='undefined'){
       let logged_user = new User(
         data['user']['id'],
@@ -212,6 +213,29 @@ export class UserProvider {
       console.error(e);
     }
     return null;
+  }
+
+  recoverPassword(email:string){
+
+    let url =Params.getBaseUrl()+'/v1/user/recover-request';
+    let form_data:FormData=new FormData();
+    form_data.append('email', email);
+
+    return this.http.post(
+      url,
+      form_data,
+    );
+
+  }
+
+  pointsHistory(token){
+    if(this.isAuthenticated()){
+      let url = Params.getBaseUrl()+'/v1/user/points-history';
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+      });
+      return this.http.get(url, {headers:headers});
+    }
   }
 
 

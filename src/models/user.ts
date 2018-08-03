@@ -21,6 +21,9 @@ export class User{
   private _points:number;
   private _about:string;
   private _token:string;
+  private _my_city
+
+
 
   static readonly UserTypesNames ={
     1: 'Leitor',
@@ -190,5 +193,13 @@ export class User{
 
   set token(value: string) {
     this._token = value;
+  }
+
+  get my_city() {
+    return this._my_city;
+  }
+
+  set my_city(value) {
+    this._my_city = value;
   }
 }

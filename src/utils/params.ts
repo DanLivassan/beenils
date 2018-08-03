@@ -11,12 +11,12 @@ export class Params{
   static readonly baseUrl = 'api';
   static readonly frontUrl = 'front-api';
   static getBaseUrl(){
-    //return Params.baseUrl;
-    return 'http://beenils.com.br:8000';
+    return Params.baseUrl;
+    //return 'http://beenils.com.br:8000';
   }
   static getFrontUrl(){
-    //return Params.frontUrl;
-    return 'http://beenils.com.br';
+    return Params.frontUrl;
+    //return 'http://beenils.com.br';
   }
 
   static getWebSocketUrl(){

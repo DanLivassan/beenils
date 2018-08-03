@@ -72,7 +72,7 @@ export class HomePage {
         if(edt1.id<edt2.id) return -1;
         return 0;
       });
-      console.log(this.editorials);
+
 
       this.editorials.forEach((edt,index)=>{
 

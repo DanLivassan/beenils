@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {User} from "../../models/user";
 import {isArray} from "rxjs/util/isArray";
+import {UserProvider} from "../../providers/user/user";
 
 /**
  * Generated class for the ProfilePage page.
@@ -18,13 +19,28 @@ import {isArray} from "rxjs/util/isArray";
 export class ProfilePage {
 
   user:User;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  icons:Array<string>;
+  reactions:Array<any>;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider:UserProvider) {
     this.user = this.navParams.get('user');
+    this.icons = [
+      'fa fa-thumbs-up',
+      'fa fa-heart',
+      'fa fa-comment',
+      'fa fa-comment',
+      'fa fa-share-alt',
+    ];
   }
 
   ionViewDidLoad() {
-    
+
+    this.userProvider.pointsHistory(this.userProvider.getToken()).subscribe((data:Array<any>)=>{
+      this.reactions = [];
+      data.forEach((reaction, index)=>{
+
+        this.reactions.push({icon:this.icons[index], item:reaction});
+      });
+    });
   }
 
 }

@@ -6,7 +6,18 @@ export class PublicationReaction{
 
   static readonly ReactionTypes = {
     'curtir':1,
+    'curtir-comentario':2,
+    'comentario-curtido':3,
+    'comentario-aprovado':4,
+    'publicacao-aprovada':5,
+    'publicacao-comentada':6,
+    'publicacao-curtida':7,
+    'aprovar-comentario':8,
+    'aprovar-publicacao':9,
+    'convidar':10
   };
+
+
 
 
   constructor(user_id, publication_id, type) {

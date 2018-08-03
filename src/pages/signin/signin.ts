@@ -3,11 +3,9 @@ import {Events, IonicPage, NavController, NavParams, Toast, ToastController} fro
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserProvider} from "../../providers/user/user";
 import {HomePage} from "../home/home";
-import {User} from "../../models/user";
-import {Address} from "../../models/address";
-import {Editorial} from "../../models/editorial";
 import {SignupPage} from "../signup/signup";
-import {Push, PushObject, PushOptions} from "@ionic-native/push";
+import {Push} from "@ionic-native/push";
+import {RecoverPage} from "../recover/recover";
 
 /**
  * Generated class for the SigninPage page.
@@ -82,6 +80,11 @@ export class SigninPage {
 
 
   }
+
+  goToRecover(){
+    this.navCtrl.push(RecoverPage);
+  }
+
 
   presentToast(message:string, duration:number, position:string) {
     let toast = this.toastCtrl.create({

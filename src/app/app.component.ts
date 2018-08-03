@@ -22,6 +22,7 @@ import {tap} from "rxjs/operators";
 import {Push, PushObject, PushOptions} from "@ionic-native/push";
 import {PublicationViewPage} from "../pages/publication-view/publication-view";
 import {PublicationProvider} from "../providers/publication/publication";
+import {CineinsitePage} from "../pages/cineinsite/cineinsite";
 
 
 @Component({
@@ -227,5 +228,10 @@ export class MyApp {
     });
 
     toast.present();
+  }
+
+  cineInSite(){
+    this.menu.close();
+    this.nav.push(CineinsitePage);
   }
 }

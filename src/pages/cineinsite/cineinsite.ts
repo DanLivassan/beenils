@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams } from 'ionic-angular';
+import {Cine} from "../../models/cine";
+import {CineinsiteProvider} from "../../providers/cineinsite/cineinsite";
 
 /**
  * Generated class for the CineinsitePage page.
@@ -8,18 +10,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-cineinsite',
   templateUrl: 'cineinsite.html',
 })
 export class CineinsitePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  films:Array<Cine>=[];
+  constructor(public navCtrl: NavController, public cineProvider:CineinsiteProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CineinsitePage');
+    this.films = this.cineProvider.getAll();
   }
 
 }
