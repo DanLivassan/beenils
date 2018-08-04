@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import {NavController, NavParams } from 'ionic-angular';
 import {Cine} from "../../models/cine";
 import {CineinsiteProvider} from "../../providers/cineinsite/cineinsite";
+import {Movie} from "../../models/movie";
+import {UserProvider} from "../../providers/user/user";
+import {CineinsiteViewPage} from "../cineinsite-view/cineinsite-view";
+import {CineSchedulePage} from "../cine-schedule/cine-schedule";
 
 /**
  * Generated class for the CineinsitePage page.
@@ -17,12 +21,28 @@ import {CineinsiteProvider} from "../../providers/cineinsite/cineinsite";
 })
 export class CineinsitePage {
 
-  films:Array<Cine>=[];
-  constructor(public navCtrl: NavController, public cineProvider:CineinsiteProvider) {
+  movies:Array<Movie>=[];
+  constructor(
+    public navCtrl: NavController,
+    public cineProvider:CineinsiteProvider,
+    public userProvider:UserProvider
+  ) {
   }
 
   ionViewDidLoad() {
-    this.films = this.cineProvider.getAll();
+    this.movies = this.cineProvider.getAll();
   }
+
+  ionViewCanEnter(){
+    return this.userProvider.isAuthenticated();
+  }
+  movieView(movie:Movie){
+    this.navCtrl.push(CineinsiteViewPage, {'movie':movie})
+  }
+
+  movieSchedule(movie:Movie){
+    this.navCtrl.push(CineSchedulePage, {'movie':movie})
+  }
+
 
 }

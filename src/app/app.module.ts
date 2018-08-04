@@ -35,10 +35,12 @@ import {Firebase} from "@ionic-native/firebase";
 import { FcmProvider } from '../providers/fcm/fcm';
 import { CineinsiteProvider } from '../providers/cineinsite/cineinsite';
 import {CineinsitePage} from "../pages/cineinsite/cineinsite";
-import {CineinsiteCategoryPage} from "../pages/cineinsite-category/cineinsite-category";
-import {CineinsiteMovietheatersPage} from "../pages/cineinsite-movietheaters/cineinsite-movietheaters";
+
+
 import {CineinsiteViewPage} from "../pages/cineinsite-view/cineinsite-view";
 import {RecoverPage} from "../pages/recover/recover";
+import {CineSchedulePage} from "../pages/cine-schedule/cine-schedule";
+import {CineListPage} from "../pages/cine-list/cine-list";
 
 //const config: SocketIoConfig = {url:Params.getWebSocketUrl(), options:{}};
 const firebase = {
@@ -67,9 +69,9 @@ const firebase = {
     ApproveCommentsPage,
     PublicationPreviewPage,
     CineinsitePage,
-    CineinsiteCategoryPage,
-    CineinsiteMovietheatersPage,
     CineinsiteViewPage,
+    CineSchedulePage,
+    CineListPage,
     RecoverPage
   ],
   imports: [
@@ -98,8 +100,9 @@ const firebase = {
     ApproveCommentsPage,
     PublicationPreviewPage,
     CineinsitePage,
-    CineinsiteCategoryPage,
-    CineinsiteMovietheatersPage,
+    CineSchedulePage,
+    CineListPage,
+
     CineinsiteViewPage,
     RecoverPage
   ],

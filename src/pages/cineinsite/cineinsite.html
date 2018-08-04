@@ -11,33 +11,26 @@
 
 
 <ion-content>
-  <ion-card *ngFor="let film of films">
+  <ion-card *ngFor="let movie of movies">
     <ion-item>
-
-      <h2>{{film.name}}</h2>
-      <p>Local para data</p>
+      <h2>{{movie.original_title}}</h2>
+      <p>Lançamento: {{movie.created_at}}</p>
     </ion-item>
-
-    <img src="{{film.picture}}">
-
-    <ion-card-content>
-      <p>{{film.information}}</p>
-    </ion-card-content>
-
+    <img src="{{movie.picture}}">
     <ion-row>
       <ion-col>
-        <button ion-button icon-start clear small>
-          <ion-icon name="thumbs-up"></ion-icon>
-          <div>Ação 1</div>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-start clear small>
-          <ion-icon name="text"></ion-icon>
-          <div>Ação 2</div>
+        <button (click)="movieView(movie)" ion-button icon-start clear small>
+          <ion-icon name="list"></ion-icon>
+          <div>Detalhes</div>
         </button>
       </ion-col>
 
+      <ion-col>
+        <button (click)="movieSchedule(movie)" ion-button icon-start clear small>
+          <ion-icon name="calendar"></ion-icon>
+          <div>Exibição</div>
+        </button>
+      </ion-col>
     </ion-row>
 
   </ion-card>

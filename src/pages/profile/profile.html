@@ -53,7 +53,7 @@
 
             <div class="decoration"></div>
             <ul class="font-icon-list">
-              <li *ngFor="let reaction of reactions"><a href="#"><i class="{{reaction.icon}}"></i>{{reaction.item.value}}pts em {{reaction.item.type}}</a></li>
+              <li *ngFor="let reaction of reactions" [hidden]="reaction.item.value==0"><a href="#"><i class="{{reaction.icon}}"></i>{{reaction.item.value}}pts em {{reaction.item.type}}</a></li>
             </ul>
             <br>
           </div>

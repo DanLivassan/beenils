@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {Movie} from "../../models/movie";
 
 /**
  * Generated class for the CineinsiteViewPage page.
@@ -14,12 +15,16 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'cineinsite-view.html',
 })
 export class CineinsiteViewPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  movie:Movie;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) {
+      this.movie = navParams.get('movie');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CineinsiteViewPage');
+
   }
 
 }
