@@ -15,7 +15,7 @@
     <ion-item>
 
       <h2>{{movie.original_title}}</h2>
-      <p>Lançamento: {{movie.created_at}}</p>
+      <p>Lançamento: {{movie.created_at  | amDateFormat: 'DD-MM-YYYY'}}</p>
     </ion-item>
 
     <img src="{{movie.picture}}">

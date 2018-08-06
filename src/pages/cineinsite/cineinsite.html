@@ -11,10 +11,15 @@
 
 
 <ion-content>
+  <ion-item>
+    <button (click)="goToCineList()" ion-button icon-end>Lista de cinemas <ion-icon name="list"></ion-icon></button>
+  </ion-item>
+<h2>Filmes em cartaz</h2>
   <ion-card *ngFor="let movie of movies">
     <ion-item>
       <h2>{{movie.original_title}}</h2>
-      <p>Lançamento: {{movie.created_at}}</p>
+      <p>Lançamento: {{movie.created_at | amDateFormat: 'DD-MM-YYYY'}}</p>
+
     </ion-item>
     <img src="{{movie.picture}}">
     <ion-row>

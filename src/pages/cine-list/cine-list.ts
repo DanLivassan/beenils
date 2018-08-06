@@ -1,25 +1,29 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import {Cine} from "../../models/cine";
+import {CineinsiteProvider} from "../../providers/cineinsite/cineinsite";
 
-/**
- * Generated class for the CineListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
-@IonicPage()
 @Component({
   selector: 'page-cine-list',
   templateUrl: 'cine-list.html',
 })
 export class CineListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  cines:Cine[];
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private cineProvider:CineinsiteProvider
+  ) {
+      this.cineProvider.getAllCines().subscribe((data)=>{
+        this.cines = this.cineProvider.extractDataCine(data['items']);
+      });
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CineListPage');
+
   }
 
 }

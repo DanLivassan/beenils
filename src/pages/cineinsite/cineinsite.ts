@@ -6,6 +6,7 @@ import {Movie} from "../../models/movie";
 import {UserProvider} from "../../providers/user/user";
 import {CineinsiteViewPage} from "../cineinsite-view/cineinsite-view";
 import {CineSchedulePage} from "../cine-schedule/cine-schedule";
+import {CineListPage} from "../cine-list/cine-list";
 
 /**
  * Generated class for the CineinsitePage page.
@@ -30,7 +31,14 @@ export class CineinsitePage {
   }
 
   ionViewDidLoad() {
-    this.movies = this.cineProvider.getAll();
+    this.movies =[]
+    this.cineProvider.getAll().subscribe((data:Array<any>)=>{
+      //data = data['items'];
+      console.log(data);
+      data.forEach((movie)=>{
+        this.movies.push(this.cineProvider.extractData(movie))
+      });
+    });
   }
 
   ionViewCanEnter(){
@@ -43,6 +51,13 @@ export class CineinsitePage {
   movieSchedule(movie:Movie){
     this.navCtrl.push(CineSchedulePage, {'movie':movie})
   }
+
+  goToCineList(){
+    this.navCtrl.push(CineListPage);
+  }
+
+
+
 
 
 }

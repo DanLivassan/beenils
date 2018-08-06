@@ -11,9 +11,7 @@ export class CineSchedule{
   private _schedule_tags:Array<string>;
 
 
-  constructor(movie: Movie, room: CineRoom, displayed_at: string) {
-    this._movie = movie;
-    this._room = room;
+  constructor( displayed_at: string) {
     this._displayed_at = displayed_at;
   }
 
