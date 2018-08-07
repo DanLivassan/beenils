@@ -40,6 +40,8 @@ export class Params{
     'administrador':100
   };
 
+  static readonly Citys =['Salvador']; //TODO Desenvolver no backend endpoint para pegar as cidades
+
 
 
 

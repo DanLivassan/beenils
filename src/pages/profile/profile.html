@@ -21,15 +21,20 @@
         <div class="page-profile-header">
           <a href="#" class="show-gallery" title="Profile Image!"><img data-original="images/pictures/5t.jpg" class="preload-image" alt="img"></a>
           <h3>{{user.get_full_name()}}</h3>
-          <em *ngIf="user.address!=null"><i class="fa fa-location-arrow"></i>{{user.address.city}}, {{user.address.state}}</em>
+          <em *ngIf="my_city!=null"><i class="fa fa-location-arrow"></i>{{my_city}}</em>
           <div class="overlay bg-black"></div>
           <div class='change-image-button'>
-            <a href="#">Alterar foto</a>
+            <a (click)="openSelect()" >Alterar Cidade</a>
           </div>
 
         </div>
       </div>
     </div>
+    <ion-item [hidden]="true">
+      <ion-select okText="Ok" cancelText="Cancelar" [(ngModel)]="my_city" (ionChange)="changeCity()" #city_select>
+        <ion-option *ngFor="let city of citys" value="{{city}}">{{city}}</ion-option>
+      </ion-select>
+    </ion-item>
     <div class="content">
       <div class="page-profile">
         <div class="page-profile-followers">
@@ -78,4 +83,5 @@
 
 
   </div>
+
 </ion-content>

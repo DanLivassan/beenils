@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, Select} from 'ionic-angular';
 import {User} from "../../models/user";
 import {isArray} from "rxjs/util/isArray";
 import {UserProvider} from "../../providers/user/user";
+import {Params} from "../../utils/params"
 
 /**
  * Generated class for the ProfilePage page.
@@ -17,10 +18,12 @@ import {UserProvider} from "../../providers/user/user";
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-
+  @ViewChild('city_select') city_select: Select;
   user:User;
   icons:Array<string>;
   reactions:Array<any>;
+  citys = ['Salvador'];
+  my_city = localStorage.getItem('city');
   constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider:UserProvider) {
     this.user = this.navParams.get('user');
     this.icons = [
@@ -30,6 +33,8 @@ export class ProfilePage {
       'fa fa-comment',
       'fa fa-share-alt',
     ];
+
+
   }
 
   ionViewDidLoad() {
@@ -41,6 +46,15 @@ export class ProfilePage {
         this.reactions.push({icon:this.icons[index], item:reaction});
       });
     });
+
+
+  }
+
+  openSelect(){
+    this.city_select.open();
+  }
+  changeCity(){
+    this.userProvider.setCityPreference(this.my_city);
   }
 
 }

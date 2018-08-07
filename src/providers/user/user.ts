@@ -130,6 +130,14 @@ export class UserProvider {
     return false;
   }
 
+  setCityPreference(city_name){
+    localStorage.setItem('city', city_name)
+  }
+
+  getCityPreference():string{
+    return localStorage.getItem('city');
+  }
+
   isAuthenticated():boolean{
     if(localStorage.getItem('user')!=null && localStorage.getItem('token')!=null){
       if(typeof this.user==='undefined'){

@@ -41,7 +41,7 @@ export class FcmProvider {
       await this.firebase.grantPermission();
     }
 
-
+    console.log(token);
     return this.sendTokenToBack(token)
   }
 

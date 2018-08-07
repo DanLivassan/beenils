@@ -142,7 +142,7 @@ export class PublicationProvider {
         publication['created_by']['status']['id']
       ),
       publication['status']['description'],
-      this.editorialProvider.get(publication['editorial']['id']),
+      new Editorial(publication['editorial']['id'],publication['editorial']['name']),
       publication['type']['id'],
       publication['exclusive']['id'],
       publication['scope']['id'],
