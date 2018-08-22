@@ -23,6 +23,12 @@ export class Publication{
     'aprovada': '2',
   };
 
+  static readonly PublicationType = {
+    news:'1',
+    post:'2',
+    multimedia:'3'
+  };
+
 
   constructor(
     id: number,

@@ -34,6 +34,7 @@ export class HomePage {
   private number_slide=1;
   private publications = [];
 
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -58,7 +59,9 @@ export class HomePage {
 
     this.active_guide = Editorial.NOTICIAS_ID;
     //Slider Publications
-    this.pubProvider.getPublications('5',null, null, null, '1', null).subscribe((data:Array<any>)=>{
+    let search:Array<{name:string, value:string}> = [];
+    search.push({name:'type', value: Publication.PublicationType.news});
+    this.pubProvider.getPublications('5',null, null, null, '1', search).subscribe((data:Array<any>)=>{
       this.publications = this.pubProvider.extractData(data);
     });
 
@@ -78,7 +81,8 @@ export class HomePage {
 
         let search:Array<{name:string, value:string}> = [];
         search.push({name:'editorial', value:edt.id.toString()});
-        this.pubProvider.getPublications('5',null, null, null, null, search).subscribe((data)=>{
+        search.push({name:'type', value: Publication.PublicationType.news});
+        this.pubProvider.getPublications('5',this.userProvider.getCityPreference().id+"", null, null, null, search).subscribe((data)=>{
           this.editorial_guides.push(
             {
               editorial:edt,
@@ -86,7 +90,9 @@ export class HomePage {
               page:1,
               publications:this.pubProvider.extractData(data)
             });
+
         });
+
         if(index>3) return false;
       });
 
@@ -207,6 +213,7 @@ export class HomePage {
   moreNews(index:number){
     let search:Array<{name:string, value:string}> = [];
     search.push({name:'editorial', value:this.editorial_guides[index].editorial.id.toString()});
+    search.push({name:'type', value: Publication.PublicationType.news});
     this.editorial_guides[index].page++;
     this.pubProvider.getPublications(
       '5',

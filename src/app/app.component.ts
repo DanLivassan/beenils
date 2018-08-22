@@ -23,6 +23,7 @@ import {Push, PushObject, PushOptions} from "@ionic-native/push";
 import {PublicationViewPage} from "../pages/publication-view/publication-view";
 import {PublicationProvider} from "../providers/publication/publication";
 import {CineinsitePage} from "../pages/cineinsite/cineinsite";
+import {Address} from "../models/address";
 
 
 @Component({
@@ -104,6 +105,21 @@ export class MyApp {
           { title: 'Cultura', component: EditorialPublicationsViewPage, icon: 'fa-image', color:'bg-magenta-dark', editorial_id:Editorial.CULTURA_ID},
           { title: 'Mais editorias', component: EditorialPage, icon: 'fa-list-ul', color:'bg-night-dark'},
         ];
+      }
+      this.events.publish('user:set_address_preferences',this.userProvider.getUser(), null);
+    });
+
+    //Evento usado para setar preferências do usuário
+    this.events.subscribe('user:set_address_preferences',(user:User, data:Address)=>{
+      if(data!=null){
+        this.userProvider.setCityPreference(data);
+      }
+      else{
+        this.userProvider.getAllCitys().subscribe((citys:Array<Address>)=>{
+
+          if(citys.length>0)
+            this.userProvider.setCityPreference(citys[0]);
+        });
       }
 
     });

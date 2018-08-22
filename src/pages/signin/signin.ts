@@ -51,7 +51,7 @@ export class SigninPage {
             2000,
             'bottom'
           );
-          this.userProvider.setCityPreference('Salvador');
+
           this.events.publish('user:logged',this.userProvider.getUser());
           this.navCtrl.setRoot(HomePage);
         }

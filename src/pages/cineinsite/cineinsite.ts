@@ -32,12 +32,8 @@ export class CineinsitePage {
 
   ionViewDidLoad() {
     this.movies =[]
-    this.cineProvider.getAll().subscribe((data:Array<any>)=>{
-      //data = data['items'];
-      console.log(data);
-      data.forEach((movie)=>{
-        this.movies.push(this.cineProvider.extractData(movie))
-      });
+    this.cineProvider.getAll().subscribe((data:Array<Movie>)=>{
+      this.movies = data;
     });
   }
 

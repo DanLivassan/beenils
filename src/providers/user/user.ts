@@ -130,12 +130,27 @@ export class UserProvider {
     return false;
   }
 
-  setCityPreference(city_name){
-    localStorage.setItem('city', city_name)
+  setCityPreference(city:Address){
+    localStorage.setItem('city', JSON.stringify(city));
   }
 
-  getCityPreference():string{
-    return localStorage.getItem('city');
+  getCityPreference():Address{
+    let stringfied_city = localStorage.getItem('city');
+    if(stringfied_city==null){
+      return null;
+    }
+    let city = JSON.parse(stringfied_city);
+    return new Address(city._id, city._city, city._state);
+  }
+
+  getAllCitys(){
+    return this.http.get(Params.getFrontUrl()+'/site/get-addresses').map((data:Array<any>)=>{
+      let data_formatted:Array<Address>=[];
+      data.forEach((city)=>{
+        data_formatted.push(new Address(city['id'], city['city'], city['state']['state']));
+      });
+      return data_formatted;
+    });
   }
 
   isAuthenticated():boolean{

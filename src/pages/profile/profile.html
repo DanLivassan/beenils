@@ -31,8 +31,8 @@
       </div>
     </div>
     <ion-item [hidden]="true">
-      <ion-select okText="Ok" cancelText="Cancelar" [(ngModel)]="my_city" (ionChange)="changeCity()" #city_select>
-        <ion-option *ngFor="let city of citys" value="{{city}}">{{city}}</ion-option>
+      <ion-select  okText="Ok" cancelText="Cancelar" [(ngModel)]="my_city" (ionChange)="changeCity()" #city_select>
+        <ion-option *ngFor="let city of citys; let i = index" value="{{city.city}}">{{city.city}}</ion-option>
       </ion-select>
     </ion-item>
     <div class="content">
